@@ -1,0 +1,27 @@
+{
+  "name": "testing-backbonejQM",
+  "version": "0.0.1",
+  "description": "A sample app for jQuery Mobile setup",
+  "author": "Prasad Ubhalkar",
+  "contributors": [
+    "Prasad Ubhalkar <ubhalkar.prasad@gmail.com>"
+  ],
+  "eslintConfig": {
+      "env": {
+          "browser": true,
+          "node": true
+      }
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-eslint": "0.0.5",
+    "grunt-contrib-handlebars": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-shell": "^2.0.0",
+    "gruntify-eslint": "^3.1.0",
+    "jshint-stylish": "^2.2.1"
+  }
+}
