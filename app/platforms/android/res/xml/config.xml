@@ -82,9 +82,9 @@
     <splash density="port-xxhdpi" src="www/res/screen/android/drawable-port-xxhdpi-screen.png" />
     <splash density="port-xxxhdpi" src="www/res/screen/android/drawable-port-xxxhdpi-screen.png" />
     <allow-intent href="market:*" />
-    <name>Hello World</name>
+    <name>Code Quality</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Learn tricks to improve code quality
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team

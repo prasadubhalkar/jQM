@@ -1,0 +1,13 @@
+<div data-role="header">
+    <a href="#myPanel" data-icon="bars" data-iconpos="notext"> Menu </a>
+    <h1>{{pageTitle}}</h1>
+</div>
+
+<div data-role="content">
+    <h3>{{navigationLabel}}</h3>
+    <ul data-role="listview" data-inset="true">
+    {{#each topics}}
+        <li><a href="#">{{this.title}}</a></li>
+    {{/each}}
+    </ul>
+</div>

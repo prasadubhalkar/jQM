@@ -1,12 +1,12 @@
 {
-  "name": "phonegap-template-hello-world",
+  "name": "learn-code-quality",
   "version": "4.0.2",
-  "description": "> A Hello World template built with PhoneGap",
+  "description": "> Learn Code Quality, coding tips improve code quality",
   "repository": {
     "type": "git",
-    "url": "https://github.com/phonegap/phonegap-app-hello-world.git"
+    "url": "https://github.com/prasadubhalkar/jQM"
   },
-  "author": "PhoneGap Team",
+  "author": "Prasad Ubhalkar",
   "license": "Apache-2.0.0",
   "keywords": [
     "ecosystem:phonegap",
@@ -15,7 +15,7 @@
     "phonegap:template"
   ],
   "bugs": {
-    "url": "https://github.com/phonegap/phonegap-app-hello-world/issues"
+    "url": "https://github.com/prasadubhalkar/jQM"
   },
-  "homepage": "https://github.com/phonegap/phonegap-app-hello-world"
+  "homepage": "https://github.com/prasadubhalkar/jQM"
 }
