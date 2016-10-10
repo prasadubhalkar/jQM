@@ -55,6 +55,7 @@ var AppRouter = Backbone.Router.extend({
         //call the render funcation for backbone view
         page.render();
 
+        //if page is any other than home append panel
         if(pageIndex){
             page.appendMenu();
         }

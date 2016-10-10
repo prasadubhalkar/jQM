@@ -53,7 +53,7 @@ module.exports = function(grunt) {
           separator: '/* ---------- end of file --------------- */'
         },
         files: {
-          '../androidApp/www/js/app.js': [
+          '../app/www/js/app.js': [
             'src/lib/jquery.js',
             'src/config/jqm-config.js', //concat this file before the jQM mobile is loaded
             'src/lib/jquery.mobile-1.4.5.min.js',
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
       },
       css:{
         files: {
-          '../androidApp/www/css/app.css': [
+          '../app/www/css/app.css': [
             'lib/*.css',
             'src/css/*.css'
           ]
@@ -87,7 +87,7 @@ module.exports = function(grunt) {
             flatten: false,
             cwd: 'src/css',
             src: ['images/**'],
-            dest: '../androidApp/www/css/'
+            dest: '../app/www/css/'
           }
         ]
       }
@@ -113,7 +113,7 @@ module.exports = function(grunt) {
      * check adb devices to check all devices configured for android
      */
     shell: {
-        run: 'cd ../androidApp && phonegap run android'
+        run: 'cd ../app && phonegap run android'
     }
   });
 

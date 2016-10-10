@@ -1,7 +1,14 @@
 /* global Backbone, $, AppTmplts, PanelView */
 /* exported HomeView */
 var HomeView = Backbone.View.extend({
+    //default template for the view
     template: AppTmplts["src/html/partials/home.hbs"],
+    
+    /**
+     * render create the home page view from the
+     * handlebar template and append to backbone view
+     * @returns {object} backbone view
+     */
     render:function () {
         $(this.el).html(this.template({
             title: "Code Quality",
@@ -14,6 +21,10 @@ var HomeView = Backbone.View.extend({
         return this;
     },
 
+    /**
+     * appendPanel append the panel to the view
+     * @returns {undefined}
+     */
     appendPanel: function(){
         var panelView = new PanelView();
         panelView.render();

@@ -1,3 +1,7 @@
+/**
+ * Over-ride default jQM setting on mobile init
+ * @returns {undefined}
+ */
 $(document).bind("mobileinit", function () {
     $.mobile.ajaxEnabled = false;
     $.mobile.linkBindingEnabled = false;
