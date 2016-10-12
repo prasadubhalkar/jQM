@@ -22,10 +22,12 @@ var PanelView = Backbone.View.extend({
      * @returns {undefined}
      */
     setupElementAttributes: function(){
-    	$(this.el).attr("data-role", "panel");
+        $(this.el).attr("data-role", "panel");
 		$(this.el).attr("data-display", "overlay");
 		$(this.el).attr("data-position", "left");
 		$(this.el).attr("data-swipe-close", "true");
+        $(this.el).attr("data-theme", "b");
+        $(this.el).attr("data-content-theme", "a");
     },
 
     /**

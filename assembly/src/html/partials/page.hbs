@@ -1,13 +1,21 @@
-<div data-role="header">
+<div data-role="header" data-theme="b">
     <a href="#myPanel" data-icon="bars" data-iconpos="notext"> Menu </a>
     <h1>{{pageTitle}}</h1>
 </div>
 
 <div data-role="content">
     <h3>{{navigationLabel}}</h3>
-    <ul data-role="listview" data-inset="true">
-    {{#each topics}}
-        <li><a href="#">{{this.title}}</a></li>
-    {{/each}}
-    </ul>
+    <div data-role="collapsible-set" data-inset="true" data-theme="b" data-content-theme="a">
+    	{{#each topics}}
+    		<div data-role="collapsible" data-collapsed="true">
+    			<h3>{{this.title}}</h3>
+                <p>{{this.description}}</p>
+                <ul>
+                    {{#each this.details}}
+                        <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+    		</div>
+    	{{/each}}
+    </div>
 </div>

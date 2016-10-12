@@ -1,5 +1,9 @@
 <ul data-role="listview">
 	{{#each menuItems}}
-		<li><a href="#page/{{this.pageIndex}}" data-rel="close"> {{this.title}} </a></li>
+		{{#if this.pageIndex}}
+			<li><a href="#page/{{this.pageIndex}}" data-rel="close"> {{this.title}} </a></li>
+		{{else}}
+			<li><a href="#" data-rel="close"> {{this.title}} </a></li>
+		{{/if}}
 	{{/each}}
 </ul>

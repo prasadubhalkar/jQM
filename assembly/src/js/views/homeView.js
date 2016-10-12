@@ -1,8 +1,16 @@
-/* global Backbone, $, AppTmplts, PanelView */
+/* global Backbone, $, AppTmplts, PanelView, HomeModel */
 /* exported HomeView */
 var HomeView = Backbone.View.extend({
     //default template for the view
     template: AppTmplts["src/html/partials/home.hbs"],
+
+    /**
+     * initialize set initial parameters for the Home View
+     * @returns {undefined}
+     */
+    initialize: function() {
+        this.model = new HomeModel();
+    },
     
     /**
      * render create the home page view from the
@@ -11,11 +19,8 @@ var HomeView = Backbone.View.extend({
      */
     render:function () {
         $(this.el).html(this.template({
-            title: "Code Quality",
-            subTitle: "This application will provide you some tricks to improve code quality",
-            navigationLabel: "Navigate to:",
-            page1: "Page 1",
-            page2: "Page 2"
+            title: this.model.introModel.title,
+            topics: this.model.introModel.topics
         }));
         this.appendPanel();
         return this;

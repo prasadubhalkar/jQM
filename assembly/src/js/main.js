@@ -45,6 +45,7 @@ var AppRouter = Backbone.Router.extend({
      * changePage will handle the action to change the state of page
      * and what is main view for android application
      * @param  {object} page backbone page element
+     * @param {number} pageIndex is the page index for the selected page
      * @returns {undefined}
      */
     changePage:function (page, pageIndex) {

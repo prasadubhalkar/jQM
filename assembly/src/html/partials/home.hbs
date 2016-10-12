@@ -1,8 +1,10 @@
-<div data-role="header">
+<div data-role="header" data-theme="b">
 	<a href="#myPanel" data-icon="bars" data-iconpos="notext"> Menu </a>
     <h1 data-position="right">{{title}}</h1>
 </div>
 <div data-role="content">
-    <h3>{{subTitle}}</h3>
-    <p>{{navigationLabel}}</p>
+	{{#each topics}}
+		<h3>{{this.title}}</h3>
+    	<p>{{this.details}}</p>
+	{{/each}}
 </div>
