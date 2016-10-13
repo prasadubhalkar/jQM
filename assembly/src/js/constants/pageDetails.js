@@ -1,31 +1,70 @@
 /* exported indexItems, pages, homeIntro */
 
 var homeIntro = {
-	title: "Code Quality",
+	title: "jQuery Quiz",
 	topics: [
 		{
-			title: "What?",
-			details: "This application will provide you with tips and trick to improve code quality and software application"
+			title: "jQuery Core",
+			started: false,
+			completed: false,
+			score: 0,
+			questions: 10
 		},
 		{
-			title: "Why?",
-			details: "Code is the core of an software application, improving the code will improve the software application"
+			title: "Events",
+			started: false,
+			completed: false,
+			score: 0,
+			questions: 10
 		},
 		{
-			title: "Who?",
-			details: "Novice developers can use this application to learn new tips, Experienced developers can use this as a revision"
+			title: "Effects",
+			started: false,
+			completed: false,
+			score: 0,
+			questions: 10
 		},
 		{
-			title: "Where?",
-			details: "This tips are been borrowed from Code Complete 2 by Steve McConnell"
+			title: "Ajax",
+			started: false,
+			completed: false,
+			score: 0,
+			questions: 10
 		},
 		{
-			title: "How?",
-			details: "Select the menu to navigate through the chapters"
+			title: "Plugins",
+			started: false,
+			completed: false,
+			score: 0,
+			questions: 10	
 		},
 		{
-			title: "More?",
-			details: "To check out more details for each topic please refer to the book"
+			title: "Performance",
+			started: false,
+			completed: false,
+			score: 0,
+			questions: 10	
+		},
+		{
+			title: "Code Organization",
+			started: false,
+			completed: false,
+			score: 0,
+			questions: 10	
+		},
+		{
+			title: "jQuery UI",
+			started: false,
+			completed: false,
+			score: 0,
+			questions: 10	
+		},
+		{
+			title: "jQuery Mobile",
+			started: false,
+			completed: false,
+			score: 0,
+			questions: 10	
 		}
 	]
 }
@@ -38,32 +77,40 @@ var indexItems = [
 		pageIndex: 0
 	},
 	{
-		title: "Foundation",
+		title: "jQuery Core",
 		pageIndex: 1
 	},
 	{
-		title: "Creating High-Quality Code",
+		title: "Events",
 		pageIndex: 2
 	},
 	{
-		title: "Variables",
+		title: "Effects",
 		pageIndex: 3
 	},
 	{
-		title: "Statements",
+		title: "Ajax",
 		pageIndex: 4
 	},
 	{
-		title: "Code Improvements",
+		title: "Plugins",
 		pageIndex: 5
 	},
 	{
-		title: "System Considerations",
+		title: "Performance",
 		pageIndex: 6
 	},
 	{
-		title: "Software Craftsmanship",
+		title: "Code Organization",
 		pageIndex: 7
+	},
+	{
+		title: "jQuery UI",
+		pageIndex: 8
+	},
+	{
+		title: "jQuery Mobile",
+		pageIndex: 9
 	}
 ];
 
@@ -72,33 +119,278 @@ var indexItems = [
  */
 var pages = {
 	page1: {
-		title: "Foundation",
-		topics: [
+		title: "jQuery Core",
+		questions: [
 			{
-				title: "Software Construction",
-				description: "In every software development project we can skip requirements, design, testing but" +
-					"we cannot skip coding/construction that is where the rubber meets the road," +
-					"Improving construction is thus a way of improving any software-development effort, no matter how abbreviated",
-				details: [
-					"Verifying that the groundwork has been laid so that construction can proceed successfully",
-					"Determining how your code will be tested ",
-					"Designing and writing classes and routines ",
-					"Creating and naming variables and named constants ",
-					"Selecting control structures and organizing blocks of statements ",
-					"Unit testing, integration testing, and debugging your own code ",
-					"Reviewing other team members’ low-level designs and code and having them ",
-					"Polishing code by carefully formatting and commenting it ",
-					"Integrating software components that were created separately ",
-					"Tuning code to make it faster and use fewer resources"
+				title: "What is difference between jQuery object methods and core jQuery methods?",
+				type: "single",
+				questionId: "t1q1",
+				correctAnswerId: "q1a2", 
+				description: [
+					"Methods called on jQuery selections are in the $.fn namespace, and automatically receive and return the selection as this.",
+					"Methods in the $ namespace are generally utility-type methods, and do not work with selections; they are not automatically passed any arguments, and their return value will vary."
+				],
+				answers: [
+					{
+						label: "There is no difference",
+						answerId: "q1a1"
+					},
+					{
+						label: "jQuery object methods work with selections, where as core jQuery methods are generally utility-type methods, and do not work with selections",
+						answerId: "q1a2"
+					},
+					{
+						label: "Core jQuery methods will generally receive and return 'this'",
+						answerId: "q1a3"
+					},
+					{
+						label: "jQuery object methods are not automatically passed any arguments",
+						answerId: "q1a4"
+					}
 				]
 			},
 			{
-				title: "Understanding of Software Development",
-				details: [ "Details to Come" ]
+				title: "Which of this statement is correct?",
+				type: "single",
+				questionId: "t1q2",
+				correctAnswerId: "q2a1", 
+				description: [
+					"$( document ).ready() will only run once the page Document Object Model (DOM) is ready for JavaScript code to execute.",
+					"Code included inside $( window ).load(function() { ... }) will run once the entire page (images or iframes), not just the DOM, is ready."
+				],
+				answers: [
+					{
+						label: "Code inside $(document).ready() will run before DOM is ready",
+						answerId: "q2a1"
+					},
+					{
+						label: "$( document ).ready() and $( window ).load(function() { ... }) are both the same",
+						answerId: "q2a2"
+					},
+					{
+						label: "Code in $( document ).ready() will run once DOM is ready, but before entire page contents are ready",
+						answerId: "q2a3"
+					},
+					{
+						label: "Page can be manipulated safely before $(document).ready() event is fired",
+						answerId: "q2a4"
+					}
+				]
 			},
 			{
-				title: "Measure Twice, Cut Once",
-				details: [ "Details to Come" ]
+				title: "What does jQuery no-conflict means?",
+				type: "single",
+				questionId: "t1q3",
+				correctAnswerId: "q3a2",
+				description: [
+					"By default, jQuery uses $ as a shortcut for jQuery. Thus, if you are using another JavaScript library that uses the $ variable, you can run into conflicts with jQuery",
+					"In order to avoid these conflicts, you need to put jQuery in no-conflict mode immediately after it is loaded onto the page and before you attempt to use jQuery in your page"
+				],
+				answers: [
+					{
+						label: "jQuery with $ alias won't load until all other libraries are loaded to avoid conflicts manipulating DOM",
+						answerId: "q3a1"
+					},
+					{
+						label: "When you put jQuery into no-conflict mode, you have the option of assigning a new variable name to replace the $ alias",
+						answerId: "q3a2"
+					},
+					{
+						label: "jQuery indicates that it as loaded without any conflicts in a normal way with $ alias",
+						answerId: "q3a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "q3a4"
+					}
+				]
+			},
+			{
+				title: "With no-conflicts, how do you avoid defining another alternative to the full jQuery?",
+				type: "single",
+				questionId: "t1q4",
+				correctAnswerId: "q4a3",
+				description: [
+					"if you don't want to define another alternative to the full jQuery function name",
+					"simply add the $ as an argument passed to your jQuery( document ).ready() function",
+					"This is most frequently used in the case where you still want the benefits of really concise jQuery code, but don't want to cause conflicts with other libraries",
+					"Use (function($) { //use $ as jQuery })(jQuery);"
+				],
+				answers: [
+					{
+						label: "Invoke windows.load function with $ alias",
+						answerId: "q4a1"
+					},
+					{
+						label: "Invoke document.ready function with $ alias",
+						answerId: "q4a2"
+					},
+					{
+						label: "Call jQuery.noConflict() and pass in $ as an argument to immediately invoked function block",
+						answerId: "q4a3"
+					},
+					{
+						label: "Invoke windows.ready function with $ alias",
+						answerId: "q4a4"
+					}
+				]
+			},
+			{
+				title: "The attr method can be used as both getter and setter",
+				type: "single",
+				questionId: "t1q5",
+				correctAnswerId: "q5a1",
+				description: [
+					"The .attr() method acts as both a getter and a setter. As a setter, .attr() can accept either a key and a value, or an object containing one or more key/value pairs."
+				],
+				answers: [
+					{
+						label: "True",
+						answerId: "q5a1"
+					},
+					{
+						label: "False",
+						answerId: "q5a2"
+					}
+				]
+			},
+			{
+				title: "What is correct way to use jQuery selector to find element by CSS class",
+				type: "single",
+				questionId: "t1q6",
+				correctAnswerId: "q6a2",
+				description: [
+					"The most basic concept of jQuery is to select some elements and do something with them.",
+					"jQuery supports most CSS3 selectors, as well as some non-standard selectors."
+				],
+				answers: [
+					{
+						label: "$('#myElement')",
+						answerId: "q6a1"
+					},
+					{
+						label: "$('.myElement)",
+						answerId: "q6a2"
+					},
+					{
+						label: "$('$myElement)",
+						answerId: "q6a3"
+					},
+					{
+						label: "$('_myElement)",
+						answerId: "q6a4"
+					},
+				]
+			},
+			{
+				title: "What is correct way to use jQuery selector to find element by its ID",
+				type: "single",
+				questionId: "t1q7",
+				correctAnswerId: "q7a1",
+				description: [
+					"The most basic concept of jQuery is to select some elements and do something with them.",
+					"jQuery supports most CSS3 selectors, as well as some non-standard selectors."
+				],
+				answers: [
+					{
+						label: "$('#myElement')",
+						answerId: "q6a1"
+					},
+					{
+						label: "$('.myElement')",
+						answerId: "q6a2"
+					},
+					{
+						label: "$('$myElement')",
+						answerId: "q6a3"
+					},
+					{
+						label: "$('_myElement')",
+						answerId: "q6a4"
+					},
+				]
+			},
+			{
+				title: "What is syntax for selecting element by custom attribute",
+				type: "single",
+				questionId: "t1q8",
+				correctAnswerId: "q8a2",
+				description: [
+					"The most basic concept of jQuery is to select some elements and do something with them.",
+					"jQuery supports most CSS3 selectors, as well as some non-standard selectors."
+				],
+				answers: [
+					{
+						label: "$('[name=\"customName\"]')",
+						answerId: "q8a1"
+					},
+					{
+						label: "$('input[name=\"customName\"]')",
+						answerId: "q8a2"
+					},
+					{
+						label: "$('#[\"customName\"]')",
+						answerId: "q8a3"
+					},
+					{
+						label: "$('input.[\"customName\"])",
+						answerId: "q8a4"
+					},
+				]
+			},
+			{
+				title: "What does $(div p) means?",
+				type: "single",
+				questionId: "t1q9",
+				correctAnswerId: "q9a1",
+				description: [
+					"The element element selector is used to select elements inside elements."
+				],
+				answers: [
+					{
+						label: "Selects all <p> elements inside <div> elements",
+						answerId: "q9a1"
+					},
+					{
+						label: "Selects all <div> elements inside <p> elements",
+						answerId: "q9a2"
+					},
+					{
+						label: "Selects all <div> elements",
+						answerId: "q9a3"
+					},
+					{
+						label: "Selects all <div> elements",
+						answerId: "q9a4"
+					},
+				]
+			},
+			{
+				title: "What does $(div + p) means?",
+				type: "single",
+				questionId: "t1q10",
+				correctAnswerId: "q10a3",
+				description: [
+					"The element element selector is used to select elements inside elements."
+				],
+				answers: [
+					{
+						label: "Selects all <p> elements that are placed immediately before <div> elements",
+						answerId: "q10a1"
+					},
+					{
+						label: "Selects all <p> elements those are inside <div> elements",
+						answerId: "q10a2"
+					},
+					{
+						label: "Selects all <p> elements that are placed immediately after <div> elements",
+						answerId: "q10a3"
+					},
+					{
+						label: "Selects all <div> elements that are placed immediately after <p> elements",
+						answerId: "q10a4"
+					},
+				]
 			}
 		]
 	},

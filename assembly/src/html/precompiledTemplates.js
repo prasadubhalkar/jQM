@@ -18,21 +18,25 @@ this["AppTmplts"]["src/html/partials/home.hbs"] = Handlebars.template({"1":funct
     + "</div>";
 },"useData":true});
 
-this["AppTmplts"]["src/html/partials/page.hbs"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+this["AppTmplts"]["src/html/partials/page.hbs"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1;
 
   return "    		<div data-role=\"collapsible\" data-collapsed=\"true\">\r\n    			<h3>"
-    + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
-    + "</h3>\r\n                <p>"
-    + alias2(alias1((depth0 != null ? depth0.description : depth0), depth0))
-    + "</p>\r\n                <ul>\r\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.details : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                </ul>\r\n    		</div>\r\n";
-},"2":function(container,depth0,helpers,partials,data) {
-    return "                        <li>"
-    + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</li>\r\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    + container.escapeExpression(container.lambda((depth0 != null ? depth0.title : depth0), depth0))
+    + "</h3>\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.answers : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    		</div>\r\n";
+},"2":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "                    <label>\r\n                        <input type=\"radio\" name=\""
+    + alias2(alias1((depths[1] != null ? depths[1].questionId : depths[1]), depth0))
+    + "\" id=\""
+    + alias2(alias1((depth0 != null ? depth0.answerId : depth0), depth0))
+    + "\">\r\n                        "
+    + alias2(alias1((depth0 != null ? depth0.label : depth0), depth0))
+    + "\r\n                    </label>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "<div data-role=\"header\" data-theme=\"b\">\r\n    <a href=\"#myPanel\" data-icon=\"bars\" data-iconpos=\"notext\"> Menu </a>\r\n    <h1>"
@@ -40,9 +44,9 @@ this["AppTmplts"]["src/html/partials/page.hbs"] = Handlebars.template({"1":funct
     + "</h1>\r\n</div>\r\n\r\n<div data-role=\"content\">\r\n    <h3>"
     + alias4(((helper = (helper = helpers.navigationLabel || (depth0 != null ? depth0.navigationLabel : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"navigationLabel","hash":{},"data":data}) : helper)))
     + "</h3>\r\n    <div data-role=\"collapsible-set\" data-inset=\"true\" data-theme=\"b\" data-content-theme=\"a\">\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.topics : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.questions : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    </div>\r\n</div>";
-},"useData":true});
+},"useData":true,"useDepths":true});
 
 this["AppTmplts"]["src/html/partials/panel.hbs"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;

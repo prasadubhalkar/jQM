@@ -21,8 +21,8 @@ var PageView = Backbone.View.extend({
     render:function () {
         $(this.el).html(this.template({
             pageTitle: this.model.page.title,
-            navigationLabel: "Topics",
-            topics: this.model.page.topics
+            navigationLabel: "Questions",
+            questions: this.model.page.questions
         }));
         return this;
     },

@@ -6,15 +6,15 @@
 <div data-role="content">
     <h3>{{navigationLabel}}</h3>
     <div data-role="collapsible-set" data-inset="true" data-theme="b" data-content-theme="a">
-    	{{#each topics}}
+    	{{#each questions}}
     		<div data-role="collapsible" data-collapsed="true">
     			<h3>{{this.title}}</h3>
-                <p>{{this.description}}</p>
-                <ul>
-                    {{#each this.details}}
-                        <li>{{this}}</li>
-                    {{/each}}
-                </ul>
+                {{#each this.answers}}
+                    <label>
+                        <input type="radio" name="{{../questionId}}" id="{{this.answerId}}">
+                        {{this.label}}
+                    </label>
+                {{/each}}
     		</div>
     	{{/each}}
     </div>
