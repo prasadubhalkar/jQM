@@ -82,9 +82,9 @@
     <splash density="port-xxhdpi" src="www/res/screen/android/drawable-port-xxhdpi-screen.png" />
     <splash density="port-xxxhdpi" src="www/res/screen/android/drawable-port-xxxhdpi-screen.png" />
     <allow-intent href="market:*" />
-    <name>Code Quality</name>
+    <name>jQuery Quiz</name>
     <description>
-        Learn tricks to improve code quality
+        jQuery Quiz test your knowledge
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team

@@ -706,24 +706,280 @@ var pages = {
 		]
 	},
 	page3: {
-		title: "Variables",
-		topics: [
+		title: "Effects",
+		questions: [
 			{
-				title: "General Issues in Using Variables",
-				details: [ "Details to Come" ]
+				title: "Which property is set by jQuery when hide() function is called?",
+				type: "single",
+				questionId: "t3q1",
+				correctanswerId: "t3q1a3", 
+				description: [
+					"When jQuery hides an element, it sets its CSS display property to none",
+					"This means the content will have zero width and height; it does not mean that the content will simply become transparent and leave an empty area on the page"
+				],
+				answers: [
+					{
+						label: "visibility:hidden",
+						answerId: "t3q1a1"
+					},
+					{
+						label: "visibility:none",
+						answerId: "t3q1a2"
+					},
+					{
+						label: "display:none",
+						answerId: "t3q1a3"
+					},
+					{
+						label: "display:hidden",
+						answerId: "t3q1a4"
+					}
+				]
 			},
 			{
-				title: "The Power of Variable Names",
-				details: [ "Details to Come" ]
+				title: "Which of this is not correct argument for show/hide jQuery functions?",
+				type: "single",
+				questionId: "t3q2",
+				correctanswerId: "t3q2a4", 
+				description: [
+					"You can tell .show() and .hide() to use animation in a couple of ways",
+					"One is to pass in an argument of 'slow', 'normal', or 'fast'"
+				],
+				answers: [
+					{
+						label: "slow",
+						answerId: "t3q2a1"
+					},
+					{
+						label: "fast",
+						answerId: "t3q2a2"
+					},
+					{
+						label: "normal",
+						answerId: "t3q2a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "t3q2a4"
+					}
+				]
 			},
 			{
-				title: "Fundamental Data Types",
-				details: [ "Details to Come" ]
+				title: ".show() and .hide() uses combination of which two animation effects?",
+				type: "single",
+				questionId: "t3q3",
+				correctanswerId: "t3q3a2", 
+				description: [
+					".show() and .hide() use a combination of slide and fade effects when showing and hiding content in an animated way"
+				],
+				answers: [
+					{
+						label: "flip and fade",
+						answerId: "t3q3a1"
+					},
+					{
+						label: "slide and fade",
+						answerId: "t3q3a2"
+					},
+					{
+						label: "roll and fade",
+						answerId: "t3q3a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "t3q3a4"
+					}
+				]
 			},
 			{
-				title: "Unusual Data Types",
-				details: [ "Details to Come" ]
-			}
+				title: ".slideIn() and .slideOut() show and hide content, respectively, using only a slide effect?",
+				type: "single",
+				questionId: "t3q4",
+				correctanswerId: "t3q4a2", 
+				description: [
+					".slideDown() and .slideUp() show and hide content, respectively, using only a slide effect",
+					".fadeIn() and .fadeOut() show and hide content, respectively, by means of a fade animation"
+
+				],
+				answers: [
+					{
+						label: "True",
+						answerId: "t3q4a1"
+					},
+					{
+						label: "False",
+						answerId: "t3q4a2"
+					}
+				]
+			},
+			{
+				title: "jQuery can let you change a content's visibility based on its current visibility state using?",
+				type: "single",
+				questionId: "t3q5",
+				correctanswerId: "t3q5a3", 
+				description: [
+					".show() and .hide() use a combination of slide and fade effects when showing and hiding content in an animated way"
+				],
+				answers: [
+					{
+						label: "show()",
+						answerId: "t3q5a1"
+					},
+					{
+						label: "hide()",
+						answerId: "t3q5a2"
+					},
+					{
+						label: "toggle()",
+						answerId: "t3q5a3"
+					},
+					{
+						label: "fadeInOut()",
+						answerId: "t3q5a4"
+					}
+				]
+			},
+			{
+				title: "Which of this is correct way of doing something after animation completes?",
+				type: "single",
+				questionId: "t3q6",
+				correctanswerId: "t3q6a2", 
+				description: [
+					"It is important to realize that .fadeIn() above only kicks off the animation",
+					"Once started, the animation is implemented by rapidly changing CSS properties in a JavaScript setInterval() loop",
+					"When you call .fadeIn(), it starts the animation loop and then returns the jQuery object, passing it along to .addClass()",
+					"which will then add the colorRed style class while the animation loop is just getting started."
+				],
+				answers: [
+					{
+						label: "$( 'div.hidden' ).fadeIn( 750 ).addClass( 'colorRed' );",
+						answerId: "t3q6a1"
+					},
+					{
+						label: "$( 'div.hidden' ).fadeIn( 750, function() { $( this ).addClass( 'colorRed' ); } )",
+						answerId: "t3q6a2"
+					},
+					{
+						label: "$( 'div.hidden' ).fadeIn( 750 ).on( 'addClass', colorRed' );",
+						answerId: "t3q6a3"
+					},
+					{
+						label: "$( 'div.hidden' ).fadeIn( 750 ).done( 'addClass', colorRed' );",
+						answerId: "t3q6a4"
+					}
+				]
+			},
+			{
+				title: "How to select all the elements under a div for which animation is in progress?",
+				type: "single",
+				questionId: "t3q7",
+				correctanswerId: "t3q7a1", 
+				description: [
+					"Select all elements that are in the progress of an animation at the time the selector is run.",
+					"Note. If you use a custom jQuery build without the effects module, the :animated selector will throw an error."
+				],
+				answers: [
+					{
+						label: "$( 'div:animated' )",
+						answerId: "t3q7a1"
+					},
+					{
+						label: "$( 'div' ).animated",
+						answerId: "t3q7a2"
+					},
+					{
+						label: "$( 'div:animated' ).inProgress()",
+						answerId: "t3q7a3"
+					},
+					{
+						label: "All of the above",
+						answerId: "t3q7a4"
+					}
+				]
+			},
+			{
+				title: "Which function us used to stop inprogress animation?",
+				type: "single",
+				questionId: "t3q8",
+				correctanswerId: "t3q8a2", 
+				description: [
+					".stop() will immediately terminate all animations running on the elements in your selection",
+					"You might give end-users control over page animations by rigging a button they can click to stop the animations."
+				],
+				answers: [
+					{
+						label: ".terminate()",
+						answerId: "t3q8a1"
+					},
+					{
+						label: ".stop()",
+						answerId: "t3q8a2"
+					},
+					{
+						label: ".clear()",
+						answerId: "t3q8a3"
+					},
+					{
+						label: ".close()",
+						answerId: "t3q8a4"
+					}
+				]
+			},
+			{
+				title: "Which is correct syntax to introduce additional time with successive animations?",
+				type: "single",
+				questionId: "t3q9",
+				correctanswerId: "t3q9a4", 
+				description: [
+					".delay() is used to introduce a delay between successive animations"
+				],
+				answers: [
+					{
+						label: ".hide( 500 ).add( 1500 ).show( 300 )",
+						answerId: "t3q9a1"
+					},
+					{
+						label: ".hide( 500 ).slow( 1500 ).show( 300 )",
+						answerId: "t3q9a2"
+					},
+					{
+						label: ".hide( 500, 1500 ).show( 300 )",
+						answerId: "t3q9a3"
+					},
+					{
+						label: ".hide( 500 ).delay( 1500 ).show( 300 )",
+						answerId: "t3q9a4"
+					}
+				]
+			},
+			{
+				title: "Which function will Stop the currently-running animation, remove all queued animations, and complete all animations for the matched elements?",
+				type: "single",
+				questionId: "t3q10",
+				correctanswerId: "t3q10a1", 
+				description: [
+					"When .finish() is called on an element, the currently-running animation and all queued animations (if any) immediately stop and their CSS properties set to their target values.",
+					"All queued animations are removed."
+				],
+				answers: [
+					{
+						label: ".finish()",
+						answerId: "t3q10a1"
+					},
+					{
+						label: ".stop()",
+						answerId: "t3q10a2"
+					},
+					{
+						label: ".terminate()",
+						answerId: "t3q10a3"
+					},
+					{
+						label: ".animate()",
+						answerId: "t3q10a4"
+					}
+				]
+			},
 		]
 	},
 	page4: {
