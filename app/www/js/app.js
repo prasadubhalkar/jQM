@@ -1261,31 +1261,291 @@ var pages = {
 		]
 	},
 	page4: {
-		title: "Statements",
-		topics: [
+		title: "Ajax",
+		questions: [
 			{
-				title: "Organizing Straight-Line Code",
-				details: [ "Details to Come" ]
+				title: "cache option for $.ajax is true for all request types except?",
+				type: "single",
+				questionId: "t4q1",
+				correctanswerId: "t4q1a3", 
+				description: [
+					"Whether to use a cached response if available. Defaults to true for all dataTypes except 'script' and 'jsonp'.", 
+					"When set to false, the URL will simply have a cachebusting parameter appended to it."
+				],
+				answers: [
+					{
+						label: "PUT and POST",
+						answerId: "t4q1a1"
+					},
+					{
+						label: "DELETE and POST",
+						answerId: "t4q1a2"
+					},
+					{
+						label: "SCRIPT and JSONP",
+						answerId: "t4q1a3"
+					},
+					{
+						label: "SCRIPT and POST",
+						answerId: "t4q1a4"
+					}
+				]
 			},
 			{
-				title: "Using Conditionals",
-				details: [ "Details to Come" ]
+				title: "Which function is guaranteed to run when request is complete, regardless of success or failure?",
+				type: "single",
+				questionId: "t4q2",
+				correctanswerId: "t4q2a2", 
+				description: [
+					"A callback function to run when the request is complete, regardless of success or failure.", 
+					"The function receives the raw request object and the text status of the request."
+				],
+				answers: [
+					{
+						label: "done",
+						answerId: "t4q2a1"
+					},
+					{
+						label: "always",
+						answerId: "t4q2a2"
+					},
+					{
+						label: "finally",
+						answerId: "t4q2a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "t4q2a4"
+					}
+				]
 			},
 			{
-				title: "Controlling Loops",
-				details: [ "Details to Come" ]
+				title: "What is the default contentType for ajax requests?",
+				type: "single",
+				questionId: "t4q3",
+				correctanswerId: "t4q3a4", 
+				description: [
+					"A callback function to run when the request is complete, regardless of success or failure.", 
+					"The function receives the raw request object and the text status of the request."
+				],
+				answers: [
+					{
+						label: "multipart/form-data",
+						answerId: "t4q3a1"
+					},
+					{
+						label: "text/plain",
+						answerId: "t4q3a2"
+					},
+					{
+						label: "application/json",
+						answerId: "t4q3a3"
+					},
+					{
+						label: "application/x-www-form-urlencoded; charset=UTF-8",
+						answerId: "t4q3a4"
+					}
+				]
 			},
 			{
-				title: "Unusual Control Structures",
-				details: [ "Details to Come" ]
+				title: "What is the 'context' option in $.ajax used for?",
+				type: "single",
+				questionId: "t4q4",
+				correctanswerId: "t4q4a1", 
+				description: [
+					"The scope in which the callback function(s) should run (i.e. what this will mean inside the callback function(s)).", 
+					"By default, this inside the callback function(s) refers to the object originally passed to $.ajax()."
+				],
+				answers: [
+					{
+						label: "The scope in which the callback function(s) should run",
+						answerId: "t4q4a1"
+					},
+					{
+						label: "Specify the execution context for request",
+						answerId: "t4q4a2"
+					},
+					{
+						label: "Specifying sever context where the request should be executed",
+						answerId: "t4q4a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "t4q4a4"
+					}
+				]
 			},
 			{
-				title: "Table-Driven Methods",
-				details: [ "Details to Come" ]
+				title: "What is difference between serialize and serializeArray?",
+				type: "single",
+				questionId: "t4q5",
+				correctanswerId: "t4q5a2", 
+				description: [
+					"The .serialize() method serializes a form's data into a query string", 
+					".serializeArray() method is similar to the .serialize(), except it produces an array of objects"
+				],
+				answers: [
+					{
+						label: "They are both the same",
+						answerId: "t4q5a1"
+					},
+					{
+						label: ".serialize() method serializes a form's data into a query string, and .serializeArray() in an Array",
+						answerId: "t4q5a2"
+					},
+					{
+						label: ".serialize() method serializes a form's data into a JSON object, and .serializeArray() in an Array",
+						answerId: "t4q5a3"
+					},
+					{
+						label: ".serialize() method serializes a form's data into a string, and .serializeArray() in an JSON object",
+						answerId: "t4q5a4"
+					}
+				]
 			},
 			{
-				title: "General Control Issues",
-				details: [ "Details to Come" ]
+				title: "What is ifModified param under $.ajax?",
+				type: "single",
+				questionId: "t4q6",
+				correctanswerId: "t4q6a3", 
+				description: [
+					"Allow the request to be successful only if the response has changed since the last request", 
+					"This is done by checking the Last-Modified header."
+				],
+				answers: [
+					{
+						label: "Verify if the query string is modified from last request, and allow the request to be successful",
+						answerId: "t4q6a1"
+					},
+					{
+						label: "Verify if the form data is modified from last request, and allow the request to be successful",
+						answerId: "t4q6a2"
+					},
+					{
+						label: "Verify if the response has changed since the last request, and allow the request to be successful",
+						answerId: "t4q6a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "t4q6a4"
+					}
+				]
+			},
+			{
+				title: "What is ifModified param under $.ajax?",
+				type: "single",
+				questionId: "t4q7",
+				correctanswerId: "t4q7a3", 
+				description: [
+					"Allow the request to be successful only if the response has changed since the last request", 
+					"This is done by checking the Last-Modified header."
+				],
+				answers: [
+					{
+						label: "Verify if the query string is modified from last request, and allow the request to be successful",
+						answerId: "t4q7a1"
+					},
+					{
+						label: "Verify if the form data is modified from last request, and allow the request to be successful",
+						answerId: "t4q7a2"
+					},
+					{
+						label: "Verify if the response has changed since the last request, and allow the request to be successful",
+						answerId: "t4q7a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "t4q7a4"
+					}
+				]
+			},
+			{
+				title: "What is ajaxPrefilter used for?",
+				type: "single",
+				questionId: "t4q8",
+				correctanswerId: "t4q8a4", 
+				description: [
+					"A prefilter is a way to modify the ajax options before each request is sent", 
+					"You can pass in an optional argument before the callback function that specifies which dataTypes you'd like the prefilter to be applied to."
+				],
+				answers: [
+					{
+						label: "A prefilter is a way to modify the query string options before each request is sent",
+						answerId: "t4q8a1"
+					},
+					{
+						label: "A prefilter is a way to modify the contentType options before each request is sent",
+						answerId: "t4q8a2"
+					},
+					{
+						label: "A prefilter is a way to modify the dataType options before each request is sent",
+						answerId: "t4q8a3"
+					},
+					{
+						label: "A prefilter is a way to modify the ajax options before each request is sent",
+						answerId: "t4q8a4"
+					}
+				]
+			},
+			{
+				title: "What is jsonpCallback used for?",
+				type: "single",
+				questionId: "t4q9",
+				correctanswerId: "t4q9a2", 
+				description: [
+					"Specify the callback function name for a JSONP request.",
+					"This value will be used instead of the random name automatically generated by jQuery."
+				],
+				answers: [
+					{
+						label: "To make CORS requests",
+						answerId: "t4q9a1"
+					},
+					{
+						label: "To make JSONP requests",
+						answerId: "t4q9a2"
+					},
+					{
+						label: "To set the name of JSONP callback",
+						answerId: "t4q9a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "t4q9a4"
+					}
+				]
+			},
+			{
+				title: "Which of this is not an jQuery ajax event?",
+				type: "single",
+				questionId: "t4q10",
+				correctanswerId: "t4q10a1", 
+				description: [
+					".ajaxComplete(): Register a handler to be called when Ajax requests complete.",
+					".ajaxError(): Register a handler to be called when Ajax requests complete with an error.",
+					".ajaxSend(): Attach a function to be executed before an Ajax request is sent.",
+					".ajaxStart(): Register a handler to be called when the first Ajax request begins.",
+					".ajaxStop(): Register a handler to be called when all Ajax requests have completed.",
+					".ajaxSuccess(): Attach a function to be executed whenever an Ajax request completes successfully."
+				],
+				answers: [
+					{
+						label: "ajaxFinish",
+						answerId: "t4q10a1"
+					},
+					{
+						label: "ajaxComplete",
+						answerId: "t4q10a2"
+					},
+					{
+						label: "ajaxError",
+						answerId: "t4q10a3"
+					},
+					{
+						label: "ajaxSuccess",
+						answerId: "t4q10a4"
+					}
+				]
 			}
 		]
 	},
