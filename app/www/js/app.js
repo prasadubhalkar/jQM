@@ -1550,56 +1550,531 @@ var pages = {
 		]
 	},
 	page5: {
-		title: "Code Improvements",
-		topics: [
+		title: "Plugins",
+		questions: [
 			{
-				title: "The Software-Quality Landscape",
-				details: [ "Details to Come" ]
+				title: "Where should the function be added to be available just as any other jQuery object method?",
+				type: "single",
+				questionId: "t5q1",
+				correctanswerId: "t5q1a2", 
+				description: [
+					"To create a plugin, all we have to do is add a function", 
+					"to $.fn and it will be available just like any other jQuery object method"
+				],
+				answers: [
+					{
+						label: "$",
+						answerId: "t5q1a1"
+					},
+					{
+						label: "$.fn",
+						answerId: "t5q1a2"
+					},
+					{
+						label: "jQuery",
+						answerId: "t5q1a3"
+					},
+					{
+						label: "$()",
+						answerId: "t5q1a4"
+					}
+				]
 			},
 			{
-				title: "Collaborative Construction",
-				details: [ "Details to Come" ]
+				title: "What is correct way to make plugin method chainable?",
+				type: "single",
+				questionId: "t5q2",
+				correctanswerId: "t5q2a1", 
+				description: [
+					"Chainable accomplished by having all jQuery object methods return the original jQuery object again", 
+					"Making plugin method chainable takes one line of code 'return this;'"
+				],
+				answers: [
+					{
+						label: "use 'return this;' from plugin method",
+						answerId: "t5q2a1"
+					},
+					{
+						label: "use 'return $(this);' from plugin method",
+						answerId: "t5q2a2"
+					},
+					{
+						label: "use 'return $.fn' from plugin method",
+						answerId: "t5q2a3"
+					},
+					{
+						label: "use 'return jQuery();' from plugin method",
+						answerId: "t5q2a4"
+					}
+				]
 			},
 			{
-				title: "Developer Testing",
-				details: [ "Details to Come" ]
-			},	
-			{
-				title: "Debugging",
-				details: [ "Details to Come" ]
+				title: "How to make jQuery plugin $ alias safe in case of no-conflict mode?",
+				type: "single",
+				questionId: "t5q3",
+				correctanswerId: "t5q3a3", 
+				description: [
+					"To work well with other plugins, and still use the jQuery $ alias, we need to put all of our code inside of an Immediately Invoked Function Expression", 
+					"and then pass the function jQuery, and name the parameter $"
+				],
+				answers: [
+					{
+						label: "We cannot make plugin $ alias safe in case of no-conflict mode",
+						answerId: "t5q3a1"
+					},
+					{
+						label: "All jQuery plugins are by default $ alias safe in case of no-conflict mode ",
+						answerId: "t5q3a2"
+					},
+					{
+						label: "Wrap plugin code inside Immediately Invoked Expression passing jQuery as argument",
+						answerId: "t5q3a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "t5q3a4"
+					}
+				]
 			},
 			{
-				title: "Refactoring",
-				details: [ "Details to Come" ]
+				title: "What is correct syntax to specify default for a plugin?",
+				type: "single",
+				questionId: "t5q4",
+				correctanswerId: "t5q4a1", 
+				description: [
+					"Plugin defaults – added as a property on our plugin function"
+				],
+				answers: [
+					{
+						label: "$.fn.pluginName.defaults.<<propertyName>>",
+						answerId: "t5q4a1"
+					},
+					{
+						label: "$.fn.pluginName.<<propertyName>",
+						answerId: "t5q4a2"
+					},
+					{
+						label: "$.fn.pluginName.properties.<<propertyName>",
+						answerId: "t5q4a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "t5q4a4"
+					}
+				]
 			},
 			{
-				title: "Code-Tuning Strategies",
-				details: [ "Details to Come" ]
+				title: "In jQuery UI the system that manages state, allows multiple functions to be exposed via a single plugin, and provides various extension points is called?",
+				type: "single",
+				questionId: "t5q5",
+				correctanswerId: "t5q5a1", 
+				description: [
+					"The system is called the Widget Factory and is exposed as jQuery.widget as part of jQuery UI 1.8; however, it can be used independently of jQuery UI"
+				],
+				answers: [
+					{
+						label: "Widget Factory",
+						answerId: "t5q5a1"
+					},
+					{
+						label: "Plugin Factory",
+						answerId: "t5q5a2"
+					},
+					{
+						label: "Addon Factory",
+						answerId: "t5q5a3"
+					},
+					{
+						label: "State Factory",
+						answerId: "t5q5a4"
+					}
+				]
 			},
 			{
-				title: "Code-Tuning Techniques",
-				details: [ "Details to Come" ]
+				title: "How is jQuery.widget different from jQuery.plugin?",
+				type: "single",
+				questionId: "t5q6",
+				correctanswerId: "t5q6a1", 
+				description: [
+					"When the plugin gets called, it will create a new plugin instance and all functions will be executed within the context of that instance.",
+					"This is different from a standard jQuery plugin in two important ways. First, the context is an object, not a DOM element. Second, the context is always a single object, never a collection."
+				],
+				answers: [
+					{
+						label: "In jQuery.widget a DOM element and the context is always a collection",
+						answerId: "t5q6a1"
+					},
+					{
+						label: "In jQuery.widget the context is an function",
+						answerId: "t5q6a2"
+					},
+					{
+						label: "In jQuery.widget the context is an object, not a DOM element and the context is always a single object, never a collection",
+						answerId: "t5q6a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "t5q6a4"
+					}
+				]
+			},
+			{
+				title: "Which statement true for jQuery.widget plugin name?",
+				type: "single",
+				questionId: "t5q7",
+				correctanswerId: "t5q7a1", 
+				description: [
+					"The name of the plugin must contain a namespace; in this case we've used the nmk namespace.",
+					"There is a limitation that namespaces be exactly one level deep – that is, we can't use a namespace like nmk.foo."
+				],
+				answers: [
+					{
+						label: "The name of the plugin must contain a namespace; namespaces be exactly one level deep",
+						answerId: "t5q7a1"
+					},
+					{
+						label: "The name of the plugin can contain optional namespace; namespaces be exactly one level deep",
+						answerId: "t5q7a2"
+					},
+					{
+						label: "There is no restriction on the name of the plugin",
+						answerId: "t5q7a3"
+					},
+					{
+						label: "The name of the plugin should not contain a namespace",
+						answerId: "t5q7a4"
+					}
+				]
+			},
+			{
+				title: "The 'ui' namespace is reserved for official jQuery UI plugins?",
+				type: "single",
+				questionId: "t5q8",
+				correctanswerId: "t5q8a1", 
+				description: [
+					"The ui namespace is reserved for official jQuery UI plugins. When building your own plugins, you should create your own namespace.",
+					"This makes it clear where the plugin came from and whether it is part of a larger collection."
+				],
+				answers: [
+					{
+						label: "True",
+						answerId: "t5q8a1"
+					},
+					{
+						label: "False",
+						answerId: "t5q8a2"
+					}
+				]
+			},
+			{
+				title: "Which method can be used to add callback in widget plugins?",
+				type: "single",
+				questionId: "t5q8",
+				correctanswerId: "t5q8a3", 
+				description: [
+					"The _trigger method takes three parameters:",
+					"the name of the callback, a native event object that initiated the callback, and a hash of data relevant to the event."
+				],
+				answers: [
+					{
+						label: "_callback",
+						answerId: "t5q8a1"
+					},
+					{
+						label: "_delegate",
+						answerId: "t5q8a2"
+					},
+					{
+						label: "_trigger",
+						answerId: "t5q8a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "t5q8a4"
+					}
+				]
+			},
+			{
+				title: "When a plugin instance is created, it is stored on the original DOM element using jQuery.data, with the plugin's full name?",
+				type: "single",
+				questionId: "t5q9",
+				correctanswerId: "t5q9a1", 
+				description: [
+					"When a plugin instance is created, it is stored on the original DOM element using jQuery.data, with the plugin's full name",
+					"(the plugin's namespace, plus a hyphen, plus the plugin's name) as the key. For example the jQuery UI dialog widget uses a key of 'ui-dialog'"
+				],
+				answers: [
+					{
+						label: "True",
+						answerId: "t5q9a1"
+					},
+					{
+						label: "False",
+						answerId: "t5q9a2"
+					}
+				]
+			},
+			{
+				title: "How is plugin clean up handled in jQuery?",
+				type: "single",
+				questionId: "t5q10",
+				correctanswerId: "t5q10a1", 
+				description: [
+					"The _destroy method is automatically called if the element that your plugin instance is tied to is removed",
+					"from the DOM, so this can be used for garbage collection as well."
+				],
+				answers: [
+					{
+						label: "_destroy method is called on plugin when corresponding element is removed from DOM",
+						answerId: "t5q10a1"
+					},
+					{
+						label: "_destroy method is called on plugin when corresponding element is hidden from DOM",
+						answerId: "t5q10a2"
+					},
+					{
+						label: "_destroy method must be called explicitly for garbage collection",
+						answerId: "t5q10a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "t5q10a4"
+					}
+				]
 			}
 		]
 	},
 	page6: {
-		title: "System Considerations",
-		topics: [
+		title: "Performance",
+		questions: [
 			{
-				title: "How Program Size Affects Construction",
-				details: [ "Details to Come" ]
+				title: "Which of the statement is true about appending elements to DOM, to improve performance?",
+				type: "single",
+				questionId: "t6q1",
+				correctanswerId: "t6q1a4", 
+				description: [
+					"Touching the DOM comes at a cost.  If you're appending a lot of elements to the DOM, you will want to append them all at once, ", 
+					"rather than one at a time. This is a common problem when appending elements within a loop."
+				],
+				answers: [
+					{
+						label: "You will want to append them all at once, rather than one at a time",
+						answerId: "t6q1a1"
+					},
+					{
+						label: "During each iteration of the loop, you append the element to the fragment rather than the DOM element",
+						answerId: "t6q1a2"
+					},
+					{
+						label: "Build up a string during each iteration of the loop and just set the HTML of the DOM element to that string",
+						answerId: "t6q1a3"
+					},
+					{
+						label: "All of the above",
+						answerId: "t6q1a4"
+					}
+				]
 			},
 			{
-				title: "Managing Construction",
-				details: [ "Details to Come" ]
+				title: "How can you improve loop performance?",
+				type: "single",
+				questionId: "t6q2",
+				correctanswerId: "t6q2a2", 
+				description: [
+					"In a for loop, don't access the length property of an array every time; cache it beforehand."
+				],
+				answers: [
+					{
+						label: "Delcare index variable for loop beforehand",
+						answerId: "t6q2a1"
+					},
+					{
+						label: "Cache length property of an array beforehand",
+						answerId: "t6q1a2"
+					},
+					{
+						label: "Cache loop increament property beforehand",
+						answerId: "t6q1a3"
+					},
+					{
+						label: "Avoid using for loops",
+						answerId: "t6q1a4"
+					}
+				]
 			},
 			{
-				title: "Integration",
-				details: [ "Details to Come" ]
-			},	
+				title: "What is detach() method used for?",
+				type: "single",
+				questionId: "t6q3",
+				correctanswerId: "t6q3a1", 
+				description: [
+					"The DOM is slow; you want to avoid manipulating it as much as possible. ",
+					"jQuery introduced detach() in version 1.4 to help address this issue, allowing you to remove an element from the DOM while you work with it."
+				],
+				answers: [
+					{
+						label: "To remove an element from the DOM while you work with it",
+						answerId: "t6q3a1"
+					},
+					{
+						label: "To manipulate element efficiently within DOM",
+						answerId: "t6q3a2"
+					},
+					{
+						label: "Creates a placeholder in DOM to modify elements",
+						answerId: "t6q3a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "t6q3a4"
+					}
+				]
+			},
 			{
-				title: "Programming Tools",
-				details: [ "Details to Come" ]
+				title: "jQuery won't tell you if you're trying to run a whole lot of code on an empty selection?",
+				type: "single",
+				questionId: "t6q4",
+				correctanswerId: "t6q4a1", 
+				description: [
+					"jQuery won't tell you if you're trying to run a whole lot of code on an empty selection",
+					"– it will proceed as though nothing's wrong. It's up to you to verify that your selection contains some elements."
+				],
+				answers: [
+					{
+						label: "True",
+						answerId: "t6q4a1"
+					},
+					{
+						label: "False",
+						answerId: "t6q4a2"
+					}
+				]
+			},
+			{
+				title: "Which of this statement is true about using jQuery extensions?",
+				type: "single",
+				questionId: "t6q6",
+				correctanswerId: "t6q6a2", 
+				description: [
+					"These extensions cannot take advantage of the performance boost provided by the native querySelectorAll()",
+					"DOM method and, therefore, require the use of the Sizzle selector engine provided by jQuery."
+				],
+				answers: [
+					{
+						label: "Use jQuery extensions as they are performance efficient",
+						answerId: "t6q6a1"
+					},
+					{
+						label: "When possible, avoid selectors that include jQuery extensions",
+						answerId: "t6q6a2"
+					},
+					{
+						label: "jQuery extensions are faster than normal ID selectors",
+						answerId: "t6q6a3"
+					},
+					{
+						label: "None of the above",
+						answerId: "t6q6a4"
+					}
+				]
+			},
+			{
+				title: "A 'flatter' DOM also helps improve selector performance?",
+				type: "single",
+				questionId: "t6q7",
+				correctanswerId: "t6q7a1", 
+				description: [
+					"A 'flatter' DOM also helps improve selector performance",
+					"as the selector engine has fewer layers to traverse when looking for an element."
+				],
+				answers: [
+					{
+						label: "True",
+						answerId: "t6q7a1"
+					},
+					{
+						label: "False",
+						answerId: "t6q7a2"
+					}
+				]
+			},
+			{
+				title: "What is difference between $( '#container div.child1' ) and $( '#container' ).find( 'div.child1' )",
+				type: "single",
+				questionId: "t6q8",
+				correctanswerId: "t6q8a4", 
+				description: [
+					"With the first approach, jQuery queries the DOM using document.querySelectorAll().",
+					"With the second, jQuery uses document.getElementById(), which is faster"
+				],
+				answers: [
+					{
+						label: "They both are same",
+						answerId: "t6q8a1"
+					},
+					{
+						label: "First is faster than second approach",
+						answerId: "t6q8a2"
+					},
+					{
+						label: "First approach uses document.getElementById() whereas second uses document.querySelectorAll()",
+						answerId: "t6q8a3"
+					},
+					{
+						label: "First approach uses document.querySelectorAll() whereas second uses document.getElementById()",
+						answerId: "t6q8a4"
+					}
+				]
+			},
+			{
+				title: "What factor/s should be considered while providing support for older browsers, such as Internet Explorer 8",
+				type: "single",
+				questionId: "t6q9",
+				correctanswerId: "t6q9a2", 
+				description: [
+					"Specificity : Be specific on the right-hand side of your selector, and less specific on the left.",
+					"Avoid the Universal Selector : Selections that specify or imply that a match could be found anywhere can be very slow."
+				],
+				answers: [
+					{
+						label: "Avoid using older versions of jQuery as they are less performance efficient",
+						answerId: "t6q9a1"
+					},
+					{
+						label: "Specificity and Avoid the Universal Selector",
+						answerId: "t6q9a2"
+					},
+					{
+						label: "Always use Universal Selectors",
+						answerId: "t6q9a3"
+					},
+					{
+						label: "No specific factors needs to be considered",
+						answerId: "t6q9a4"
+					}
+				]
+			},
+			{
+				title: "Changing the CSS for bulk elements using .css() is faster than adding a style tag to the page",
+				type: "single",
+				questionId: "t6q10",
+				correctanswerId: "t6q10a2", 
+				description: [
+					"If you're changing the CSS of more than 20 elements using .css()",
+					"consider adding a style tag to the page instead for a nearly 60% increase in speed.",
+					"Using .css() - $( 'a.links' ).css( 'color', '#0769ad' );",
+					"Using style tag - $( '<style type=\"text/css\">a.links { color: #0769ad }</style>').appendTo( 'head' )"
+				],
+				answers: [
+					{
+						label: "True",
+						answerId: "t6q10a1"
+					},
+					{
+						label: "False",
+						answerId: "t6q10a2"
+					}
+				]
 			}
 		]
 	},
