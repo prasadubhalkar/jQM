@@ -2093,23 +2093,101 @@ var pages = {
 		]
 	},
 	page7: {
-		title: "Software Craftsmanship",
-		topics: [
+		title: "Code Organization",
+		questions: [
 			{
-				title: "Layout and Style",
-				details: [ "Details to Come" ]
-			},
+				title: "Which of the statement is true about appending elements to DOM, to improve performance?",
+				type: "single",
+				questionId: "t6q1",
+				correctanswerId: "t6q1a4", 
+				description: [
+					"Touching the DOM comes at a cost.  If you're appending a lot of elements to the DOM, you will want to append them all at once, ", 
+					"rather than one at a time. This is a common problem when appending elements within a loop."
+				],
+				answers: [
+					{
+						label: "You will want to append them all at once, rather than one at a time",
+						answerId: "t6q1a1"
+					},
+					{
+						label: "During each iteration of the loop, you append the element to the fragment rather than the DOM element",
+						answerId: "t6q1a2"
+					},
+					{
+						label: "Build up a string during each iteration of the loop and just set the HTML of the DOM element to that string",
+						answerId: "t6q1a3"
+					},
+					{
+						label: "All of the above",
+						answerId: "t6q1a4"
+					}
+				]
+			}
+		]
+	},
+	page8: {
+		title: "jQuery UI",
+		questions: [
 			{
-				title: "Self-Documenting Code",
-				details: [ "Details to Come" ]
-			},
+				title: "Which of the statement is true about appending elements to DOM, to improve performance?",
+				type: "single",
+				questionId: "t6q1",
+				correctanswerId: "t6q1a4", 
+				description: [
+					"Touching the DOM comes at a cost.  If you're appending a lot of elements to the DOM, you will want to append them all at once, ", 
+					"rather than one at a time. This is a common problem when appending elements within a loop."
+				],
+				answers: [
+					{
+						label: "You will want to append them all at once, rather than one at a time",
+						answerId: "t6q1a1"
+					},
+					{
+						label: "During each iteration of the loop, you append the element to the fragment rather than the DOM element",
+						answerId: "t6q1a2"
+					},
+					{
+						label: "Build up a string during each iteration of the loop and just set the HTML of the DOM element to that string",
+						answerId: "t6q1a3"
+					},
+					{
+						label: "All of the above",
+						answerId: "t6q1a4"
+					}
+				]
+			}
+		]
+	},
+	page9: {
+		title: "jQuery Mobile",
+		questions: [
 			{
-				title: "Personal Character",
-				details: [ "Details to Come" ]
-			},	
-			{
-				title: "Themes in Software Craftsmanship",
-				details: [ "Details to Come" ]
+				title: "Which of the statement is true about appending elements to DOM, to improve performance?",
+				type: "single",
+				questionId: "t6q1",
+				correctanswerId: "t6q1a4", 
+				description: [
+					"Touching the DOM comes at a cost.  If you're appending a lot of elements to the DOM, you will want to append them all at once, ", 
+					"rather than one at a time. This is a common problem when appending elements within a loop."
+				],
+				answers: [
+					{
+						label: "You will want to append them all at once, rather than one at a time",
+						answerId: "t6q1a1"
+					},
+					{
+						label: "During each iteration of the loop, you append the element to the fragment rather than the DOM element",
+						answerId: "t6q1a2"
+					},
+					{
+						label: "Build up a string during each iteration of the loop and just set the HTML of the DOM element to that string",
+						answerId: "t6q1a3"
+					},
+					{
+						label: "All of the above",
+						answerId: "t6q1a4"
+					}
+				]
 			}
 		]
 	}
