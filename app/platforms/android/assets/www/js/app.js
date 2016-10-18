@@ -928,7 +928,7 @@ var pages = {
 				]
 			},
 			{
-				title: "Which event object properties to use to fecth mouse position at the time the event occurred?",
+				title: "Which event object properties to use to fetch mouse position at the time the event occurred?",
 				type: "single",
 				questionId: "t2q9",
 				correctanswerId: "t2q9a2", 
@@ -955,28 +955,29 @@ var pages = {
 				]
 			},
 			{
-				title: "What is this statement is true about triggerHandler?",
+				title: "Which of this statement is not true about triggerHandler?",
 				type: "single",
 				questionId: "t2q10",
 				correctanswerId: "t2q10a4", 
 				description: [
-					" pageX, pageY : The mouse position at the time the event occurred, relative to the top left of the page."
+					" .triggerHandler( eventType ) executes all handlers bound with jQuery for the event type.",
+					"It will also execute any method called on{eventType}() found on the element. "
 				],
 				answers: [
 					{
-						label: ".triggerHandler() can be chained, as it returns jQuery object",
+						label: "The .triggerHandler( 'event' ) method will not call .event() on the element it is triggered on",
 						answerId: "t2q10a1"
 					},
 					{
-						label: "Events triggered by .triggerHandler(), will bubble up the DOM hierarchy",
+						label: "While .trigger() will operate on all elements matched by the jQuery object, .triggerHandler() only affects the first matched element.",
 						answerId: "t2q10a2"
 					},
 					{
-						label: ".triggerHandler() will cause the default behavior of the event",
+						label: ".triggerHandler() returns the jQuery object (to allow chaining), .triggerHandler() returns whatever value was returned by the last handler",
 						answerId: "t2q10a3"
 					},
 					{
-						label: ".triggerHandler() only triggers the event on the first element of a jQuery object",
+						label: "Events triggered with .triggerHandler() will bubble up the DOM hierarchy; and are handled by the target element directly",
 						answerId: "t2q10a4"
 					}
 				]
@@ -1091,7 +1092,7 @@ var pages = {
 				]
 			},
 			{
-				title: "jQuery can let you change a content's visibility based on its current visibility state using?",
+				title: "jQuery can let you change the content's visibility based on its current visibility status in DOM using?",
 				type: "single",
 				questionId: "t3q5",
 				correctanswerId: "t3q5a3", 
@@ -1432,30 +1433,23 @@ var pages = {
 				]
 			},
 			{
-				title: "What is ifModified param under $.ajax?",
+				title: "Set the 'global' param false to prevent the global handlers like ajaxStart or ajaxStop from being triggered",
 				type: "single",
 				questionId: "t4q7",
-				correctanswerId: "t4q7a3", 
+				correctanswerId: "t4q7a1", 
 				description: [
-					"Allow the request to be successful only if the response has changed since the last request", 
-					"This is done by checking the Last-Modified header."
+					"Whether to trigger global Ajax event handlers for this request.", 
+					"The default is true. Set to false to prevent the global handlers like ajaxStart or ajaxStop from being triggered.",
+					"This can be used to control various Ajax Events."
 				],
 				answers: [
 					{
-						label: "Verify if the query string is modified from last request, and allow the request to be successful",
+						label: "True",
 						answerId: "t4q7a1"
 					},
 					{
-						label: "Verify if the form data is modified from last request, and allow the request to be successful",
+						label: "False",
 						answerId: "t4q7a2"
-					},
-					{
-						label: "Verify if the response has changed since the last request, and allow the request to be successful",
-						answerId: "t4q7a3"
-					},
-					{
-						label: "None of the above",
-						answerId: "t4q7a4"
 					}
 				]
 			},
@@ -1553,7 +1547,7 @@ var pages = {
 		title: "Plugins",
 		questions: [
 			{
-				title: "Where should the function be added to be available just as any other jQuery object method?",
+				title: "To make a method available just like any other jQuery object method add it to?",
 				type: "single",
 				questionId: "t5q1",
 				correctanswerId: "t5q1a2", 
@@ -1701,7 +1695,7 @@ var pages = {
 				],
 				answers: [
 					{
-						label: "In jQuery.widget a DOM element and the context is always a collection",
+						label: "In jQuery.widget context is always collection of DOM element",
 						answerId: "t5q6a1"
 					},
 					{
@@ -1709,7 +1703,7 @@ var pages = {
 						answerId: "t5q6a2"
 					},
 					{
-						label: "In jQuery.widget the context is an object, not a DOM element and the context is always a single object, never a collection",
+						label: "In jQuery.widget the context is a single object, not DOM element",
 						answerId: "t5q6a3"
 					},
 					{
@@ -1829,7 +1823,7 @@ var pages = {
 						answerId: "t5q10a1"
 					},
 					{
-						label: "_destroy method is called on plugin when corresponding element is hidden from DOM",
+						label: "_destroy method is called on plugin when corresponding element is hidden in the DOM",
 						answerId: "t5q10a2"
 					},
 					{
@@ -1953,8 +1947,8 @@ var pages = {
 			{
 				title: "Which of this statement is true about using jQuery extensions?",
 				type: "single",
-				questionId: "t6q6",
-				correctanswerId: "t6q6a2", 
+				questionId: "t6q5",
+				correctanswerId: "t6q5a2", 
 				description: [
 					"These extensions cannot take advantage of the performance boost provided by the native querySelectorAll()",
 					"DOM method and, therefore, require the use of the Sizzle selector engine provided by jQuery."
@@ -1962,27 +1956,27 @@ var pages = {
 				answers: [
 					{
 						label: "Use jQuery extensions as they are performance efficient",
-						answerId: "t6q6a1"
+						answerId: "t6q5a1"
 					},
 					{
 						label: "When possible, avoid selectors that include jQuery extensions",
-						answerId: "t6q6a2"
+						answerId: "t6q5a2"
 					},
 					{
 						label: "jQuery extensions are faster than normal ID selectors",
-						answerId: "t6q6a3"
+						answerId: "t6q5a3"
 					},
 					{
 						label: "None of the above",
-						answerId: "t6q6a4"
+						answerId: "t6q5a4"
 					}
 				]
 			},
 			{
 				title: "A 'flatter' DOM also helps improve selector performance?",
 				type: "single",
-				questionId: "t6q7",
-				correctanswerId: "t6q7a1", 
+				questionId: "t6q6",
+				correctanswerId: "t6q6a1", 
 				description: [
 					"A 'flatter' DOM also helps improve selector performance",
 					"as the selector engine has fewer layers to traverse when looking for an element."
@@ -1990,19 +1984,19 @@ var pages = {
 				answers: [
 					{
 						label: "True",
-						answerId: "t6q7a1"
+						answerId: "t6q6a1"
 					},
 					{
 						label: "False",
-						answerId: "t6q7a2"
+						answerId: "t6q6a2"
 					}
 				]
 			},
 			{
 				title: "What is difference between $( '#container div.child1' ) and $( '#container' ).find( 'div.child1' )",
 				type: "single",
-				questionId: "t6q8",
-				correctanswerId: "t6q8a4", 
+				questionId: "t6q7",
+				correctanswerId: "t6q7a4", 
 				description: [
 					"With the first approach, jQuery queries the DOM using document.querySelectorAll().",
 					"With the second, jQuery uses document.getElementById(), which is faster"
@@ -2010,27 +2004,27 @@ var pages = {
 				answers: [
 					{
 						label: "They both are same",
-						answerId: "t6q8a1"
+						answerId: "t6q7a1"
 					},
 					{
 						label: "First is faster than second approach",
-						answerId: "t6q8a2"
+						answerId: "t6q7a2"
 					},
 					{
 						label: "First approach uses document.getElementById() whereas second uses document.querySelectorAll()",
-						answerId: "t6q8a3"
+						answerId: "t6q7a3"
 					},
 					{
 						label: "First approach uses document.querySelectorAll() whereas second uses document.getElementById()",
-						answerId: "t6q8a4"
+						answerId: "t6q7a4"
 					}
 				]
 			},
 			{
 				title: "What factor/s should be considered while providing support for older browsers, such as Internet Explorer 8",
 				type: "single",
-				questionId: "t6q9",
-				correctanswerId: "t6q9a2", 
+				questionId: "t6q8",
+				correctanswerId: "t6q8a2", 
 				description: [
 					"Specificity : Be specific on the right-hand side of your selector, and less specific on the left.",
 					"Avoid the Universal Selector : Selections that specify or imply that a match could be found anywhere can be very slow."
@@ -2038,32 +2032,52 @@ var pages = {
 				answers: [
 					{
 						label: "Avoid using older versions of jQuery as they are less performance efficient",
-						answerId: "t6q9a1"
+						answerId: "t6q8a1"
 					},
 					{
 						label: "Specificity and Avoid the Universal Selector",
-						answerId: "t6q9a2"
+						answerId: "t6q8a2"
 					},
 					{
 						label: "Always use Universal Selectors",
-						answerId: "t6q9a3"
+						answerId: "t6q8a3"
 					},
 					{
 						label: "No specific factors needs to be considered",
-						answerId: "t6q9a4"
+						answerId: "t6q8a4"
 					}
 				]
 			},
 			{
 				title: "Changing the CSS for bulk elements using .css() is faster than adding a style tag to the page",
 				type: "single",
-				questionId: "t6q10",
-				correctanswerId: "t6q10a2", 
+				questionId: "t6q9",
+				correctanswerId: "t6q9a2", 
 				description: [
 					"If you're changing the CSS of more than 20 elements using .css()",
 					"consider adding a style tag to the page instead for a nearly 60% increase in speed.",
 					"Using .css() - $( 'a.links' ).css( 'color', '#0769ad' );",
 					"Using style tag - $( '<style type=\"text/css\">a.links { color: #0769ad }</style>').appendTo( 'head' )"
+				],
+				answers: [
+					{
+						label: "True",
+						answerId: "t6q9a1"
+					},
+					{
+						label: "False",
+						answerId: "t6q9a2"
+					}
+				]
+			},
+			{
+				title: "If no DOM node context passed to jQuery(), context will be equal to the document?",
+				type: "single",
+				questionId: "t6q10",
+				correctanswerId: "t6q10a1", 
+				description: [
+					"The DOM node context originally passed to jQuery(), if none was passed then context will be equal to the document.",
+					"It should be used in conjunction with the selector to determine the exact query used."
 				],
 				answers: [
 					{
