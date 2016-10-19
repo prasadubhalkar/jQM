@@ -10,7 +10,9 @@ var PageView = Backbone.View.extend({
      */
     initialize: function(pageIndex) {
         this.pageIndex = pageIndex;
-        this.model = new PageModel(pageIndex);
+        this.model = new PageModel({
+            "pageIndex": pageIndex
+        });
     },
 
     /**
@@ -19,11 +21,15 @@ var PageView = Backbone.View.extend({
      * @returns {object} backbone view
      */
     render:function () {
+        var questionsList = this.model.getQuestions();
+        var model = this.model;
+
         $(this.el).html(this.template({
-            pageTitle: this.model.page.title,
+            pageTitle: model.title,
             navigationLabel: "Questions",
-            questions: this.model.page.questions
+            questions: questionsList
         }));
+        
         return this;
     },
 

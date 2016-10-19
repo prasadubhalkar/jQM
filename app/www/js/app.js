@@ -118,6 +118,18 @@ THE SOFTWARE.
 48:[2,16],51:[2,16],55:[2,16],60:[2,16]},{33:[1,139]},{33:[2,75]},{33:[2,32]},{72:[2,101],77:[2,101]},{14:[2,17],15:[2,17],19:[2,17],29:[2,17],34:[2,17],39:[2,17],44:[2,17],47:[2,17],48:[2,17],51:[2,17],55:[2,17],60:[2,17]}],defaultActions:{4:[2,1],55:[2,55],57:[2,20],61:[2,57],74:[2,81],83:[2,85],87:[2,18],91:[2,89],102:[2,53],105:[2,93],111:[2,19],112:[2,77],117:[2,97],120:[2,63],123:[2,69],124:[2,12],136:[2,75],137:[2,32]},parseError:function(a,b){throw new Error(a)},parse:function(a){function b(){var a;return a=c.lexer.lex()||1,"number"!=typeof a&&(a=c.symbols_[a]||a),a}var c=this,d=[0],e=[null],f=[],g=this.table,h="",i=0,j=0,k=0;this.lexer.setInput(a),this.lexer.yy=this.yy,this.yy.lexer=this.lexer,this.yy.parser=this,"undefined"==typeof this.lexer.yylloc&&(this.lexer.yylloc={});var l=this.lexer.yylloc;f.push(l);var m=this.lexer.options&&this.lexer.options.ranges;"function"==typeof this.yy.parseError&&(this.parseError=this.yy.parseError);for(var n,o,p,q,r,s,t,u,v,w={};;){if(p=d[d.length-1],this.defaultActions[p]?q=this.defaultActions[p]:((null===n||"undefined"==typeof n)&&(n=b()),q=g[p]&&g[p][n]),"undefined"==typeof q||!q.length||!q[0]){var x="";if(!k){v=[];for(s in g[p])this.terminals_[s]&&s>2&&v.push("'"+this.terminals_[s]+"'");x=this.lexer.showPosition?"Parse error on line "+(i+1)+":\n"+this.lexer.showPosition()+"\nExpecting "+v.join(", ")+", got '"+(this.terminals_[n]||n)+"'":"Parse error on line "+(i+1)+": Unexpected "+(1==n?"end of input":"'"+(this.terminals_[n]||n)+"'"),this.parseError(x,{text:this.lexer.match,token:this.terminals_[n]||n,line:this.lexer.yylineno,loc:l,expected:v})}}if(q[0]instanceof Array&&q.length>1)throw new Error("Parse Error: multiple actions possible at state: "+p+", token: "+n);switch(q[0]){case 1:d.push(n),e.push(this.lexer.yytext),f.push(this.lexer.yylloc),d.push(q[1]),n=null,o?(n=o,o=null):(j=this.lexer.yyleng,h=this.lexer.yytext,i=this.lexer.yylineno,l=this.lexer.yylloc,k>0&&k--);break;case 2:if(t=this.productions_[q[1]][1],w.$=e[e.length-t],w._$={first_line:f[f.length-(t||1)].first_line,last_line:f[f.length-1].last_line,first_column:f[f.length-(t||1)].first_column,last_column:f[f.length-1].last_column},m&&(w._$.range=[f[f.length-(t||1)].range[0],f[f.length-1].range[1]]),r=this.performAction.call(w,h,j,i,this.yy,q[1],e,f),"undefined"!=typeof r)return r;t&&(d=d.slice(0,-1*t*2),e=e.slice(0,-1*t),f=f.slice(0,-1*t)),d.push(this.productions_[q[1]][0]),e.push(w.$),f.push(w._$),u=g[d[d.length-2]][d[d.length-1]],d.push(u);break;case 3:return!0}}return!0}},c=function(){var a={EOF:1,parseError:function(a,b){if(!this.yy.parser)throw new Error(a);this.yy.parser.parseError(a,b)},setInput:function(a){return this._input=a,this._more=this._less=this.done=!1,this.yylineno=this.yyleng=0,this.yytext=this.matched=this.match="",this.conditionStack=["INITIAL"],this.yylloc={first_line:1,first_column:0,last_line:1,last_column:0},this.options.ranges&&(this.yylloc.range=[0,0]),this.offset=0,this},input:function(){var a=this._input[0];this.yytext+=a,this.yyleng++,this.offset++,this.match+=a,this.matched+=a;var b=a.match(/(?:\r\n?|\n).*/g);return b?(this.yylineno++,this.yylloc.last_line++):this.yylloc.last_column++,this.options.ranges&&this.yylloc.range[1]++,this._input=this._input.slice(1),a},unput:function(a){var b=a.length,c=a.split(/(?:\r\n?|\n)/g);this._input=a+this._input,this.yytext=this.yytext.substr(0,this.yytext.length-b-1),this.offset-=b;var d=this.match.split(/(?:\r\n?|\n)/g);this.match=this.match.substr(0,this.match.length-1),this.matched=this.matched.substr(0,this.matched.length-1),c.length-1&&(this.yylineno-=c.length-1);var e=this.yylloc.range;return this.yylloc={first_line:this.yylloc.first_line,last_line:this.yylineno+1,first_column:this.yylloc.first_column,last_column:c?(c.length===d.length?this.yylloc.first_column:0)+d[d.length-c.length].length-c[0].length:this.yylloc.first_column-b},this.options.ranges&&(this.yylloc.range=[e[0],e[0]+this.yyleng-b]),this},more:function(){return this._more=!0,this},less:function(a){this.unput(this.match.slice(a))},pastInput:function(){var a=this.matched.substr(0,this.matched.length-this.match.length);return(a.length>20?"...":"")+a.substr(-20).replace(/\n/g,"")},upcomingInput:function(){var a=this.match;return a.length<20&&(a+=this._input.substr(0,20-a.length)),(a.substr(0,20)+(a.length>20?"...":"")).replace(/\n/g,"")},showPosition:function(){var a=this.pastInput(),b=new Array(a.length+1).join("-");return a+this.upcomingInput()+"\n"+b+"^"},next:function(){if(this.done)return this.EOF;this._input||(this.done=!0);var a,b,c,d,e;this._more||(this.yytext="",this.match="");for(var f=this._currentRules(),g=0;g<f.length&&(c=this._input.match(this.rules[f[g]]),!c||b&&!(c[0].length>b[0].length)||(b=c,d=g,this.options.flex));g++);return b?(e=b[0].match(/(?:\r\n?|\n).*/g),e&&(this.yylineno+=e.length),this.yylloc={first_line:this.yylloc.last_line,last_line:this.yylineno+1,first_column:this.yylloc.last_column,last_column:e?e[e.length-1].length-e[e.length-1].match(/\r?\n?/)[0].length:this.yylloc.last_column+b[0].length},this.yytext+=b[0],this.match+=b[0],this.matches=b,this.yyleng=this.yytext.length,this.options.ranges&&(this.yylloc.range=[this.offset,this.offset+=this.yyleng]),this._more=!1,this._input=this._input.slice(b[0].length),this.matched+=b[0],a=this.performAction.call(this,this.yy,this,f[d],this.conditionStack[this.conditionStack.length-1]),this.done&&this._input&&(this.done=!1),a?a:void 0):""===this._input?this.EOF:this.parseError("Lexical error on line "+(this.yylineno+1)+". Unrecognized text.\n"+this.showPosition(),{text:"",token:null,line:this.yylineno})},lex:function(){var a=this.next();return"undefined"!=typeof a?a:this.lex()},begin:function(a){this.conditionStack.push(a)},popState:function(){return this.conditionStack.pop()},_currentRules:function(){return this.conditions[this.conditionStack[this.conditionStack.length-1]].rules},topState:function(){return this.conditionStack[this.conditionStack.length-2]},pushState:function(a){this.begin(a)}};return a.options={},a.performAction=function(a,b,c,d){function e(a,c){return b.yytext=b.yytext.substr(a,b.yyleng-c)}switch(c){case 0:if("\\\\"===b.yytext.slice(-2)?(e(0,1),this.begin("mu")):"\\"===b.yytext.slice(-1)?(e(0,1),this.begin("emu")):this.begin("mu"),b.yytext)return 15;break;case 1:return 15;case 2:return this.popState(),15;case 3:return this.begin("raw"),15;case 4:return this.popState(),"raw"===this.conditionStack[this.conditionStack.length-1]?15:(b.yytext=b.yytext.substr(5,b.yyleng-9),"END_RAW_BLOCK");case 5:return 15;case 6:return this.popState(),14;case 7:return 65;case 8:return 68;case 9:return 19;case 10:return this.popState(),this.begin("raw"),23;case 11:return 55;case 12:return 60;case 13:return 29;case 14:return 47;case 15:return this.popState(),44;case 16:return this.popState(),44;case 17:return 34;case 18:return 39;case 19:return 51;case 20:return 48;case 21:this.unput(b.yytext),this.popState(),this.begin("com");break;case 22:return this.popState(),14;case 23:return 48;case 24:return 73;case 25:return 72;case 26:return 72;case 27:return 87;case 28:break;case 29:return this.popState(),54;case 30:return this.popState(),33;case 31:return b.yytext=e(1,2).replace(/\\"/g,'"'),80;case 32:return b.yytext=e(1,2).replace(/\\'/g,"'"),80;case 33:return 85;case 34:return 82;case 35:return 82;case 36:return 83;case 37:return 84;case 38:return 81;case 39:return 75;case 40:return 77;case 41:return 72;case 42:return b.yytext=b.yytext.replace(/\\([\\\]])/g,"$1"),72;case 43:return"INVALID";case 44:return 5}},a.rules=[/^(?:[^\x00]*?(?=(\{\{)))/,/^(?:[^\x00]+)/,/^(?:[^\x00]{2,}?(?=(\{\{|\\\{\{|\\\\\{\{|$)))/,/^(?:\{\{\{\{(?=[^\/]))/,/^(?:\{\{\{\{\/[^\s!"#%-,\.\/;->@\[-\^`\{-~]+(?=[=}\s\/.])\}\}\}\})/,/^(?:[^\x00]*?(?=(\{\{\{\{)))/,/^(?:[\s\S]*?--(~)?\}\})/,/^(?:\()/,/^(?:\))/,/^(?:\{\{\{\{)/,/^(?:\}\}\}\})/,/^(?:\{\{(~)?>)/,/^(?:\{\{(~)?#>)/,/^(?:\{\{(~)?#\*?)/,/^(?:\{\{(~)?\/)/,/^(?:\{\{(~)?\^\s*(~)?\}\})/,/^(?:\{\{(~)?\s*else\s*(~)?\}\})/,/^(?:\{\{(~)?\^)/,/^(?:\{\{(~)?\s*else\b)/,/^(?:\{\{(~)?\{)/,/^(?:\{\{(~)?&)/,/^(?:\{\{(~)?!--)/,/^(?:\{\{(~)?![\s\S]*?\}\})/,/^(?:\{\{(~)?\*?)/,/^(?:=)/,/^(?:\.\.)/,/^(?:\.(?=([=~}\s\/.)|])))/,/^(?:[\/.])/,/^(?:\s+)/,/^(?:\}(~)?\}\})/,/^(?:(~)?\}\})/,/^(?:"(\\["]|[^"])*")/,/^(?:'(\\[']|[^'])*')/,/^(?:@)/,/^(?:true(?=([~}\s)])))/,/^(?:false(?=([~}\s)])))/,/^(?:undefined(?=([~}\s)])))/,/^(?:null(?=([~}\s)])))/,/^(?:-?[0-9]+(?:\.[0-9]+)?(?=([~}\s)])))/,/^(?:as\s+\|)/,/^(?:\|)/,/^(?:([^\s!"#%-,\.\/;->@\[-\^`\{-~]+(?=([=~}\s\/.)|]))))/,/^(?:\[(\\\]|[^\]])*\])/,/^(?:.)/,/^(?:$)/],a.conditions={mu:{rules:[7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44],inclusive:!1},emu:{rules:[2],inclusive:!1},com:{rules:[6],inclusive:!1},raw:{rules:[3,4,5],inclusive:!1},INITIAL:{rules:[0,1,44],inclusive:!0}},a}();return b.lexer=c,a.prototype=b,b.Parser=a,new a}();b.__esModule=!0,b["default"]=c},function(a,b,c){"use strict";function d(){var a=arguments.length<=0||void 0===arguments[0]?{}:arguments[0];this.options=a}function e(a,b,c){void 0===b&&(b=a.length);var d=a[b-1],e=a[b-2];return d?"ContentStatement"===d.type?(e||!c?/\r?\n\s*?$/:/(^|\r?\n)\s*?$/).test(d.original):void 0:c}function f(a,b,c){void 0===b&&(b=-1);var d=a[b+1],e=a[b+2];return d?"ContentStatement"===d.type?(e||!c?/^\s*?\r?\n/:/^\s*?(\r?\n|$)/).test(d.original):void 0:c}function g(a,b,c){var d=a[null==b?0:b+1];if(d&&"ContentStatement"===d.type&&(c||!d.rightStripped)){var e=d.value;d.value=d.value.replace(c?/^\s+/:/^[ \t]*\r?\n?/,""),d.rightStripped=d.value!==e}}function h(a,b,c){var d=a[null==b?a.length-1:b-1];if(d&&"ContentStatement"===d.type&&(c||!d.leftStripped)){var e=d.value;return d.value=d.value.replace(c?/\s+$/:/[ \t]+$/,""),d.leftStripped=d.value!==e,d.leftStripped}}var i=c(1)["default"];b.__esModule=!0;var j=c(25),k=i(j);d.prototype=new k["default"],d.prototype.Program=function(a){var b=!this.options.ignoreStandalone,c=!this.isRootSeen;this.isRootSeen=!0;for(var d=a.body,i=0,j=d.length;j>i;i++){var k=d[i],l=this.accept(k);if(l){var m=e(d,i,c),n=f(d,i,c),o=l.openStandalone&&m,p=l.closeStandalone&&n,q=l.inlineStandalone&&m&&n;l.close&&g(d,i,!0),l.open&&h(d,i,!0),b&&q&&(g(d,i),h(d,i)&&"PartialStatement"===k.type&&(k.indent=/([ \t]+$)/.exec(d[i-1].original)[1])),b&&o&&(g((k.program||k.inverse).body),h(d,i)),b&&p&&(g(d,i),h((k.inverse||k.program).body))}}return a},d.prototype.BlockStatement=d.prototype.DecoratorBlock=d.prototype.PartialBlockStatement=function(a){this.accept(a.program),this.accept(a.inverse);var b=a.program||a.inverse,c=a.program&&a.inverse,d=c,i=c;if(c&&c.chained)for(d=c.body[0].program;i.chained;)i=i.body[i.body.length-1].program;var j={open:a.openStrip.open,close:a.closeStrip.close,openStandalone:f(b.body),closeStandalone:e((d||b).body)};if(a.openStrip.close&&g(b.body,null,!0),c){var k=a.inverseStrip;k.open&&h(b.body,null,!0),k.close&&g(d.body,null,!0),a.closeStrip.open&&h(i.body,null,!0),!this.options.ignoreStandalone&&e(b.body)&&f(d.body)&&(h(b.body),g(d.body))}else a.closeStrip.open&&h(b.body,null,!0);return j},d.prototype.Decorator=d.prototype.MustacheStatement=function(a){return a.strip},d.prototype.PartialStatement=d.prototype.CommentStatement=function(a){var b=a.strip||{};return{inlineStandalone:!0,open:b.open,close:b.close}},b["default"]=d,a.exports=b["default"]},function(a,b,c){"use strict";function d(){this.parents=[]}function e(a){this.acceptRequired(a,"path"),this.acceptArray(a.params),this.acceptKey(a,"hash")}function f(a){e.call(this,a),this.acceptKey(a,"program"),this.acceptKey(a,"inverse")}function g(a){this.acceptRequired(a,"name"),this.acceptArray(a.params),this.acceptKey(a,"hash")}var h=c(1)["default"];b.__esModule=!0;var i=c(6),j=h(i);d.prototype={constructor:d,mutating:!1,acceptKey:function(a,b){var c=this.accept(a[b]);if(this.mutating){if(c&&!d.prototype[c.type])throw new j["default"]('Unexpected node type "'+c.type+'" found when accepting '+b+" on "+a.type);a[b]=c}},acceptRequired:function(a,b){if(this.acceptKey(a,b),!a[b])throw new j["default"](a.type+" requires "+b)},acceptArray:function(a){for(var b=0,c=a.length;c>b;b++)this.acceptKey(a,b),a[b]||(a.splice(b,1),b--,c--)},accept:function(a){if(a){if(!this[a.type])throw new j["default"]("Unknown type: "+a.type,a);this.current&&this.parents.unshift(this.current),this.current=a;var b=this[a.type](a);return this.current=this.parents.shift(),!this.mutating||b?b:b!==!1?a:void 0}},Program:function(a){this.acceptArray(a.body)},MustacheStatement:e,Decorator:e,BlockStatement:f,DecoratorBlock:f,PartialStatement:g,PartialBlockStatement:function(a){g.call(this,a),this.acceptKey(a,"program")},ContentStatement:function(){},CommentStatement:function(){},SubExpression:e,PathExpression:function(){},StringLiteral:function(){},NumberLiteral:function(){},BooleanLiteral:function(){},UndefinedLiteral:function(){},NullLiteral:function(){},Hash:function(a){this.acceptArray(a.pairs)},HashPair:function(a){this.acceptRequired(a,"value")}},b["default"]=d,a.exports=b["default"]},function(a,b,c){"use strict";function d(a,b){if(b=b.path?b.path.original:b,a.path.original!==b){var c={loc:a.path.loc};throw new q["default"](a.path.original+" doesn't match "+b,c)}}function e(a,b){this.source=a,this.start={line:b.first_line,column:b.first_column},this.end={line:b.last_line,column:b.last_column}}function f(a){return/^\[.*\]$/.test(a)?a.substr(1,a.length-2):a}function g(a,b){return{open:"~"===a.charAt(2),close:"~"===b.charAt(b.length-3)}}function h(a){return a.replace(/^\{\{~?\!-?-?/,"").replace(/-?-?~?\}\}$/,"")}function i(a,b,c){c=this.locInfo(c);for(var d=a?"@":"",e=[],f=0,g="",h=0,i=b.length;i>h;h++){var j=b[h].part,k=b[h].original!==j;if(d+=(b[h].separator||"")+j,k||".."!==j&&"."!==j&&"this"!==j)e.push(j);else{if(e.length>0)throw new q["default"]("Invalid path: "+d,{loc:c});".."===j&&(f++,g+="../")}}return{type:"PathExpression",data:a,depth:f,parts:e,original:d,loc:c}}function j(a,b,c,d,e,f){var g=d.charAt(3)||d.charAt(2),h="{"!==g&&"&"!==g,i=/\*/.test(d);return{type:i?"Decorator":"MustacheStatement",path:a,params:b,hash:c,escaped:h,strip:e,loc:this.locInfo(f)}}function k(a,b,c,e){d(a,c),e=this.locInfo(e);var f={type:"Program",body:b,strip:{},loc:e};return{type:"BlockStatement",path:a.path,params:a.params,hash:a.hash,program:f,openStrip:{},inverseStrip:{},closeStrip:{},loc:e}}function l(a,b,c,e,f,g){e&&e.path&&d(a,e);var h=/\*/.test(a.open);b.blockParams=a.blockParams;var i=void 0,j=void 0;if(c){if(h)throw new q["default"]("Unexpected inverse block on decorator",c);c.chain&&(c.program.body[0].closeStrip=e.strip),j=c.strip,i=c.program}return f&&(f=i,i=b,b=f),{type:h?"DecoratorBlock":"BlockStatement",path:a.path,params:a.params,hash:a.hash,program:b,inverse:i,openStrip:a.strip,inverseStrip:j,closeStrip:e&&e.strip,loc:this.locInfo(g)}}function m(a,b){if(!b&&a.length){var c=a[0].loc,d=a[a.length-1].loc;c&&d&&(b={source:c.source,start:{line:c.start.line,column:c.start.column},end:{line:d.end.line,column:d.end.column}})}return{type:"Program",body:a,strip:{},loc:b}}function n(a,b,c,e){return d(a,c),{type:"PartialBlockStatement",name:a.path,params:a.params,hash:a.hash,program:b,openStrip:a.strip,closeStrip:c&&c.strip,loc:this.locInfo(e)}}var o=c(1)["default"];b.__esModule=!0,b.SourceLocation=e,b.id=f,b.stripFlags=g,b.stripComment=h,b.preparePath=i,b.prepareMustache=j,b.prepareRawBlock=k,b.prepareBlock=l,b.prepareProgram=m,b.preparePartialBlock=n;var p=c(6),q=o(p)},function(a,b,c){"use strict";function d(){}function e(a,b,c){if(null==a||"string"!=typeof a&&"Program"!==a.type)throw new k["default"]("You must pass a string or Handlebars AST to Handlebars.precompile. You passed "+a);b=b||{},"data"in b||(b.data=!0),b.compat&&(b.useDepths=!0);var d=c.parse(a,b),e=(new c.Compiler).compile(d,b);return(new c.JavaScriptCompiler).compile(e,b)}function f(a,b,c){function d(){var d=c.parse(a,b),e=(new c.Compiler).compile(d,b),f=(new c.JavaScriptCompiler).compile(e,b,void 0,!0);return c.template(f)}function e(a,b){return f||(f=d()),f.call(this,a,b)}if(void 0===b&&(b={}),null==a||"string"!=typeof a&&"Program"!==a.type)throw new k["default"]("You must pass a string or Handlebars AST to Handlebars.compile. You passed "+a);"data"in b||(b.data=!0),b.compat&&(b.useDepths=!0);var f=void 0;return e._setup=function(a){return f||(f=d()),f._setup(a)},e._child=function(a,b,c,e){return f||(f=d()),f._child(a,b,c,e)},e}function g(a,b){if(a===b)return!0;if(l.isArray(a)&&l.isArray(b)&&a.length===b.length){for(var c=0;c<a.length;c++)if(!g(a[c],b[c]))return!1;return!0}}function h(a){if(!a.path.parts){var b=a.path;a.path={type:"PathExpression",data:!1,depth:0,parts:[b.original+""],original:b.original+"",loc:b.loc}}}var i=c(1)["default"];b.__esModule=!0,b.Compiler=d,b.precompile=e,b.compile=f;var j=c(6),k=i(j),l=c(5),m=c(21),n=i(m),o=[].slice;d.prototype={compiler:d,equals:function(a){var b=this.opcodes.length;if(a.opcodes.length!==b)return!1;for(var c=0;b>c;c++){var d=this.opcodes[c],e=a.opcodes[c];if(d.opcode!==e.opcode||!g(d.args,e.args))return!1}b=this.children.length;for(var c=0;b>c;c++)if(!this.children[c].equals(a.children[c]))return!1;return!0},guid:0,compile:function(a,b){this.sourceNode=[],this.opcodes=[],this.children=[],this.options=b,this.stringParams=b.stringParams,this.trackIds=b.trackIds,b.blockParams=b.blockParams||[];var c=b.knownHelpers;if(b.knownHelpers={helperMissing:!0,blockHelperMissing:!0,each:!0,"if":!0,unless:!0,"with":!0,log:!0,lookup:!0},c)for(var d in c)d in c&&(b.knownHelpers[d]=c[d]);return this.accept(a)},compileProgram:function(a){var b=new this.compiler,c=b.compile(a,this.options),d=this.guid++;return this.usePartial=this.usePartial||c.usePartial,this.children[d]=c,this.useDepths=this.useDepths||c.useDepths,d},accept:function(a){if(!this[a.type])throw new k["default"]("Unknown type: "+a.type,a);this.sourceNode.unshift(a);var b=this[a.type](a);return this.sourceNode.shift(),b},Program:function(a){this.options.blockParams.unshift(a.blockParams);for(var b=a.body,c=b.length,d=0;c>d;d++)this.accept(b[d]);return this.options.blockParams.shift(),this.isSimple=1===c,this.blockParams=a.blockParams?a.blockParams.length:0,this},BlockStatement:function(a){h(a);var b=a.program,c=a.inverse;b=b&&this.compileProgram(b),c=c&&this.compileProgram(c);var d=this.classifySexpr(a);"helper"===d?this.helperSexpr(a,b,c):"simple"===d?(this.simpleSexpr(a),this.opcode("pushProgram",b),this.opcode("pushProgram",c),this.opcode("emptyHash"),this.opcode("blockValue",a.path.original)):(this.ambiguousSexpr(a,b,c),this.opcode("pushProgram",b),this.opcode("pushProgram",c),this.opcode("emptyHash"),this.opcode("ambiguousBlockValue")),this.opcode("append")},DecoratorBlock:function(a){var b=a.program&&this.compileProgram(a.program),c=this.setupFullMustacheParams(a,b,void 0),d=a.path;this.useDecorators=!0,this.opcode("registerDecorator",c.length,d.original)},PartialStatement:function(a){this.usePartial=!0;var b=a.program;b&&(b=this.compileProgram(a.program));var c=a.params;if(c.length>1)throw new k["default"]("Unsupported number of partial arguments: "+c.length,a);c.length||(this.options.explicitPartialContext?this.opcode("pushLiteral","undefined"):c.push({type:"PathExpression",parts:[],depth:0}));var d=a.name.original,e="SubExpression"===a.name.type;e&&this.accept(a.name),this.setupFullMustacheParams(a,b,void 0,!0);var f=a.indent||"";this.options.preventIndent&&f&&(this.opcode("appendContent",f),f=""),this.opcode("invokePartial",e,d,f),this.opcode("append")},PartialBlockStatement:function(a){this.PartialStatement(a)},MustacheStatement:function(a){this.SubExpression(a),a.escaped&&!this.options.noEscape?this.opcode("appendEscaped"):this.opcode("append")},Decorator:function(a){this.DecoratorBlock(a)},ContentStatement:function(a){a.value&&this.opcode("appendContent",a.value)},CommentStatement:function(){},SubExpression:function(a){h(a);var b=this.classifySexpr(a);"simple"===b?this.simpleSexpr(a):"helper"===b?this.helperSexpr(a):this.ambiguousSexpr(a)},ambiguousSexpr:function(a,b,c){var d=a.path,e=d.parts[0],f=null!=b||null!=c;this.opcode("getContext",d.depth),this.opcode("pushProgram",b),this.opcode("pushProgram",c),d.strict=!0,this.accept(d),this.opcode("invokeAmbiguous",e,f)},simpleSexpr:function(a){var b=a.path;b.strict=!0,this.accept(b),this.opcode("resolvePossibleLambda")},helperSexpr:function(a,b,c){var d=this.setupFullMustacheParams(a,b,c),e=a.path,f=e.parts[0];if(this.options.knownHelpers[f])this.opcode("invokeKnownHelper",d.length,f);else{if(this.options.knownHelpersOnly)throw new k["default"]("You specified knownHelpersOnly, but used the unknown helper "+f,a);e.strict=!0,e.falsy=!0,this.accept(e),this.opcode("invokeHelper",d.length,e.original,n["default"].helpers.simpleId(e))}},PathExpression:function(a){this.addDepth(a.depth),this.opcode("getContext",a.depth);var b=a.parts[0],c=n["default"].helpers.scopedId(a),d=!a.depth&&!c&&this.blockParamIndex(b);d?this.opcode("lookupBlockParam",d,a.parts):b?a.data?(this.options.data=!0,this.opcode("lookupData",a.depth,a.parts,a.strict)):this.opcode("lookupOnContext",a.parts,a.falsy,a.strict,c):this.opcode("pushContext")},StringLiteral:function(a){this.opcode("pushString",a.value)},NumberLiteral:function(a){this.opcode("pushLiteral",a.value)},BooleanLiteral:function(a){this.opcode("pushLiteral",a.value)},UndefinedLiteral:function(){this.opcode("pushLiteral","undefined")},NullLiteral:function(){this.opcode("pushLiteral","null")},Hash:function(a){var b=a.pairs,c=0,d=b.length;for(this.opcode("pushHash");d>c;c++)this.pushParam(b[c].value);for(;c--;)this.opcode("assignToHash",b[c].key);this.opcode("popHash")},opcode:function(a){this.opcodes.push({opcode:a,args:o.call(arguments,1),loc:this.sourceNode[0].loc})},addDepth:function(a){a&&(this.useDepths=!0)},classifySexpr:function(a){var b=n["default"].helpers.simpleId(a.path),c=b&&!!this.blockParamIndex(a.path.parts[0]),d=!c&&n["default"].helpers.helperExpression(a),e=!c&&(d||b);if(e&&!d){var f=a.path.parts[0],g=this.options;g.knownHelpers[f]?d=!0:g.knownHelpersOnly&&(e=!1)}return d?"helper":e?"ambiguous":"simple"},pushParams:function(a){for(var b=0,c=a.length;c>b;b++)this.pushParam(a[b])},pushParam:function(a){var b=null!=a.value?a.value:a.original||"";if(this.stringParams)b.replace&&(b=b.replace(/^(\.?\.\/)*/g,"").replace(/\//g,".")),a.depth&&this.addDepth(a.depth),this.opcode("getContext",a.depth||0),this.opcode("pushStringParam",b,a.type),"SubExpression"===a.type&&this.accept(a);else{if(this.trackIds){var c=void 0;if(!a.parts||n["default"].helpers.scopedId(a)||a.depth||(c=this.blockParamIndex(a.parts[0])),c){var d=a.parts.slice(1).join(".");this.opcode("pushId","BlockParam",c,d)}else b=a.original||b,b.replace&&(b=b.replace(/^this(?:\.|$)/,"").replace(/^\.\//,"").replace(/^\.$/,"")),this.opcode("pushId",a.type,b)}this.accept(a)}},setupFullMustacheParams:function(a,b,c,d){var e=a.params;return this.pushParams(e),this.opcode("pushProgram",b),this.opcode("pushProgram",c),a.hash?this.accept(a.hash):this.opcode("emptyHash",d),e},blockParamIndex:function(a){for(var b=0,c=this.options.blockParams.length;c>b;b++){var d=this.options.blockParams[b],e=d&&l.indexOf(d,a);if(d&&e>=0)return[b,e]}}}},function(a,b,c){"use strict";function d(a){this.value=a}function e(){}function f(a,b,c,d){var e=b.popStack(),f=0,g=c.length;for(a&&g--;g>f;f++)e=b.nameLookup(e,c[f],d);return a?[b.aliasable("container.strict"),"(",e,", ",b.quotedString(c[f]),")"]:e}var g=c(1)["default"];b.__esModule=!0;var h=c(4),i=c(6),j=g(i),k=c(5),l=c(29),m=g(l);e.prototype={nameLookup:function(a,b){return e.isValidJavaScriptVariableName(b)?[a,".",b]:[a,"[",JSON.stringify(b),"]"]},depthedLookup:function(a){return[this.aliasable("container.lookup"),'(depths, "',a,'")']},compilerInfo:function(){var a=h.COMPILER_REVISION,b=h.REVISION_CHANGES[a];return[a,b]},appendToBuffer:function(a,b,c){return k.isArray(a)||(a=[a]),a=this.source.wrap(a,b),this.environment.isSimple?["return ",a,";"]:c?["buffer += ",a,";"]:(a.appendToBuffer=!0,a)},initializeBuffer:function(){return this.quotedString("")},compile:function(a,b,c,d){this.environment=a,this.options=b,this.stringParams=this.options.stringParams,this.trackIds=this.options.trackIds,this.precompile=!d,this.name=this.environment.name,this.isChild=!!c,this.context=c||{decorators:[],programs:[],environments:[]},this.preamble(),this.stackSlot=0,this.stackVars=[],this.aliases={},this.registers={list:[]},this.hashes=[],this.compileStack=[],this.inlineStack=[],this.blockParams=[],this.compileChildren(a,b),this.useDepths=this.useDepths||a.useDepths||a.useDecorators||this.options.compat,this.useBlockParams=this.useBlockParams||a.useBlockParams;var e=a.opcodes,f=void 0,g=void 0,h=void 0,i=void 0;for(h=0,i=e.length;i>h;h++)f=e[h],this.source.currentLocation=f.loc,g=g||f.loc,this[f.opcode].apply(this,f.args);if(this.source.currentLocation=g,this.pushSource(""),this.stackSlot||this.inlineStack.length||this.compileStack.length)throw new j["default"]("Compile completed with content left on stack");this.decorators.isEmpty()?this.decorators=void 0:(this.useDecorators=!0,this.decorators.prepend("var decorators = container.decorators;\n"),this.decorators.push("return fn;"),d?this.decorators=Function.apply(this,["fn","props","container","depth0","data","blockParams","depths",this.decorators.merge()]):(this.decorators.prepend("function(fn, props, container, depth0, data, blockParams, depths) {\n"),this.decorators.push("}\n"),this.decorators=this.decorators.merge()));var k=this.createFunctionContext(d);if(this.isChild)return k;var l={compiler:this.compilerInfo(),main:k};this.decorators&&(l.main_d=this.decorators,l.useDecorators=!0);var m=this.context,n=m.programs,o=m.decorators;for(h=0,i=n.length;i>h;h++)n[h]&&(l[h]=n[h],o[h]&&(l[h+"_d"]=o[h],l.useDecorators=!0));return this.environment.usePartial&&(l.usePartial=!0),this.options.data&&(l.useData=!0),this.useDepths&&(l.useDepths=!0),this.useBlockParams&&(l.useBlockParams=!0),this.options.compat&&(l.compat=!0),d?l.compilerOptions=this.options:(l.compiler=JSON.stringify(l.compiler),this.source.currentLocation={start:{line:1,column:0}},l=this.objectLiteral(l),b.srcName?(l=l.toStringWithSourceMap({file:b.destName}),l.map=l.map&&l.map.toString()):l=l.toString()),l},preamble:function(){this.lastContext=0,this.source=new m["default"](this.options.srcName),this.decorators=new m["default"](this.options.srcName)},createFunctionContext:function(a){var b="",c=this.stackVars.concat(this.registers.list);c.length>0&&(b+=", "+c.join(", "));var d=0;for(var e in this.aliases){var f=this.aliases[e];this.aliases.hasOwnProperty(e)&&f.children&&f.referenceCount>1&&(b+=", alias"+ ++d+"="+e,f.children[0]="alias"+d)}var g=["container","depth0","helpers","partials","data"];(this.useBlockParams||this.useDepths)&&g.push("blockParams"),this.useDepths&&g.push("depths");var h=this.mergeSource(b);return a?(g.push(h),Function.apply(this,g)):this.source.wrap(["function(",g.join(","),") {\n  ",h,"}"])},mergeSource:function(a){var b=this.environment.isSimple,c=!this.forceBuffer,d=void 0,e=void 0,f=void 0,g=void 0;return this.source.each(function(a){a.appendToBuffer?(f?a.prepend("  + "):f=a,g=a):(f&&(e?f.prepend("buffer += "):d=!0,g.add(";"),f=g=void 0),e=!0,b||(c=!1))}),c?f?(f.prepend("return "),g.add(";")):e||this.source.push('return "";'):(a+=", buffer = "+(d?"":this.initializeBuffer()),f?(f.prepend("return buffer + "),g.add(";")):this.source.push("return buffer;")),a&&this.source.prepend("var "+a.substring(2)+(d?"":";\n")),this.source.merge()},blockValue:function(a){var b=this.aliasable("helpers.blockHelperMissing"),c=[this.contextName(0)];this.setupHelperArgs(a,0,c);var d=this.popStack();c.splice(1,0,d),this.push(this.source.functionCall(b,"call",c))},ambiguousBlockValue:function(){var a=this.aliasable("helpers.blockHelperMissing"),b=[this.contextName(0)];this.setupHelperArgs("",0,b,!0),this.flushInline();var c=this.topStack();b.splice(1,0,c),this.pushSource(["if (!",this.lastHelper,") { ",c," = ",this.source.functionCall(a,"call",b),"}"])},appendContent:function(a){this.pendingContent?a=this.pendingContent+a:this.pendingLocation=this.source.currentLocation,this.pendingContent=a},append:function(){if(this.isInline())this.replaceStack(function(a){return[" != null ? ",a,' : ""']}),this.pushSource(this.appendToBuffer(this.popStack()));else{var a=this.popStack();this.pushSource(["if (",a," != null) { ",this.appendToBuffer(a,void 0,!0)," }"]),this.environment.isSimple&&this.pushSource(["else { ",this.appendToBuffer("''",void 0,!0)," }"])}},appendEscaped:function(){this.pushSource(this.appendToBuffer([this.aliasable("container.escapeExpression"),"(",this.popStack(),")"]))},getContext:function(a){this.lastContext=a},pushContext:function(){this.pushStackLiteral(this.contextName(this.lastContext))},lookupOnContext:function(a,b,c,d){var e=0;d||!this.options.compat||this.lastContext?this.pushContext():this.push(this.depthedLookup(a[e++])),this.resolvePath("context",a,e,b,c)},lookupBlockParam:function(a,b){this.useBlockParams=!0,this.push(["blockParams[",a[0],"][",a[1],"]"]),this.resolvePath("context",b,1)},lookupData:function(a,b,c){a?this.pushStackLiteral("container.data(data, "+a+")"):this.pushStackLiteral("data"),this.resolvePath("data",b,0,!0,c)},resolvePath:function(a,b,c,d,e){var g=this;if(this.options.strict||this.options.assumeObjects)return void this.push(f(this.options.strict&&e,this,b,a));for(var h=b.length;h>c;c++)this.replaceStack(function(e){var f=g.nameLookup(e,b[c],a);return d?[" && ",f]:[" != null ? ",f," : ",e]})},resolvePossibleLambda:function(){this.push([this.aliasable("container.lambda"),"(",this.popStack(),", ",this.contextName(0),")"])},pushStringParam:function(a,b){this.pushContext(),this.pushString(b),"SubExpression"!==b&&("string"==typeof a?this.pushString(a):this.pushStackLiteral(a))},emptyHash:function(a){this.trackIds&&this.push("{}"),this.stringParams&&(this.push("{}"),this.push("{}")),this.pushStackLiteral(a?"undefined":"{}")},pushHash:function(){this.hash&&this.hashes.push(this.hash),this.hash={values:[],types:[],contexts:[],ids:[]}},popHash:function(){var a=this.hash;this.hash=this.hashes.pop(),this.trackIds&&this.push(this.objectLiteral(a.ids)),this.stringParams&&(this.push(this.objectLiteral(a.contexts)),this.push(this.objectLiteral(a.types))),this.push(this.objectLiteral(a.values))},pushString:function(a){this.pushStackLiteral(this.quotedString(a))},pushLiteral:function(a){this.pushStackLiteral(a)},pushProgram:function(a){null!=a?this.pushStackLiteral(this.programExpression(a)):this.pushStackLiteral(null)},registerDecorator:function(a,b){var c=this.nameLookup("decorators",b,"decorator"),d=this.setupHelperArgs(b,a);this.decorators.push(["fn = ",this.decorators.functionCall(c,"",["fn","props","container",d])," || fn;"])},invokeHelper:function(a,b,c){var d=this.popStack(),e=this.setupHelper(a,b),f=c?[e.name," || "]:"",g=["("].concat(f,d);this.options.strict||g.push(" || ",this.aliasable("helpers.helperMissing")),g.push(")"),this.push(this.source.functionCall(g,"call",e.callParams))},invokeKnownHelper:function(a,b){var c=this.setupHelper(a,b);this.push(this.source.functionCall(c.name,"call",c.callParams))},invokeAmbiguous:function(a,b){this.useRegister("helper");var c=this.popStack();this.emptyHash();var d=this.setupHelper(0,a,b),e=this.lastHelper=this.nameLookup("helpers",a,"helper"),f=["(","(helper = ",e," || ",c,")"];this.options.strict||(f[0]="(helper = ",f.push(" != null ? helper : ",this.aliasable("helpers.helperMissing"))),this.push(["(",f,d.paramsInit?["),(",d.paramsInit]:[],"),","(typeof helper === ",this.aliasable('"function"')," ? ",this.source.functionCall("helper","call",d.callParams)," : helper))"])},invokePartial:function(a,b,c){var d=[],e=this.setupParams(b,1,d);a&&(b=this.popStack(),delete e.name),c&&(e.indent=JSON.stringify(c)),e.helpers="helpers",e.partials="partials",e.decorators="container.decorators",a?d.unshift(b):d.unshift(this.nameLookup("partials",b,"partial")),this.options.compat&&(e.depths="depths"),e=this.objectLiteral(e),
 d.push(e),this.push(this.source.functionCall("container.invokePartial","",d))},assignToHash:function(a){var b=this.popStack(),c=void 0,d=void 0,e=void 0;this.trackIds&&(e=this.popStack()),this.stringParams&&(d=this.popStack(),c=this.popStack());var f=this.hash;c&&(f.contexts[a]=c),d&&(f.types[a]=d),e&&(f.ids[a]=e),f.values[a]=b},pushId:function(a,b,c){"BlockParam"===a?this.pushStackLiteral("blockParams["+b[0]+"].path["+b[1]+"]"+(c?" + "+JSON.stringify("."+c):"")):"PathExpression"===a?this.pushString(b):"SubExpression"===a?this.pushStackLiteral("true"):this.pushStackLiteral("null")},compiler:e,compileChildren:function(a,b){for(var c=a.children,d=void 0,e=void 0,f=0,g=c.length;g>f;f++){d=c[f],e=new this.compiler;var h=this.matchExistingProgram(d);null==h?(this.context.programs.push(""),h=this.context.programs.length,d.index=h,d.name="program"+h,this.context.programs[h]=e.compile(d,b,this.context,!this.precompile),this.context.decorators[h]=e.decorators,this.context.environments[h]=d,this.useDepths=this.useDepths||e.useDepths,this.useBlockParams=this.useBlockParams||e.useBlockParams):(d.index=h,d.name="program"+h,this.useDepths=this.useDepths||d.useDepths,this.useBlockParams=this.useBlockParams||d.useBlockParams)}},matchExistingProgram:function(a){for(var b=0,c=this.context.environments.length;c>b;b++){var d=this.context.environments[b];if(d&&d.equals(a))return b}},programExpression:function(a){var b=this.environment.children[a],c=[b.index,"data",b.blockParams];return(this.useBlockParams||this.useDepths)&&c.push("blockParams"),this.useDepths&&c.push("depths"),"container.program("+c.join(", ")+")"},useRegister:function(a){this.registers[a]||(this.registers[a]=!0,this.registers.list.push(a))},push:function(a){return a instanceof d||(a=this.source.wrap(a)),this.inlineStack.push(a),a},pushStackLiteral:function(a){this.push(new d(a))},pushSource:function(a){this.pendingContent&&(this.source.push(this.appendToBuffer(this.source.quotedString(this.pendingContent),this.pendingLocation)),this.pendingContent=void 0),a&&this.source.push(a)},replaceStack:function(a){var b=["("],c=void 0,e=void 0,f=void 0;if(!this.isInline())throw new j["default"]("replaceStack on non-inline");var g=this.popStack(!0);if(g instanceof d)c=[g.value],b=["(",c],f=!0;else{e=!0;var h=this.incrStack();b=["((",this.push(h)," = ",g,")"],c=this.topStack()}var i=a.call(this,c);f||this.popStack(),e&&this.stackSlot--,this.push(b.concat(i,")"))},incrStack:function(){return this.stackSlot++,this.stackSlot>this.stackVars.length&&this.stackVars.push("stack"+this.stackSlot),this.topStackName()},topStackName:function(){return"stack"+this.stackSlot},flushInline:function(){var a=this.inlineStack;this.inlineStack=[];for(var b=0,c=a.length;c>b;b++){var e=a[b];if(e instanceof d)this.compileStack.push(e);else{var f=this.incrStack();this.pushSource([f," = ",e,";"]),this.compileStack.push(f)}}},isInline:function(){return this.inlineStack.length},popStack:function(a){var b=this.isInline(),c=(b?this.inlineStack:this.compileStack).pop();if(!a&&c instanceof d)return c.value;if(!b){if(!this.stackSlot)throw new j["default"]("Invalid stack pop");this.stackSlot--}return c},topStack:function(){var a=this.isInline()?this.inlineStack:this.compileStack,b=a[a.length-1];return b instanceof d?b.value:b},contextName:function(a){return this.useDepths&&a?"depths["+a+"]":"depth"+a},quotedString:function(a){return this.source.quotedString(a)},objectLiteral:function(a){return this.source.objectLiteral(a)},aliasable:function(a){var b=this.aliases[a];return b?(b.referenceCount++,b):(b=this.aliases[a]=this.source.wrap(a),b.aliasable=!0,b.referenceCount=1,b)},setupHelper:function(a,b,c){var d=[],e=this.setupHelperArgs(b,a,d,c),f=this.nameLookup("helpers",b,"helper"),g=this.aliasable(this.contextName(0)+" != null ? "+this.contextName(0)+" : {}");return{params:d,paramsInit:e,name:f,callParams:[g].concat(d)}},setupParams:function(a,b,c){var d={},e=[],f=[],g=[],h=!c,i=void 0;h&&(c=[]),d.name=this.quotedString(a),d.hash=this.popStack(),this.trackIds&&(d.hashIds=this.popStack()),this.stringParams&&(d.hashTypes=this.popStack(),d.hashContexts=this.popStack());var j=this.popStack(),k=this.popStack();(k||j)&&(d.fn=k||"container.noop",d.inverse=j||"container.noop");for(var l=b;l--;)i=this.popStack(),c[l]=i,this.trackIds&&(g[l]=this.popStack()),this.stringParams&&(f[l]=this.popStack(),e[l]=this.popStack());return h&&(d.args=this.source.generateArray(c)),this.trackIds&&(d.ids=this.source.generateArray(g)),this.stringParams&&(d.types=this.source.generateArray(f),d.contexts=this.source.generateArray(e)),this.options.data&&(d.data="data"),this.useBlockParams&&(d.blockParams="blockParams"),d},setupHelperArgs:function(a,b,c,d){var e=this.setupParams(a,b,c);return e=this.objectLiteral(e),d?(this.useRegister("options"),c.push("options"),["options=",e]):c?(c.push(e),""):e}},function(){for(var a="break else new var case finally return void catch for switch while continue function this with default if throw delete in try do instanceof typeof abstract enum int short boolean export interface static byte extends long super char final native synchronized class float package throws const goto private transient debugger implements protected volatile double import public let yield await null true false".split(" "),b=e.RESERVED_WORDS={},c=0,d=a.length;d>c;c++)b[a[c]]=!0}(),e.isValidJavaScriptVariableName=function(a){return!e.RESERVED_WORDS[a]&&/^[a-zA-Z_$][0-9a-zA-Z_$]*$/.test(a)},b["default"]=e,a.exports=b["default"]},function(a,b,c){"use strict";function d(a,b,c){if(f.isArray(a)){for(var d=[],e=0,g=a.length;g>e;e++)d.push(b.wrap(a[e],c));return d}return"boolean"==typeof a||"number"==typeof a?a+"":a}function e(a){this.srcFile=a,this.source=[]}b.__esModule=!0;var f=c(5),g=void 0;try{}catch(h){}g||(g=function(a,b,c,d){this.src="",d&&this.add(d)},g.prototype={add:function(a){f.isArray(a)&&(a=a.join("")),this.src+=a},prepend:function(a){f.isArray(a)&&(a=a.join("")),this.src=a+this.src},toStringWithSourceMap:function(){return{code:this.toString()}},toString:function(){return this.src}}),e.prototype={isEmpty:function(){return!this.source.length},prepend:function(a,b){this.source.unshift(this.wrap(a,b))},push:function(a,b){this.source.push(this.wrap(a,b))},merge:function(){var a=this.empty();return this.each(function(b){a.add(["  ",b,"\n"])}),a},each:function(a){for(var b=0,c=this.source.length;c>b;b++)a(this.source[b])},empty:function(){var a=this.currentLocation||{start:{}};return new g(a.start.line,a.start.column,this.srcFile)},wrap:function(a){var b=arguments.length<=1||void 0===arguments[1]?this.currentLocation||{start:{}}:arguments[1];return a instanceof g?a:(a=d(a,this,b),new g(b.start.line,b.start.column,this.srcFile,a))},functionCall:function(a,b,c){return c=this.generateList(c),this.wrap([a,b?"."+b+"(":"(",c,")"])},quotedString:function(a){return'"'+(a+"").replace(/\\/g,"\\\\").replace(/"/g,'\\"').replace(/\n/g,"\\n").replace(/\r/g,"\\r").replace(/\u2028/g,"\\u2028").replace(/\u2029/g,"\\u2029")+'"'},objectLiteral:function(a){var b=[];for(var c in a)if(a.hasOwnProperty(c)){var e=d(a[c],this);"undefined"!==e&&b.push([this.quotedString(c),":",e])}var f=this.generateList(b);return f.prepend("{"),f.add("}"),f},generateList:function(a){for(var b=this.empty(),c=0,e=a.length;e>c;c++)c&&b.add(","),b.add(d(a[c],this));return b},generateArray:function(a){var b=this.generateList(a);return b.prepend("["),b.add("]"),b}},b["default"]=e,a.exports=b["default"]}])});/* ---------- end of file --------------- */this["AppTmplts"] = this["AppTmplts"] || {};
 
+this["AppTmplts"]["src/html/partials/answers.hbs"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "<label>\r\n    <input type=\"radio\" name=\""
+    + alias2(alias1((depths[1] != null ? depths[1].questionId : depths[1]), depth0))
+    + "\" id=\""
+    + alias2(alias1((depth0 != null ? depth0.answerId : depth0), depth0))
+    + "\">\r\n    "
+    + alias2(alias1((depth0 != null ? depth0.label : depth0), depth0))
+    + "\r\n</label>";
+},"useData":true,"useDepths":true});
+
 this["AppTmplts"]["src/html/partials/home.hbs"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
@@ -188,6 +200,16 @@ this["AppTmplts"]["src/html/partials/panel.hbs"] = Handlebars.template({"1":func
   return "<ul data-role=\"listview\">\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.menuItems : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</ul>\r\n";
+},"useData":true});
+
+this["AppTmplts"]["src/html/partials/question.hbs"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "<div data-role=\"collapsible\" data-collapsed=\"true\" data-inset=\"true\" data-theme=\"b\" data-content-theme=\"a\">\r\n	<h3>"
+    + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
+    + "</h3>\r\n	<div id=\"answers_"
+    + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
+    + "\">\r\n	</div>\r\n</div>";
 },"useData":true});/* ---------- end of file --------------- *//* global Backbone, $, HomeView, PageView */
 
 /**
@@ -276,8 +298,24 @@ $(document).ready(function () {
     new AppRouter();
     Backbone.history.start();
 });
-/* ---------- end of file --------------- *//* exported indexItems, pages, homeIntro */
+/* ---------- end of file --------------- *//* global Backbone, QuestionModel, _*/
+/* exported QuestionsCollection */
+var QuestionsCollection = Backbone.Collection.extend({
+	model: QuestionModel,
 
+	/**
+	 * getQuestions will get all the questions 
+	 * added to the collection for a page
+	 * @returns {object} list of questions under collection
+	 */
+	getQuestions: function(){
+		var questions = [];
+		_.each(this.models, function(question){
+			questions.push(question.attributes);
+		});
+		return questions;
+	}
+});/* ---------- end of file --------------- *//* exported indexItems, pages, homeIntro */
 var homeIntro = {
 	title: "jQuery Quiz",
 	topics: [
@@ -336,16 +374,10 @@ var homeIntro = {
 			completed: false,
 			score: 0,
 			questions: 10	
-		},
-		{
-			title: "jQuery Mobile",
-			started: false,
-			completed: false,
-			score: 0,
-			questions: 10	
 		}
 	]
 }
+
 /**
  * Is the list of menu items
  */
@@ -385,10 +417,6 @@ var indexItems = [
 	{
 		title: "jQuery UI",
 		pageIndex: 8
-	},
-	{
-		title: "jQuery Mobile",
-		pageIndex: 9
 	}
 ];
 
@@ -2093,107 +2121,577 @@ var pages = {
 		]
 	},
 	page7: {
-		title: "Code Organization",
-		questions: [
-			{
-				title: "Which of the statement is true about appending elements to DOM, to improve performance?",
-				type: "single",
-				questionId: "t6q1",
-				correctanswerId: "t6q1a4", 
-				description: [
-					"Touching the DOM comes at a cost.  If you're appending a lot of elements to the DOM, you will want to append them all at once, ", 
-					"rather than one at a time. This is a common problem when appending elements within a loop."
-				],
-				answers: [
-					{
-						label: "You will want to append them all at once, rather than one at a time",
-						answerId: "t6q1a1"
-					},
-					{
-						label: "During each iteration of the loop, you append the element to the fragment rather than the DOM element",
-						answerId: "t6q1a2"
-					},
-					{
-						label: "Build up a string during each iteration of the loop and just set the HTML of the DOM element to that string",
-						answerId: "t6q1a3"
-					},
-					{
-						label: "All of the above",
-						answerId: "t6q1a4"
-					}
-				]
-			}
-		]
-	},
+        title: "Code Organization",
+        questions: [
+            {
+                title: "Which of this is not a good practice for code organization",
+                type: "single",
+                questionId: "t7q1",
+                correctanswerId: "t7q1a3",
+                description: [
+                    "Your code should be divided into units of functionality — modules, services, etc. Avoid the temptation to have all of your code in one huge $( document ).ready() block.",
+                    "Don't repeat yourself. Identify similarities among pieces of functionality, and use inheritance techniques to avoid repetitive code.",
+                    "Despite jQuery's DOM-centric nature, JavaScript applications are not all about the DOM. Remember that not all pieces of functionality need to — or should — have a DOM representation."
+                ],
+                answers: [
+                    {
+                        label: "Your code should be divided into units of functionality — modules, services, etc",
+                        answerId: "t7q1a1"
+                    },
+                    {
+                        label: "Don't repeat yourself. Identify similarities among pieces of functionality",
+                        answerId: "t7q1a2"
+                    },
+                    {
+                        label: "Units of functionality should be tightly coupled",
+                        answerId: "t7q1a3"
+                    },
+                    {
+                        label: "Avoid the temptation to have all of your code in one huge $( document ).ready() block",
+                        answerId: "t7q1a4"
+                    }
+                ]
+            },
+            {
+                title: "Which of this not a benefit of encapsulating related code in an object literal",
+                type: "single",
+                questionId: "t7q2",
+                correctanswerId: "t7q2a2",
+                description: [
+                    "An object literal is perhaps the simplest way to encapsulate related code.",
+                    "It doesn't offer any privacy for properties or methods, but it's useful for eliminating anonymous functions from your code",
+                    "centralizing configuration options, and easing the path to reuse and refactoring."
+                ],
+                answers: [
+                    {
+                        label: "It is useful for eliminating anonymous functions from your code",
+                        answerId: "t7q2a1"
+                    },
+                    {
+                        label: "Offers privacy for properties or methods",
+                        answerId: "t7q2a2"
+                    },
+                    {
+                        label: "Centralizing configuration options",
+                        answerId: "t7q2a3"
+                    },
+                    {
+                        label: "Easing the path to reuse and refactoring.",
+                        answerId: "t7q2a4"
+                    }
+                ]
+            },
+            {
+                title: "Which of these are good practices for code organization?",
+                type: "single",
+                questionId: "t7q3",
+                correctanswerId: "t7q3a4",
+                description: [
+                    "Breaking the feature up into tiny methods:  if we want to change how content is shown, it's clear where to change it."
+                ],
+                answers: [
+                    {
+                        label: "Breaking the feature up into tiny methods",
+                        answerId: "t7q3a1"
+                    },
+                    {
+                        label: "Eliminate the use of anonymous functions",
+                        answerId: "t7q3a2"
+                    },
+                    {
+                        label: "Eliminate the constraints of the chain, making the code easier to refactor, remix, and rearrange",
+                        answerId: "t7q3a3"
+                    },
+                    {
+                        label: "All of the above",
+                        answerId: "t7q3a4"
+                    }
+                ]
+            },
+            {
+                title: "The module pattern offers privacy for variables and functions while exposing a public API if desired?",
+                type: "single",
+                questionId: "t7q4",
+                correctanswerId: "t7q4a1",
+                description: [
+                    "The module pattern offers privacy for variables and functions while exposing a public API if desired"
+                ],
+                answers: [
+                    {
+                        label: "True",
+                        answerId: "t7q4a1"
+                    },
+                    {
+                        label: "False",
+                        answerId: "t7q4a2"
+                    }
+                ]
+            },
+            {
+                title: "How to avoid anonymous functions?",
+                type: "single",
+                questionId: "t7q5",
+                correctanswerId: "t7q5a1",
+                description: [
+                    "Anonymous functions bound everywhere are a pain. They're difficult to debug, maintain, test, or reuse.",
+                    "Instead, use an object literal to organize and name your handlers and callbacks."
+                ],
+                answers: [
+                    {
+                        label: "Use an object literal to organize and name your handlers and callbacks",
+                        answerId: "t7q5a1"
+                    },
+                    {
+                        label: "Eliminate the use of handlers and callbacks",
+                        answerId: "t7q5a2"
+                    },
+                    {
+                        label: "Create global functions",
+                        answerId: "t7q5a3"
+                    },
+                    {
+                        label: "Wrap everything under document.ready",
+                        answerId: "t7q5a4"
+                    }
+                ]
+            },
+            {
+                title: "Couple of common ways to check particular feature is supported by a user's browser are?",
+                type: "single",
+                questionId: "t7q6",
+                correctanswerId: "t7q6a2",
+                description: [
+                    "Browser Detection: Browser detection is a method where the browser's User Agent (UA) string is checked for a particular pattern unique to a browser family or version. ",
+                    "Specific feature detection checks if a specific feature is available, instead of developing against a specific browser. "
+                ],
+                answers: [
+                    {
+                        label: "Browser Detection and Feature Elimination",
+                        answerId: "t7q6a1"
+                    },
+                    {
+                        label: "Browser Detection and Specific Feature Detection",
+                        answerId: "t7q6a2"
+                    },
+                    {
+                        label: "Browser Detection and Version Control",
+                        answerId: "t7q6a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t7q6a4"
+                    }
+                ]
+            },
+            {
+                title: "Which of this is true about browser's user agent?",
+                type: "single",
+                questionId: "t7q7",
+                correctanswerId: "t7q7a3",
+                description: [
+                    "User Agents are set by the client browser. In the early days of the web, browsers would mimic each others' UA strings in order to bypass exactly this type of detection.",
+                    "It is still possible that a browser with very different capabilities may mimic just the portion of the UA string you're targeting."
+                ],
+                answers: [
+                    {
+                        label: "User Agents are reliable for Browser Detection",
+                        answerId: "t7q7a1"
+                    },
+                    {
+                        label: "User Agents are not set by the client browser",
+                        answerId: "t7q7a2"
+                    },
+                    {
+                        label: "The UA string is not user-configurable",
+                        answerId: "t7q7a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t7q7a4"
+                    }
+                ]
+            },
+            {
+                title: "What is the usage of Modernizr library?",
+                type: "single",
+                questionId: "t7q8",
+                correctanswerId: "t7q8a2",
+                description: [
+                    " Modernizr will provide a simple, high-level API for determining if a browser has a specific feature available or not."
+                ],
+                answers: [
+                    {
+                        label: "It will provide a simple, high-level API for determining to just get the correct brower version",
+                        answerId: "t7q8a1"
+                    },
+                    {
+                        label: "It will provide a simple, high-level API for determining if a browser has a specific feature available or not",
+                        answerId: "t7q8a2"
+                    },
+                    {
+                        label: "It will provide a simple, high-level API for determining to create any unavailable features",
+                        answerId: "t7q8a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t7q8a4"
+                    }
+                ]
+            },
+            {
+                title: "What is Deferreds?",
+                type: "single",
+                questionId: "t7q9",
+                correctanswerId: "t7q9a1",
+                description: [
+                    "At a high-level, deferreds can be thought of as a way to represent asynchronous operations which can take a long time to complete. ",
+                    "They're the asynchronous alternative to blocking functions and the general idea is that rather than your application blocking while it awaits some request to complete before returning a result,",
+                    "a deferred object can instead be returned immediately. You can then attach callbacks to the deferred object: they will be called once the request has actually completed."
+                ],
+                answers: [
+                    {
+                        label: "Deferreds are a way to represent asynchronous operations which can take a long time to complete. ",
+                        answerId: "t7q9a1"
+                    },
+                    {
+                        label: "Deferreds are way to deffer the action when feature is not available in particular browser",
+                        answerId: "t7q9a2"
+                    },
+                    {
+                        label: "Deferreds will throw an error when unavailable feature is been called by the application code",
+                        answerId: "t7q9a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t7q9a4"
+                    }
+                ]
+            },
+            {
+                title: "What are two different states of promise?",
+                type: "single",
+                questionId: "t7q10",
+                correctanswerId: "t7q10a2",
+                description: [
+                    "Resolved: in which case data is available",
+                    "Rejected: in which case something went wrong and no value is available"
+                ],
+                answers: [
+                    {
+                        label: "Rejected and Success",
+                        answerId: "t7q10a1"
+                    },
+                    {
+                        label: "Resolved and Rejected",
+                        answerId: "t7q10a2"
+                    },
+                    {
+                        label: "Failure and Success",
+                        answerId: "t7q10a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t7q10a4"
+                    }
+                ]
+            }
+        ]
+    },
 	page8: {
-		title: "jQuery UI",
-		questions: [
-			{
-				title: "Which of the statement is true about appending elements to DOM, to improve performance?",
-				type: "single",
-				questionId: "t6q1",
-				correctanswerId: "t6q1a4", 
-				description: [
-					"Touching the DOM comes at a cost.  If you're appending a lot of elements to the DOM, you will want to append them all at once, ", 
-					"rather than one at a time. This is a common problem when appending elements within a loop."
-				],
-				answers: [
-					{
-						label: "You will want to append them all at once, rather than one at a time",
-						answerId: "t6q1a1"
-					},
-					{
-						label: "During each iteration of the loop, you append the element to the fragment rather than the DOM element",
-						answerId: "t6q1a2"
-					},
-					{
-						label: "Build up a string during each iteration of the loop and just set the HTML of the DOM element to that string",
-						answerId: "t6q1a3"
-					},
-					{
-						label: "All of the above",
-						answerId: "t6q1a4"
-					}
-				]
-			}
-		]
+        title: "Code Organization",
+        questions: [
+            {
+                title: "jQuery UI's widgets are built on top of _______________",
+                type: "single",
+                questionId: "t8q1",
+                correctanswerId: "t8q1a4",
+                description: [
+                    "jQuery UI's widgets are built on top of the Widget Factory which provides the same general API to all of them."
+                ],
+                answers: [
+                    {
+                        label: "Widget Factory",
+                        answerId: "t8q1a1"
+                    },
+                    {
+                        label: "Data Factory",
+                        answerId: "t8q1a2"
+                    },
+                    {
+                        label: "Plugin Factory",
+                        answerId: "t8q1a3"
+                    },
+                    {
+                        label: "Object Factory",
+                        answerId: "t8q1a4"
+                    }
+                ]
+            },
+            {
+                title: "What is the first step in widgets life cycle",
+                type: "single",
+                questionId: "t8q2",
+                correctanswerId: "t8q2a1",
+                description: [
+                    "The life cycle starts when the widget is initialized. To initialize a widget, we simply call the plugin on one or more elements."
+                ],
+                answers: [
+                    {
+                        label: "Initialization",
+                        answerId: "t8q2a1"
+                    },
+                    {
+                        label: "BootStrap",
+                        answerId: "t8q2a2"
+                    },
+                    {
+                        label: "Cleanup",
+                        answerId: "t8q2a3"
+                    },
+                    {
+                        label: "Append",
+                        answerId: "t8q2a4"
+                    }
+                ]
+            },
+            {
+                title: "What is the correct way to call a method on a Widget?",
+                type: "single",
+                questionId: "t8q3",
+                correctanswerId: "t8q3a3",
+                description: [
+                    "To call the value method on our progressbar widget, we would use:  $( \"#elem\" ).progressbar( \"value\" );"
+                ],
+                answers: [
+                    {
+                        label: "Use .trigger method to call particular action on widget",
+                        answerId: "t8q3a1"
+                    },
+                    {
+                        label: "Use chaining after initialization of widget is complete",
+                        answerId: "t8q3a2"
+                    },
+                    {
+                        label: "Pass the name of the method to the jQuery plugin",
+                        answerId: "t8q3a3"
+                    },
+                    {
+                        label: "All of the above",
+                        answerId: "t8q3a4"
+                    }
+                ]
+            },
+            {
+                title: "Which of this is not a common method available for all widgets?",
+                type: "single",
+                questionId: "t8q4",
+                correctanswerId: "t8q4a2",
+                description: [
+                    "Each widget will have its own set of methods based on the functionality that the widget provides. However, there are a few methods that exist on all widgets.",
+                    "option, disable, enable, destroy, widget"
+                ],
+                answers: [
+                    {
+                        label: "option",
+                        answerId: "t8q4a1"
+                    },
+                    {
+                        label: "show",
+                        answerId: "t8q4a2"
+                    },
+                    {
+                        label: "disable",
+                        answerId: "t8q4a2"
+                    },
+                    {
+                        label: "destroy",
+                        answerId: "t8q4a2"
+                    }
+                ]
+            },
+            {
+                title: "What is difference between $( \"#elem\" ).progressbar( \"option\", \"value\", 30 ); and $( \"#elem\" ).progressbar( \"value\", 40 );?",
+                type: "single",
+                questionId: "t8q5",
+                correctanswerId: "t8q5a3",
+                description: [
+                    "$( \"#elem\" ).progressbar( \"option\", \"value\", 30 ); we're calling the option method and saying that we want to change the value option to 30.",
+                    "$( \"#elem\" ).progressbar( \"value\", 40 ); we were calling the value method with argument 40"
+                ],
+                answers: [
+                    {
+                        label: "They are both the same",
+                        answerId: "t8q5a1"
+                    },
+                    {
+                        label: "First will call the value function with argument 30 and second with value 40",
+                        answerId: "t8q5a2"
+                    },
+                    {
+                        label: "First will call the option function to change value property to 30 and second will call value function with 40",
+                        answerId: "t8q5a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t8q5a4"
+                    }
+                ]
+            },
+            {
+                title: "Calling disable on a widget will remove it from DOM?",
+                type: "single",
+                questionId: "t8q6",
+                correctanswerId: "t8q6a2",
+                description: [
+                    "Calling the disable method is equivalent to setting the disabled option to true."
+                ],
+                answers: [
+                    {
+                        label: "True",
+                        answerId: "t8q6a1"
+                    },
+                    {
+                        label: "False",
+                        answerId: "t8q6a2"
+                    }
+                ]
+            },
+            {
+                title: "What will happen if you remove or modify element which has jQuery widget initialized on it?",
+                type: "single",
+                questionId: "t8q7",
+                correctanswerId: "t8q7a2",
+                description: [
+                    "Once you destroy a widget, you can no longer call any methods on it unless you initialize the widget again.",
+                    "If you're removing the element, either directly via .remove() or by modifying an ancestor with .html() or .empty(), the widget will automatically destroy itself."
+                ],
+                answers: [
+                    {
+                        label: "Nothing will happen",
+                        answerId: "t8q7a1"
+                    },
+                    {
+                        label: "Element will return back to the original markup",
+                        answerId: "t8q7a2"
+                    },
+                    {
+                        label: "Exception will be thrown",
+                        answerId: "t8q7a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t8q7a4"
+                    }
+                ]
+            },
+            {
+                title: "What is the usage of widget method?",
+                type: "single",
+                questionId: "t8q8",
+                correctanswerId: "t8q8a3",
+                description: [
+                    "Some widgets generate wrapper elements, or elements disconnected from the original element.",
+                    "In these cases, the widget method will return the generated element.",
+                    "where there is no generated wrapper, the widget method returns the original element."
+                ],
+                answers: [
+                    {
+                        label: "Delete the existing widget",
+                        answerId: "t8q8a1"
+                    },
+                    {
+                        label: "Create a new widget",
+                        answerId: "t8q8a2"
+                    },
+                    {
+                        label: "Get generated/original element",
+                        answerId: "t8q8a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t8q8a4"
+                    }
+                ]
+            },
+            {
+                title: "What is correct way add a callback to jQuery Widget method?",
+                type: "single",
+                questionId: "t8q9",
+                correctanswerId: "t8q9a1",
+                description: [
+                    "One of the easiest ways to make your plugin extensible is to add callbacks, so users can react when the state of your plugin changes.",
+                    "The _trigger() method takes three parameters: the name of the callback, a jQuery event object that initiated the callback, and a hash of data relevant to the event."
+                ],
+                answers: [
+                    {
+                        label: "use _trigger()",
+                        answerId: "t8q9a1"
+                    },
+                    {
+                        label: "use _callback()",
+                        answerId: "t8q9a2"
+                    },
+                    {
+                        label: "use _promise()",
+                        answerId: "t8q9a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t8q9a4"
+                    }
+                ]
+            },
+            {
+                title: "Which function do we invoke for creating UI widget?",
+                type: "single",
+                questionId: "t8q10",
+                correctanswerId: "t8q10a3",
+                description: [
+                    "Creating widgets with the widget factory is done by passing the name of the widget and a prototype object to $.widget()",
+                    "To allow for extension, $.widget() optionally accepts the constructor of a widget to use as a parent. ",
+                    "When specifying a parent widget, pass it as the second argument - after the widget's name, and before the widget's prototype object."
+                ],
+                answers: [
+                    {
+                        label: "$.jQuery",
+                        answerId: "t8q10a1"
+                    },
+                    {
+                        label: "$.fn",
+                        answerId: "t8q10a2"
+                    },
+                    {
+                        label: "$.widget",
+                        answerId: "t8q10a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t8q10a4"
+                    }
+                ]
+            }
+        ]
+    }
+}/* ---------- end of file --------------- *//* global Backbone*/
+/* exported AnswerModel */
+var AnswerModel = Backbone.Model.extend({
+	defaults: {
+		label:  "",
+		answerId: ""
 	},
-	page9: {
-		title: "jQuery Mobile",
-		questions: [
-			{
-				title: "Which of the statement is true about appending elements to DOM, to improve performance?",
-				type: "single",
-				questionId: "t6q1",
-				correctanswerId: "t6q1a4", 
-				description: [
-					"Touching the DOM comes at a cost.  If you're appending a lot of elements to the DOM, you will want to append them all at once, ", 
-					"rather than one at a time. This is a common problem when appending elements within a loop."
-				],
-				answers: [
-					{
-						label: "You will want to append them all at once, rather than one at a time",
-						answerId: "t6q1a1"
-					},
-					{
-						label: "During each iteration of the loop, you append the element to the fragment rather than the DOM element",
-						answerId: "t6q1a2"
-					},
-					{
-						label: "Build up a string during each iteration of the loop and just set the HTML of the DOM element to that string",
-						answerId: "t6q1a3"
-					},
-					{
-						label: "All of the above",
-						answerId: "t6q1a4"
-					}
-				]
-			}
-		]
+	/**
+	 * initialize will initialize the Answer model
+	 * with default setting
+	 * @param  {object} answer the actual answer content object
+	 * @returns {undefined}
+	 */
+	initialize: function(answer){
+		this.label = answer.label;
+		this.answerId = answer.answerId;
 	}
-}/* ---------- end of file --------------- *//* global Backbone, homeIntro*/
+});/* ---------- end of file --------------- *//* global Backbone, homeIntro*/
 /* exported HomeModel */
-var HomeModel = Backbone.View.extend({
+var HomeModel = Backbone.Model.extend({
 	/**
 	 * initialize will initialize the Page model
 	 * with default setting
@@ -2202,22 +2700,61 @@ var HomeModel = Backbone.View.extend({
 	initialize: function(){
 		this.introModel = homeIntro;
 	}
-});/* ---------- end of file --------------- *//* global Backbone, pages*/
+});/* ---------- end of file --------------- *//* global Backbone, pages, QuestionModel, _, QuestionsCollection*/
 /* exported PageModel */
-var PageModel = Backbone.View.extend({
+var PageModel = Backbone.Model.extend({
+	defaults: {
+		questionsCollection: null,
+		title: ""	
+	},
 	/**
 	 * initialize will initialize the Page model
 	 * with default setting
-	 * @param  {number} pageIndex index of selected page
+	 * @param  {number} data initial model data passed in to model
 	 * @returns {undefined}
 	 */
-	initialize: function(pageIndex){
-		var pageName = "page" + pageIndex;
-		this.page = pages[pageName];
+	initialize: function(data){
+		var pageName = "page" + data.pageIndex;
+		var pageContents = pages[pageName];
+		this.questionsCollection = new QuestionsCollection();
+		this.title = pageContents.title;
+		this.setQuestions(pageContents.questions);
+	},
+
+	/**
+	 * getPageTitle get the title for the page
+	 * @returns {string} title of the page
+	 */
+	getPageTitle: function(){
+		return this.title;
+	},
+
+	/**
+	 * setQuestions will set the questions for the
+	 * page under a collection
+	 * @param {object} questions array of questions
+	 * @returns {undefined}
+	 */
+	setQuestions: function(questions){
+		var questionModel = null;
+		var self = this;
+		_.each(questions, function(question){
+			questionModel = new QuestionModel(question);
+			self.questionsCollection.add(questionModel);
+		});
+	},
+
+	/**
+	 * getQuestions will return the list of questions
+	 * for the page
+	 * @returns {object} list of questions for the page
+	 */
+	getQuestions: function(){
+		return this.questionsCollection.getQuestions();
 	}
 });/* ---------- end of file --------------- *//* global Backbone, indexItems*/
 /* exported PanelModel */
-var PanelModel = Backbone.View.extend({
+var PanelModel = Backbone.Model.extend({
 	/**
 	 * initialize initiate the model with
 	 * list of table of content for the application
@@ -2226,6 +2763,59 @@ var PanelModel = Backbone.View.extend({
 	initialize: function(){
 		this.index = indexItems;
 	}
+});/* ---------- end of file --------------- *//* global Backbone, AnswerModel, _*/
+/* exported QuestionModel */
+var QuestionModel = Backbone.Model.extend({
+	defaults: {
+		title:  "",
+		type: "",
+		questionId: "",
+		correctanswerId: "",
+		description: "",
+		answers: null
+	},
+	/**
+	 * initialize will initialize the Page model
+	 * with default setting
+	 * @param  {object} question the actual question content object
+	 * @returns {undefined}
+	 */
+	initialize: function(question){
+		this.title = question.title;
+		this.type = question.type;
+		this.questionId = question.questionId;
+		this.correctanswerId = question.correctanswerId;
+		this.description = question.description;
+		this.answers = [];
+		this.setUpAnswers(question.answers);
+	},
+
+	/**
+	 * setUpAnswers will set the answers for this
+	 * question
+	 * @param {array} answers an array of answers
+	 * @returns {undefined}
+	 */
+	setUpAnswers: function(answers){
+		var answerModel = null;
+		var self = this;
+		_.each(answers, function(answer){
+			answerModel = new AnswerModel(answer);
+			self.answers.push(answerModel);
+		});
+	}
+});/* ---------- end of file --------------- *//* global Backbone, AppTmplts */
+/* exported AnswerView */
+var AnswerView = Backbone.View.extend({
+    //define default template for the view
+    template:AppTmplts["src/html/partials/answer.hbs"],
+    /**
+     * initialize set initial parameters for the Page View
+     * @param  {number} pageIndex index of the page
+     * @returns {undefined}
+     */
+    initialize: function() {
+    }
 });/* ---------- end of file --------------- *//* global Backbone, $, AppTmplts, PanelView, HomeModel */
 /* exported HomeView */
 var HomeView = Backbone.View.extend({
@@ -2275,7 +2865,9 @@ var PageView = Backbone.View.extend({
      */
     initialize: function(pageIndex) {
         this.pageIndex = pageIndex;
-        this.model = new PageModel(pageIndex);
+        this.model = new PageModel({
+            "pageIndex": pageIndex
+        });
     },
 
     /**
@@ -2284,11 +2876,15 @@ var PageView = Backbone.View.extend({
      * @returns {object} backbone view
      */
     render:function () {
+        var questionsList = this.model.getQuestions();
+        var model = this.model;
+
         $(this.el).html(this.template({
-            pageTitle: this.model.page.title,
+            pageTitle: model.title,
             navigationLabel: "Questions",
-            questions: this.model.page.questions
+            questions: questionsList
         }));
+        
         return this;
     },
 
@@ -2346,5 +2942,17 @@ var PanelView = Backbone.View.extend({
 		}));
 
         return this;
+    }
+});/* ---------- end of file --------------- *//* global Backbone, AppTmplts */
+/* exported QuestionView */
+var QuestionView = Backbone.View.extend({
+    //define default template for the view
+    template:AppTmplts["src/html/partials/question.hbs"],
+    /**
+     * initialize set initial parameters for the Page View
+     * @param  {number} pageIndex index of the page
+     * @returns {undefined}
+     */
+    initialize: function() {
     }
 });

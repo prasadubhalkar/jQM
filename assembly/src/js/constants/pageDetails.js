@@ -1,5 +1,4 @@
 /* exported indexItems, pages, homeIntro */
-
 var homeIntro = {
 	title: "jQuery Quiz",
 	topics: [
@@ -58,16 +57,10 @@ var homeIntro = {
 			completed: false,
 			score: 0,
 			questions: 10	
-		},
-		{
-			title: "jQuery Mobile",
-			started: false,
-			completed: false,
-			score: 0,
-			questions: 10	
 		}
 	]
 }
+
 /**
  * Is the list of menu items
  */
@@ -107,10 +100,6 @@ var indexItems = [
 	{
 		title: "jQuery UI",
 		pageIndex: 8
-	},
-	{
-		title: "jQuery Mobile",
-		pageIndex: 9
 	}
 ];
 
@@ -1815,102 +1804,555 @@ var pages = {
 		]
 	},
 	page7: {
-		title: "Code Organization",
-		questions: [
-			{
-				title: "Which of the statement is true about appending elements to DOM, to improve performance?",
-				type: "single",
-				questionId: "t6q1",
-				correctanswerId: "t6q1a4", 
-				description: [
-					"Touching the DOM comes at a cost.  If you're appending a lot of elements to the DOM, you will want to append them all at once, ", 
-					"rather than one at a time. This is a common problem when appending elements within a loop."
-				],
-				answers: [
-					{
-						label: "You will want to append them all at once, rather than one at a time",
-						answerId: "t6q1a1"
-					},
-					{
-						label: "During each iteration of the loop, you append the element to the fragment rather than the DOM element",
-						answerId: "t6q1a2"
-					},
-					{
-						label: "Build up a string during each iteration of the loop and just set the HTML of the DOM element to that string",
-						answerId: "t6q1a3"
-					},
-					{
-						label: "All of the above",
-						answerId: "t6q1a4"
-					}
-				]
-			}
-		]
-	},
+        title: "Code Organization",
+        questions: [
+            {
+                title: "Which of this is not a good practice for code organization",
+                type: "single",
+                questionId: "t7q1",
+                correctanswerId: "t7q1a3",
+                description: [
+                    "Your code should be divided into units of functionality — modules, services, etc. Avoid the temptation to have all of your code in one huge $( document ).ready() block.",
+                    "Don't repeat yourself. Identify similarities among pieces of functionality, and use inheritance techniques to avoid repetitive code.",
+                    "Despite jQuery's DOM-centric nature, JavaScript applications are not all about the DOM. Remember that not all pieces of functionality need to — or should — have a DOM representation."
+                ],
+                answers: [
+                    {
+                        label: "Your code should be divided into units of functionality — modules, services, etc",
+                        answerId: "t7q1a1"
+                    },
+                    {
+                        label: "Don't repeat yourself. Identify similarities among pieces of functionality",
+                        answerId: "t7q1a2"
+                    },
+                    {
+                        label: "Units of functionality should be tightly coupled",
+                        answerId: "t7q1a3"
+                    },
+                    {
+                        label: "Avoid the temptation to have all of your code in one huge $( document ).ready() block",
+                        answerId: "t7q1a4"
+                    }
+                ]
+            },
+            {
+                title: "Which of this not a benefit of encapsulating related code in an object literal",
+                type: "single",
+                questionId: "t7q2",
+                correctanswerId: "t7q2a2",
+                description: [
+                    "An object literal is perhaps the simplest way to encapsulate related code.",
+                    "It doesn't offer any privacy for properties or methods, but it's useful for eliminating anonymous functions from your code",
+                    "centralizing configuration options, and easing the path to reuse and refactoring."
+                ],
+                answers: [
+                    {
+                        label: "It is useful for eliminating anonymous functions from your code",
+                        answerId: "t7q2a1"
+                    },
+                    {
+                        label: "Offers privacy for properties or methods",
+                        answerId: "t7q2a2"
+                    },
+                    {
+                        label: "Centralizing configuration options",
+                        answerId: "t7q2a3"
+                    },
+                    {
+                        label: "Easing the path to reuse and refactoring.",
+                        answerId: "t7q2a4"
+                    }
+                ]
+            },
+            {
+                title: "Which of these are good practices for code organization?",
+                type: "single",
+                questionId: "t7q3",
+                correctanswerId: "t7q3a4",
+                description: [
+                    "Breaking the feature up into tiny methods:  if we want to change how content is shown, it's clear where to change it."
+                ],
+                answers: [
+                    {
+                        label: "Breaking the feature up into tiny methods",
+                        answerId: "t7q3a1"
+                    },
+                    {
+                        label: "Eliminate the use of anonymous functions",
+                        answerId: "t7q3a2"
+                    },
+                    {
+                        label: "Eliminate the constraints of the chain, making the code easier to refactor, remix, and rearrange",
+                        answerId: "t7q3a3"
+                    },
+                    {
+                        label: "All of the above",
+                        answerId: "t7q3a4"
+                    }
+                ]
+            },
+            {
+                title: "The module pattern offers privacy for variables and functions while exposing a public API if desired?",
+                type: "single",
+                questionId: "t7q4",
+                correctanswerId: "t7q4a1",
+                description: [
+                    "The module pattern offers privacy for variables and functions while exposing a public API if desired"
+                ],
+                answers: [
+                    {
+                        label: "True",
+                        answerId: "t7q4a1"
+                    },
+                    {
+                        label: "False",
+                        answerId: "t7q4a2"
+                    }
+                ]
+            },
+            {
+                title: "How to avoid anonymous functions?",
+                type: "single",
+                questionId: "t7q5",
+                correctanswerId: "t7q5a1",
+                description: [
+                    "Anonymous functions bound everywhere are a pain. They're difficult to debug, maintain, test, or reuse.",
+                    "Instead, use an object literal to organize and name your handlers and callbacks."
+                ],
+                answers: [
+                    {
+                        label: "Use an object literal to organize and name your handlers and callbacks",
+                        answerId: "t7q5a1"
+                    },
+                    {
+                        label: "Eliminate the use of handlers and callbacks",
+                        answerId: "t7q5a2"
+                    },
+                    {
+                        label: "Create global functions",
+                        answerId: "t7q5a3"
+                    },
+                    {
+                        label: "Wrap everything under document.ready",
+                        answerId: "t7q5a4"
+                    }
+                ]
+            },
+            {
+                title: "Couple of common ways to check particular feature is supported by a user's browser are?",
+                type: "single",
+                questionId: "t7q6",
+                correctanswerId: "t7q6a2",
+                description: [
+                    "Browser Detection: Browser detection is a method where the browser's User Agent (UA) string is checked for a particular pattern unique to a browser family or version. ",
+                    "Specific feature detection checks if a specific feature is available, instead of developing against a specific browser. "
+                ],
+                answers: [
+                    {
+                        label: "Browser Detection and Feature Elimination",
+                        answerId: "t7q6a1"
+                    },
+                    {
+                        label: "Browser Detection and Specific Feature Detection",
+                        answerId: "t7q6a2"
+                    },
+                    {
+                        label: "Browser Detection and Version Control",
+                        answerId: "t7q6a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t7q6a4"
+                    }
+                ]
+            },
+            {
+                title: "Which of this is true about browser's user agent?",
+                type: "single",
+                questionId: "t7q7",
+                correctanswerId: "t7q7a3",
+                description: [
+                    "User Agents are set by the client browser. In the early days of the web, browsers would mimic each others' UA strings in order to bypass exactly this type of detection.",
+                    "It is still possible that a browser with very different capabilities may mimic just the portion of the UA string you're targeting."
+                ],
+                answers: [
+                    {
+                        label: "User Agents are reliable for Browser Detection",
+                        answerId: "t7q7a1"
+                    },
+                    {
+                        label: "User Agents are not set by the client browser",
+                        answerId: "t7q7a2"
+                    },
+                    {
+                        label: "The UA string is not user-configurable",
+                        answerId: "t7q7a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t7q7a4"
+                    }
+                ]
+            },
+            {
+                title: "What is the usage of Modernizr library?",
+                type: "single",
+                questionId: "t7q8",
+                correctanswerId: "t7q8a2",
+                description: [
+                    " Modernizr will provide a simple, high-level API for determining if a browser has a specific feature available or not."
+                ],
+                answers: [
+                    {
+                        label: "It will provide a simple, high-level API for determining to just get the correct brower version",
+                        answerId: "t7q8a1"
+                    },
+                    {
+                        label: "It will provide a simple, high-level API for determining if a browser has a specific feature available or not",
+                        answerId: "t7q8a2"
+                    },
+                    {
+                        label: "It will provide a simple, high-level API for determining to create any unavailable features",
+                        answerId: "t7q8a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t7q8a4"
+                    }
+                ]
+            },
+            {
+                title: "What is Deferreds?",
+                type: "single",
+                questionId: "t7q9",
+                correctanswerId: "t7q9a1",
+                description: [
+                    "At a high-level, deferreds can be thought of as a way to represent asynchronous operations which can take a long time to complete. ",
+                    "They're the asynchronous alternative to blocking functions and the general idea is that rather than your application blocking while it awaits some request to complete before returning a result,",
+                    "a deferred object can instead be returned immediately. You can then attach callbacks to the deferred object: they will be called once the request has actually completed."
+                ],
+                answers: [
+                    {
+                        label: "Deferreds are a way to represent asynchronous operations which can take a long time to complete. ",
+                        answerId: "t7q9a1"
+                    },
+                    {
+                        label: "Deferreds are way to deffer the action when feature is not available in particular browser",
+                        answerId: "t7q9a2"
+                    },
+                    {
+                        label: "Deferreds will throw an error when unavailable feature is been called by the application code",
+                        answerId: "t7q9a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t7q9a4"
+                    }
+                ]
+            },
+            {
+                title: "What are two different states of promise?",
+                type: "single",
+                questionId: "t7q10",
+                correctanswerId: "t7q10a2",
+                description: [
+                    "Resolved: in which case data is available",
+                    "Rejected: in which case something went wrong and no value is available"
+                ],
+                answers: [
+                    {
+                        label: "Rejected and Success",
+                        answerId: "t7q10a1"
+                    },
+                    {
+                        label: "Resolved and Rejected",
+                        answerId: "t7q10a2"
+                    },
+                    {
+                        label: "Failure and Success",
+                        answerId: "t7q10a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t7q10a4"
+                    }
+                ]
+            }
+        ]
+    },
 	page8: {
-		title: "jQuery UI",
-		questions: [
-			{
-				title: "Which of the statement is true about appending elements to DOM, to improve performance?",
-				type: "single",
-				questionId: "t6q1",
-				correctanswerId: "t6q1a4", 
-				description: [
-					"Touching the DOM comes at a cost.  If you're appending a lot of elements to the DOM, you will want to append them all at once, ", 
-					"rather than one at a time. This is a common problem when appending elements within a loop."
-				],
-				answers: [
-					{
-						label: "You will want to append them all at once, rather than one at a time",
-						answerId: "t6q1a1"
-					},
-					{
-						label: "During each iteration of the loop, you append the element to the fragment rather than the DOM element",
-						answerId: "t6q1a2"
-					},
-					{
-						label: "Build up a string during each iteration of the loop and just set the HTML of the DOM element to that string",
-						answerId: "t6q1a3"
-					},
-					{
-						label: "All of the above",
-						answerId: "t6q1a4"
-					}
-				]
-			}
-		]
-	},
-	page9: {
-		title: "jQuery Mobile",
-		questions: [
-			{
-				title: "Which of the statement is true about appending elements to DOM, to improve performance?",
-				type: "single",
-				questionId: "t6q1",
-				correctanswerId: "t6q1a4", 
-				description: [
-					"Touching the DOM comes at a cost.  If you're appending a lot of elements to the DOM, you will want to append them all at once, ", 
-					"rather than one at a time. This is a common problem when appending elements within a loop."
-				],
-				answers: [
-					{
-						label: "You will want to append them all at once, rather than one at a time",
-						answerId: "t6q1a1"
-					},
-					{
-						label: "During each iteration of the loop, you append the element to the fragment rather than the DOM element",
-						answerId: "t6q1a2"
-					},
-					{
-						label: "Build up a string during each iteration of the loop and just set the HTML of the DOM element to that string",
-						answerId: "t6q1a3"
-					},
-					{
-						label: "All of the above",
-						answerId: "t6q1a4"
-					}
-				]
-			}
-		]
-	}
+        title: "Code Organization",
+        questions: [
+            {
+                title: "jQuery UI's widgets are built on top of _______________",
+                type: "single",
+                questionId: "t8q1",
+                correctanswerId: "t8q1a4",
+                description: [
+                    "jQuery UI's widgets are built on top of the Widget Factory which provides the same general API to all of them."
+                ],
+                answers: [
+                    {
+                        label: "Widget Factory",
+                        answerId: "t8q1a1"
+                    },
+                    {
+                        label: "Data Factory",
+                        answerId: "t8q1a2"
+                    },
+                    {
+                        label: "Plugin Factory",
+                        answerId: "t8q1a3"
+                    },
+                    {
+                        label: "Object Factory",
+                        answerId: "t8q1a4"
+                    }
+                ]
+            },
+            {
+                title: "What is the first step in widgets life cycle",
+                type: "single",
+                questionId: "t8q2",
+                correctanswerId: "t8q2a1",
+                description: [
+                    "The life cycle starts when the widget is initialized. To initialize a widget, we simply call the plugin on one or more elements."
+                ],
+                answers: [
+                    {
+                        label: "Initialization",
+                        answerId: "t8q2a1"
+                    },
+                    {
+                        label: "BootStrap",
+                        answerId: "t8q2a2"
+                    },
+                    {
+                        label: "Cleanup",
+                        answerId: "t8q2a3"
+                    },
+                    {
+                        label: "Append",
+                        answerId: "t8q2a4"
+                    }
+                ]
+            },
+            {
+                title: "What is the correct way to call a method on a Widget?",
+                type: "single",
+                questionId: "t8q3",
+                correctanswerId: "t8q3a3",
+                description: [
+                    "To call the value method on our progressbar widget, we would use:  $( \"#elem\" ).progressbar( \"value\" );"
+                ],
+                answers: [
+                    {
+                        label: "Use .trigger method to call particular action on widget",
+                        answerId: "t8q3a1"
+                    },
+                    {
+                        label: "Use chaining after initialization of widget is complete",
+                        answerId: "t8q3a2"
+                    },
+                    {
+                        label: "Pass the name of the method to the jQuery plugin",
+                        answerId: "t8q3a3"
+                    },
+                    {
+                        label: "All of the above",
+                        answerId: "t8q3a4"
+                    }
+                ]
+            },
+            {
+                title: "Which of this is not a common method available for all widgets?",
+                type: "single",
+                questionId: "t8q4",
+                correctanswerId: "t8q4a2",
+                description: [
+                    "Each widget will have its own set of methods based on the functionality that the widget provides. However, there are a few methods that exist on all widgets.",
+                    "option, disable, enable, destroy, widget"
+                ],
+                answers: [
+                    {
+                        label: "option",
+                        answerId: "t8q4a1"
+                    },
+                    {
+                        label: "show",
+                        answerId: "t8q4a2"
+                    },
+                    {
+                        label: "disable",
+                        answerId: "t8q4a2"
+                    },
+                    {
+                        label: "destroy",
+                        answerId: "t8q4a2"
+                    }
+                ]
+            },
+            {
+                title: "What is difference between $( \"#elem\" ).progressbar( \"option\", \"value\", 30 ); and $( \"#elem\" ).progressbar( \"value\", 40 );?",
+                type: "single",
+                questionId: "t8q5",
+                correctanswerId: "t8q5a3",
+                description: [
+                    "$( \"#elem\" ).progressbar( \"option\", \"value\", 30 ); we're calling the option method and saying that we want to change the value option to 30.",
+                    "$( \"#elem\" ).progressbar( \"value\", 40 ); we were calling the value method with argument 40"
+                ],
+                answers: [
+                    {
+                        label: "They are both the same",
+                        answerId: "t8q5a1"
+                    },
+                    {
+                        label: "First will call the value function with argument 30 and second with value 40",
+                        answerId: "t8q5a2"
+                    },
+                    {
+                        label: "First will call the option function to change value property to 30 and second will call value function with 40",
+                        answerId: "t8q5a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t8q5a4"
+                    }
+                ]
+            },
+            {
+                title: "Calling disable on a widget will remove it from DOM?",
+                type: "single",
+                questionId: "t8q6",
+                correctanswerId: "t8q6a2",
+                description: [
+                    "Calling the disable method is equivalent to setting the disabled option to true."
+                ],
+                answers: [
+                    {
+                        label: "True",
+                        answerId: "t8q6a1"
+                    },
+                    {
+                        label: "False",
+                        answerId: "t8q6a2"
+                    }
+                ]
+            },
+            {
+                title: "What will happen if you remove or modify element which has jQuery widget initialized on it?",
+                type: "single",
+                questionId: "t8q7",
+                correctanswerId: "t8q7a2",
+                description: [
+                    "Once you destroy a widget, you can no longer call any methods on it unless you initialize the widget again.",
+                    "If you're removing the element, either directly via .remove() or by modifying an ancestor with .html() or .empty(), the widget will automatically destroy itself."
+                ],
+                answers: [
+                    {
+                        label: "Nothing will happen",
+                        answerId: "t8q7a1"
+                    },
+                    {
+                        label: "Element will return back to the original markup",
+                        answerId: "t8q7a2"
+                    },
+                    {
+                        label: "Exception will be thrown",
+                        answerId: "t8q7a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t8q7a4"
+                    }
+                ]
+            },
+            {
+                title: "What is the usage of widget method?",
+                type: "single",
+                questionId: "t8q8",
+                correctanswerId: "t8q8a3",
+                description: [
+                    "Some widgets generate wrapper elements, or elements disconnected from the original element.",
+                    "In these cases, the widget method will return the generated element.",
+                    "where there is no generated wrapper, the widget method returns the original element."
+                ],
+                answers: [
+                    {
+                        label: "Delete the existing widget",
+                        answerId: "t8q8a1"
+                    },
+                    {
+                        label: "Create a new widget",
+                        answerId: "t8q8a2"
+                    },
+                    {
+                        label: "Get generated/original element",
+                        answerId: "t8q8a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t8q8a4"
+                    }
+                ]
+            },
+            {
+                title: "What is correct way add a callback to jQuery Widget method?",
+                type: "single",
+                questionId: "t8q9",
+                correctanswerId: "t8q9a1",
+                description: [
+                    "One of the easiest ways to make your plugin extensible is to add callbacks, so users can react when the state of your plugin changes.",
+                    "The _trigger() method takes three parameters: the name of the callback, a jQuery event object that initiated the callback, and a hash of data relevant to the event."
+                ],
+                answers: [
+                    {
+                        label: "use _trigger()",
+                        answerId: "t8q9a1"
+                    },
+                    {
+                        label: "use _callback()",
+                        answerId: "t8q9a2"
+                    },
+                    {
+                        label: "use _promise()",
+                        answerId: "t8q9a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t8q9a4"
+                    }
+                ]
+            },
+            {
+                title: "Which function do we invoke for creating UI widget?",
+                type: "single",
+                questionId: "t8q10",
+                correctanswerId: "t8q10a3",
+                description: [
+                    "Creating widgets with the widget factory is done by passing the name of the widget and a prototype object to $.widget()",
+                    "To allow for extension, $.widget() optionally accepts the constructor of a widget to use as a parent. ",
+                    "When specifying a parent widget, pass it as the second argument - after the widget's name, and before the widget's prototype object."
+                ],
+                answers: [
+                    {
+                        label: "$.jQuery",
+                        answerId: "t8q10a1"
+                    },
+                    {
+                        label: "$.fn",
+                        answerId: "t8q10a2"
+                    },
+                    {
+                        label: "$.widget",
+                        answerId: "t8q10a3"
+                    },
+                    {
+                        label: "None of the above",
+                        answerId: "t8q10a4"
+                    }
+                ]
+            }
+        ]
+    }
 }

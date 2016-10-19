@@ -1,6 +1,6 @@
 /* global Backbone, homeIntro*/
 /* exported HomeModel */
-var HomeModel = Backbone.View.extend({
+var HomeModel = Backbone.Model.extend({
 	/**
 	 * initialize will initialize the Page model
 	 * with default setting

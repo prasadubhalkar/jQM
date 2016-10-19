@@ -1,6 +1,6 @@
 /* global Backbone, indexItems*/
 /* exported PanelModel */
-var PanelModel = Backbone.View.extend({
+var PanelModel = Backbone.Model.extend({
 	/**
 	 * initialize initiate the model with
 	 * list of table of content for the application

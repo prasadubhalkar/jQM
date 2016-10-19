@@ -1,5 +1,17 @@
 this["AppTmplts"] = this["AppTmplts"] || {};
 
+this["AppTmplts"]["src/html/partials/answers.hbs"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "<label>\r\n    <input type=\"radio\" name=\""
+    + alias2(alias1((depths[1] != null ? depths[1].questionId : depths[1]), depth0))
+    + "\" id=\""
+    + alias2(alias1((depth0 != null ? depth0.answerId : depth0), depth0))
+    + "\">\r\n    "
+    + alias2(alias1((depth0 != null ? depth0.label : depth0), depth0))
+    + "\r\n</label>";
+},"useData":true,"useDepths":true});
+
 this["AppTmplts"]["src/html/partials/home.hbs"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
@@ -70,4 +82,14 @@ this["AppTmplts"]["src/html/partials/panel.hbs"] = Handlebars.template({"1":func
   return "<ul data-role=\"listview\">\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.menuItems : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</ul>\r\n";
+},"useData":true});
+
+this["AppTmplts"]["src/html/partials/question.hbs"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "<div data-role=\"collapsible\" data-collapsed=\"true\" data-inset=\"true\" data-theme=\"b\" data-content-theme=\"a\">\r\n	<h3>"
+    + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
+    + "</h3>\r\n	<div id=\"answers_"
+    + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
+    + "\">\r\n	</div>\r\n</div>";
 },"useData":true});
