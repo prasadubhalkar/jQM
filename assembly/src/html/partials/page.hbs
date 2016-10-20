@@ -4,16 +4,6 @@
 </div>
 
 <div data-role="content">
-    <h3>{{navigationLabel}}</h3>
-	{{#each questions}}
-		<div data-role="collapsible" data-collapsed="true" data-inset="true" data-theme="b" data-content-theme="a">
-			<h3>{{this.title}}</h3>
-            {{#each this.answers}}
-                <label>
-                    <input type="radio" name="{{../questionId}}" id="{{this.answerId}}">
-                    {{this.label}}
-                </label>
-            {{/each}}
-		</div>
-	{{/each}}
+    <div id="questios_{{pageNumber}}">
+    </div>
 </div>

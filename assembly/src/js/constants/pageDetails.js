@@ -1595,15 +1595,15 @@ var pages = {
 					},
 					{
 						label: "Cache length property of an array beforehand",
-						answerId: "t6q1a2"
+						answerId: "t6q2a2"
 					},
 					{
 						label: "Cache loop increament property beforehand",
-						answerId: "t6q1a3"
+						answerId: "t6q2a3"
 					},
 					{
 						label: "Avoid using for loops",
-						answerId: "t6q1a4"
+						answerId: "t6q2a4"
 					}
 				]
 			},

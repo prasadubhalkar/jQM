@@ -1,4 +1,4 @@
-/* global Backbone, $, AppTmplts, PanelView, PageModel */
+/* global Backbone, $, AppTmplts, PanelView, PageModel, QuestionView, _ */
 /* exported PageView */
 var PageView = Backbone.View.extend({
     //define default template for the view
@@ -21,16 +21,29 @@ var PageView = Backbone.View.extend({
      * @returns {object} backbone view
      */
     render:function () {
-        var questionsList = this.model.getQuestions();
         var model = this.model;
 
         $(this.el).html(this.template({
             pageTitle: model.title,
-            navigationLabel: "Questions",
-            questions: questionsList
+            pageNumber: this.pageIndex
         }));
+
+        this.renderQuestions();
         
         return this;
+    },
+
+    renderQuestions: function(){
+        var model = this.model;
+        var $el = $(this.el);
+        var questionsPlaceHolder = $("#questios_"+this.pageIndex, $el);
+        var questions = model.getQuestions();
+        var questionView = null;
+        _.each(questions, function(question){
+            questionView = new QuestionView(question);
+            questionsPlaceHolder.append(questionView.el);
+        });
+        return questionsPlaceHolder;
     },
 
     /**
