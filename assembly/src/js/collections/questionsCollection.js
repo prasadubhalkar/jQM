@@ -1,4 +1,4 @@
-/* global Backbone, QuestionModel, _*/
+/* global Backbone, QuestionModel*/
 /* exported QuestionsCollection */
 var QuestionsCollection = Backbone.Collection.extend({
 	model: QuestionModel,
@@ -9,10 +9,11 @@ var QuestionsCollection = Backbone.Collection.extend({
 	 * @returns {object} list of questions under collection
 	 */
 	getQuestions: function(){
-		var questions = [];
-		_.each(this.models, function(question){
-			questions.push(question.attributes);
-		});
-		return questions;
+		return this.models;
+		// var questions = [];
+		// _.each(this.models, function(question){
+		// 	questions.push(question.attributes);
+		// });
+		// return questions;
 	}
 });

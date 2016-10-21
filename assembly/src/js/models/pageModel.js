@@ -3,7 +3,9 @@
 var PageModel = Backbone.Model.extend({
 	defaults: {
 		questionsCollection: null,
-		title: ""	
+		title: "",
+		pageNumber: null,
+		currentScore: 0
 	},
 	/**
 	 * initialize will initialize the Page model
@@ -14,8 +16,12 @@ var PageModel = Backbone.Model.extend({
 	initialize: function(data){
 		var pageName = "page" + data.pageIndex;
 		var pageContents = pages[pageName];
+
+		//set the question collection instance
 		this.questionsCollection = new QuestionsCollection();
 		this.title = pageContents.title;
+		this.currentScore = 0;
+		this.pageNumber = data.pageIndex;
 		this.setQuestions(pageContents.questions);
 	},
 
@@ -37,9 +43,23 @@ var PageModel = Backbone.Model.extend({
 		var questionModel = null;
 		var self = this;
 		_.each(questions, function(question){
+			question.pageNumber = this.pageNumber;
 			questionModel = new QuestionModel(question);
+			questionModel.parent = self;
 			self.questionsCollection.add(questionModel);
 		});
+	},
+
+	/**
+	 * questionAnswered question is been answered
+	 * @param {boolean} correctAnswer if the question is answered correctly
+	 * @returns {undefined}
+	 */
+	questionAnswered: function(correctAnswer){
+		if(correctAnswer) {
+			this.currentScore += 1;
+			this.trigger("scoreUpdated");
+		}
 	},
 
 	/**

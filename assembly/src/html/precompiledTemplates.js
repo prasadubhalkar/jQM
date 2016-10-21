@@ -34,7 +34,11 @@ this["AppTmplts"]["src/html/partials/page.hbs"] = Handlebars.template({"compiler
 
   return "<div data-role=\"header\" data-theme=\"b\">\r\n    <a href=\"#myPanel\" data-icon=\"bars\" data-iconpos=\"notext\"> Menu </a>\r\n    <h1>"
     + alias4(((helper = (helper = helpers.pageTitle || (depth0 != null ? depth0.pageTitle : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageTitle","hash":{},"data":data}) : helper)))
-    + "</h1>\r\n</div>\r\n\r\n<div data-role=\"content\">\r\n    <div id=\"questios_"
+    + " (<span id=\"pageScore_"
+    + alias4(((helper = (helper = helpers.pageNumber || (depth0 != null ? depth0.pageNumber : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageNumber","hash":{},"data":data}) : helper)))
+    + "\"> "
+    + alias4(((helper = (helper = helpers.currentScore || (depth0 != null ? depth0.currentScore : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currentScore","hash":{},"data":data}) : helper)))
+    + " </span>)</h1>\r\n    <a id=\"resetQuiz\" data-icon=\"refresh\" data-iconpos=\"notext\"> Reset </a>\r\n</div>\r\n\r\n<div data-role=\"content\">\r\n    <div id=\"questions_"
     + alias4(((helper = (helper = helpers.pageNumber || (depth0 != null ? depth0.pageNumber : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageNumber","hash":{},"data":data}) : helper)))
     + "\">\r\n    </div>\r\n</div>";
 },"useData":true});

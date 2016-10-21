@@ -1,9 +1,10 @@
 <div data-role="header" data-theme="b">
     <a href="#myPanel" data-icon="bars" data-iconpos="notext"> Menu </a>
-    <h1>{{pageTitle}}</h1>
+    <h1>{{pageTitle}} (<span id="pageScore_{{pageNumber}}"> {{currentScore}} </span>)</h1>
+    <a id="resetQuiz" data-icon="refresh" data-iconpos="notext"> Reset </a>
 </div>
 
 <div data-role="content">
-    <div id="questios_{{pageNumber}}">
+    <div id="questions_{{pageNumber}}">
     </div>
 </div>

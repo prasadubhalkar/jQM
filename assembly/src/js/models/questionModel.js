@@ -7,7 +7,8 @@ var QuestionModel = Backbone.Model.extend({
 		questionId: "",
 		correctanswerId: "",
 		description: "",
-		answers: null
+		answers: null,
+		answeredCorrectly: null
 	},
 	/**
 	 * initialize will initialize the Page model
@@ -38,5 +39,17 @@ var QuestionModel = Backbone.Model.extend({
 			answerModel = new AnswerModel(answer);
 			self.answers.push(answerModel);
 		});
+	},
+
+	/**
+	 * markUserResponse will make a note if user
+	 * response for this questions was correct
+	 * or wrong
+	 * @param  {boolean} answeredCorrectly user response
+	 * @returns {undefined}
+	 */
+	markUserResponse: function(answeredCorrectly){
+		this.answeredCorrectly = answeredCorrectly;
+		this.parent.questionAnswered(answeredCorrectly);
 	}
 });

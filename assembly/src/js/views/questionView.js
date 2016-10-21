@@ -5,8 +5,8 @@ var QuestionView = Backbone.View.extend({
 	template:AppTmplts["src/html/partials/question.hbs"],
 	//bind the view level events
 	events: {
-        "change input[type='radio']": "answerSelected"
-    },
+		"change input[type='radio']": "answerSelected"
+	},
 
 	/**
 	 * initialize set initial parameters for the Page View
@@ -14,7 +14,7 @@ var QuestionView = Backbone.View.extend({
 	 * @returns {undefined}
 	 */
 	initialize: function(question) {
-		this.question = question;
+		this.model = question;
 		this.render();
 	},
 
@@ -25,10 +25,11 @@ var QuestionView = Backbone.View.extend({
 	 */
 	render: function(){
 		var $el = $(this.el);
+		var model = this.model;
 		
 		$el.append(this.template({
-			title: this.question.title,
-			questionId: this.question.questionId
+			title: model.get("title"),
+			questionId: model.get("questionId")
 		}));
 
 		this.renderChoices();
@@ -43,8 +44,9 @@ var QuestionView = Backbone.View.extend({
 	 */
 	renderChoices: function(){
 		var $el = $(this.el);
-		var choices = this.question.answers;
-		var questionId = this.question.questionId;
+		var model = this.model;
+		var choices = model.get("answers");
+		var questionId = model.get("questionId");
 		var choicesElement = $('#answers_'+questionId, $el);
 
 		_.each(choices, function(choice){
@@ -61,26 +63,43 @@ var QuestionView = Backbone.View.extend({
 	 * @returns {undefined}
 	 */
 	answerSelected: function(event){
-		if(event.target.id === this.question.correctanswerId){
-			$(event.target).siblings("label").addClass("correct-answer");
-			this.resetClass($(event.target).siblings("label"), "correct-answer");
-		}
-		else {
-			$(event.target).siblings("label").addClass("wrong-answer");
-			this.resetClass($(event.target).siblings("label"), "wrong-answer");
-		}
-    },
+		//get the label element for selected answer
+		var siblingLabel = $(event.target).siblings("label");
+		var questionId = $(event.target).attr("name");
+		var model = this.model;
+		var correctAnswerId = model.get("correctanswerId");
 
-    /**
-     * resetClass will reset the correct and wrong answer
-     * class after 500 milliseconds
-     * @param  {object} element jQuery element
-     * @param  {string} className CSS class to remove
-     * @returns {undefined}
-     */
-    resetClass: function(element, className){
-    	setTimeout(function(){
-			element.removeClass(className);
-		}, 500);	
-    }
+		//if selected answer is correct answer
+		if(event.target.id === correctAnswerId) {
+			siblingLabel.addClass("correct-answer");
+			this.markUsersAnswer(true);
+		}
+		//else if answer is not correct answer
+		else {
+			siblingLabel.addClass("wrong-answer");
+			this.markUsersAnswer(false);
+		}
+		this.disableRadios(questionId);
+	},
+
+	/**
+	 * markUsersAnswer will mark the users response
+	 * true if answered correctly false if not
+	 * @param  {boolean} userResponse user response
+	 * @returns {undefined}
+	 */
+	markUsersAnswer: function(userResponse){
+		this.model.markUserResponse(userResponse);
+	},
+
+	/**
+	 * disableRadios will disable radio buttons for
+	 * the question once an answer is selected
+	 * @param  {string} questionId the question identifier
+	 * @returns {undefined}
+	 */
+	disableRadios: function(questionId){
+		var $el = $(this.el);
+		$("input[name='"+questionId+"'", $el).prop("disabled", true).checkboxradio("refresh");
+	}
 });
