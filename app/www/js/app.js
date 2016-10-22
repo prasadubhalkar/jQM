@@ -193,7 +193,7 @@ this["AppTmplts"]["src/html/partials/question.hbs"] = Handlebars.template({"comp
     + "</h3>\r\n	<div id=\"answers_"
     + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
     + "\">\r\n	</div>\r\n</div>";
-},"useData":true});/* ---------- end of file --------------- *//* global Backbone, $, HomeView, PageView */
+},"useData":true});/* ---------- end of file --------------- *//* global Backbone, $, HomeView, PageView, PagesCollection, PageModel, pages */
 
 /**
  * Define backbone router as we override the original jQM routing
@@ -216,6 +216,7 @@ var AppRouter = Backbone.Router.extend({
             window.history.back();
             return false;
         });
+        pagesCollection.initCollection();
         this.firstPage = true;
     },
 
@@ -233,7 +234,16 @@ var AppRouter = Backbone.Router.extend({
      * @returns {undefined}
      */
     page: function (pageIndex) {
-        this.changePage(new PageView(pageIndex), pageIndex);
+        var pages = pagesCollection.getCollection();
+        var pageNumber = "page"+pageIndex;
+        var pageModel = pages.getPage(pageNumber);
+        var pageView = new PageView();
+        if(!pageModel){
+            pageModel = pagesCollection.createPage(pageNumber);
+            pagesCollection.addPage(pageModel);
+        }
+        pageView.setModel(pageModel);
+        this.changePage(pageView, pageIndex);
     },
 
     /**
@@ -273,6 +283,77 @@ var AppRouter = Backbone.Router.extend({
 });
 
 /**
+ * pagesCollection is an interface to communicate with
+ * pagesCollection
+ * @returns {object} accesiable public interface object
+ */
+var pagesCollection = (function(){
+    var pagesCollection = null;
+    /**
+     * createPagesCollection will initiate
+     * the pages collection
+     * @returns {object} pagesCollection collection of pages
+     */
+    function createPagesCollection(){
+        pagesCollection = new PagesCollection();
+        return pagesCollection;
+    }
+
+    /**
+     * fetchExistingPage will return particular
+     * page based on page index
+     * @param  {string} pageIndex unique identifier for page
+     * @returns {object} page model object found in collection
+     */
+    function fetchExistingPage(pageIndex){
+        return pagesCollection.getPage(pageIndex);
+    }
+
+    /**
+     * getPagesCollection will return the
+     * pages collection
+     * @returns {object} pagesCollection a collection of pages
+     */
+    function getPagesCollection(){
+        return pagesCollection;
+    }
+
+    /**
+     * createSinglePage will create a single page
+     * @param  {string} pageIndex page index for page
+     * @returns {undefined}
+     */
+    function createSinglePage(pageIndex){
+        var pageContents = pages[pageIndex];
+        var pageModel = new PageModel(page);
+        var page = {
+            index: pageIndex,
+            contents: pageContents
+        };
+        pageModel.setUpPageData(page);
+        return pageModel;
+    }
+
+    /**
+     * addPageToCollection will push the page model
+     * to the pages collection
+     * @param {object} pageModel page model
+     * @returns {undefined}
+     */
+    function addPageToCollection(pageModel){
+        pagesCollection.add(pageModel);
+    }
+
+    return {
+        initCollection: createPagesCollection,
+        getPage: fetchExistingPage,
+        getCollection: getPagesCollection,
+        addPage: addPageToCollection,
+        createPage: createSinglePage
+    }
+})();
+
+/**
  * When document is ready create a router instance and start
  * the backbone application
  * @returns {undefined}
@@ -281,7 +362,27 @@ $(document).ready(function () {
     new AppRouter();
     Backbone.history.start();
 });
-/* ---------- end of file --------------- *//* global Backbone, QuestionModel*/
+/* ---------- end of file --------------- *//* global Backbone, PageModel, _*/
+/* exported PagesCollection */
+var PagesCollection = Backbone.Collection.extend({
+	model: PageModel,
+
+	/**
+	 * getPage will get the specific page object
+	 * from the page collection
+	 * @param {string} pageIndex page index
+	 * @returns {object} found page for that index
+	 */
+	getPage: function(pageIndex){
+		var foundPage = null;
+		_.each(this.models, function(model){
+			if(model.pageNumber === pageIndex){
+				foundPage = model;
+			}
+		});
+		return foundPage;
+	}
+});/* ---------- end of file --------------- *//* global Backbone, QuestionModel*/
 /* exported QuestionsCollection */
 var QuestionsCollection = Backbone.Collection.extend({
 	model: QuestionModel,
@@ -293,11 +394,6 @@ var QuestionsCollection = Backbone.Collection.extend({
 	 */
 	getQuestions: function(){
 		return this.models;
-		// var questions = [];
-		// _.each(this.models, function(question){
-		// 	questions.push(question.attributes);
-		// });
-		// return questions;
 	}
 });/* ---------- end of file --------------- *//* exported indexItems, pages, homeIntro */
 var homeIntro = {
@@ -2659,10 +2755,6 @@ var pages = {
 }/* ---------- end of file --------------- *//* global Backbone*/
 /* exported AnswerModel */
 var AnswerModel = Backbone.Model.extend({
-	defaults: {
-		label:  "",
-		answerId: ""
-	},
 	/**
 	 * initialize will initialize the Answer model
 	 * with default setting
@@ -2672,6 +2764,7 @@ var AnswerModel = Backbone.Model.extend({
 	initialize: function(answer){
 		this.label = answer.label;
 		this.answerId = answer.answerId;
+		this.isSelected = answer.isSelected;
 	}
 });/* ---------- end of file --------------- *//* global Backbone, homeIntro*/
 /* exported HomeModel */
@@ -2684,31 +2777,30 @@ var HomeModel = Backbone.Model.extend({
 	initialize: function(){
 		this.introModel = homeIntro;
 	}
-});/* ---------- end of file --------------- *//* global Backbone, pages, QuestionModel, _, QuestionsCollection*/
+});/* ---------- end of file --------------- *//* global Backbone, QuestionModel, _, QuestionsCollection*/
 /* exported PageModel */
 var PageModel = Backbone.Model.extend({
-	defaults: {
-		questionsCollection: null,
-		title: "",
-		pageNumber: null,
-		currentScore: 0
-	},
 	/**
 	 * initialize will initialize the Page model
 	 * with default setting
-	 * @param  {number} data initial model data passed in to model
 	 * @returns {undefined}
 	 */
-	initialize: function(data){
-		var pageName = "page" + data.pageIndex;
-		var pageContents = pages[pageName];
+	initialize: function(){
+	},
 
+	/**
+	 * setUpPageData will setup the page data
+	 * from the page contents
+	 * @param {object} data page contents
+	 * @returns {undefined}
+	 */
+	setUpPageData: function(data){
 		//set the question collection instance
 		this.questionsCollection = new QuestionsCollection();
-		this.title = pageContents.title;
+		this.title = data.contents.title;
 		this.currentScore = 0;
-		this.pageNumber = data.pageIndex;
-		this.setQuestions(pageContents.questions);
+		this.pageNumber = data.index;
+		this.setQuestions(data.contents.questions);	
 	},
 
 	/**
@@ -2730,7 +2822,8 @@ var PageModel = Backbone.Model.extend({
 		var self = this;
 		_.each(questions, function(question){
 			question.pageNumber = this.pageNumber;
-			questionModel = new QuestionModel(question);
+			questionModel = new QuestionModel();
+			questionModel.setUpQuestionData(question);
 			questionModel.parent = self;
 			self.questionsCollection.add(questionModel);
 		});
@@ -2755,6 +2848,19 @@ var PageModel = Backbone.Model.extend({
 	 */
 	getQuestions: function(){
 		return this.questionsCollection.getQuestions();
+	},
+
+	/**
+	 * resetModel reset the model data for page
+	 * @returns {undefined}
+	 */
+	resetModel: function(){
+		var questions = this.getQuestions();
+		_.each(questions, function(question){
+			question.resetQuestion();
+        });
+        this.currentScore = 0;
+		this.trigger("scoreUpdated");
 	}
 });/* ---------- end of file --------------- *//* global Backbone, indexItems*/
 /* exported PanelModel */
@@ -2770,28 +2876,30 @@ var PanelModel = Backbone.Model.extend({
 });/* ---------- end of file --------------- *//* global Backbone, AnswerModel, _*/
 /* exported QuestionModel */
 var QuestionModel = Backbone.Model.extend({
-	defaults: {
-		title:  "",
-		type: "",
-		questionId: "",
-		correctanswerId: "",
-		description: "",
-		answers: null,
-		answeredCorrectly: null
-	},
 	/**
 	 * initialize will initialize the Page model
 	 * with default setting
 	 * @param  {object} question the actual question content object
 	 * @returns {undefined}
 	 */
-	initialize: function(question){
+	initialize: function(){
+	},
+
+	/**
+	 * setUpQuestionData will setup the question
+	 * data based on the question contents
+	 * @param {object} question question contents
+	 * @returns {undefined}
+	 */
+	setUpQuestionData: function(question){
 		this.title = question.title;
 		this.type = question.type;
 		this.questionId = question.questionId;
 		this.correctanswerId = question.correctanswerId;
 		this.description = question.description;
 		this.answers = [];
+		this.answeredCorrectly = null;
+		this.selectedAnswer = (question.selectedAnswer) ? question.selectedAnswer : undefined;
 		this.setUpAnswers(question.answers);
 	},
 
@@ -2805,8 +2913,23 @@ var QuestionModel = Backbone.Model.extend({
 		var answerModel = null;
 		var self = this;
 		_.each(answers, function(answer){
+			answer.isSelected = (answer.answerId === this.selectedAnswer);
 			answerModel = new AnswerModel(answer);
 			self.answers.push(answerModel);
+		});
+	},
+
+	/**
+	 * updateSelectedAnswer will update the user
+	 * selected choice under the answer collection
+	 * @returns {undefined}
+	 */
+	updateSelectedAnswer: function(){
+		var self = this;
+		_.each(this.answers, function(answer){
+			if(answer.answerId === self.selectedAnswer){
+				answer.isSelected = true;
+			}
 		});
 	},
 
@@ -2815,11 +2938,24 @@ var QuestionModel = Backbone.Model.extend({
 	 * response for this questions was correct
 	 * or wrong
 	 * @param  {boolean} answeredCorrectly user response
+	 * @param {string} selectedAnswer user selected answer
 	 * @returns {undefined}
 	 */
-	markUserResponse: function(answeredCorrectly){
+	markUserResponse: function(answeredCorrectly, selectedAnswer){
+		this.selectedAnswer = (!answeredCorrectly) ? selectedAnswer : this.correctanswerId;
+		this.updateSelectedAnswer();
 		this.answeredCorrectly = answeredCorrectly;
 		this.parent.questionAnswered(answeredCorrectly);
+	},
+
+	/**
+	 * resetQuestion will reset all user
+	 * action data for question
+	 * @returns {undefined}
+	 */
+	resetQuestion: function(){
+		this.answeredCorrectly = null;
+		this.selectedAnswer = undefined;	
 	}
 });/* ---------- end of file --------------- *//* global Backbone, AppTmplts, $ */
 /* exported AnswerView */
@@ -2892,7 +3028,7 @@ var HomeView = Backbone.View.extend({
         panelView.render();
         $(this.el).append($(panelView.el));
     }
-});/* ---------- end of file --------------- *//* global Backbone, $, AppTmplts, PanelView, PageModel, QuestionView, _ */
+});/* ---------- end of file --------------- *//* global Backbone, $, AppTmplts, PanelView, QuestionView, _ */
 /* exported PageView */
 var PageView = Backbone.View.extend({
     //define default template for the view
@@ -2901,16 +3037,22 @@ var PageView = Backbone.View.extend({
     events: {
         "click a#resetQuiz": "resetQuiz"
     },
+
     /**
      * initialize set initial parameters for the Page View
-     * @param  {number} pageIndex index of the page
      * @returns {undefined}
      */
-    initialize: function(pageIndex) {
-        this.pageIndex = pageIndex;
-        this.model = new PageModel({
-            "pageIndex": pageIndex
-        });
+    initialize: function() {
+        //initialize page view here
+    },
+
+    /**
+     * setModel will set the page model data
+     * @param {object} pageModel actual page data
+     * @returns {undefined}
+     */
+    setModel: function(pageModel){
+        this.model = pageModel;
         this.model.bind("scoreUpdated", this.updateScore, this);
     },
 
@@ -2923,8 +3065,8 @@ var PageView = Backbone.View.extend({
         var model = this.model;
         $(this.el).html(this.template({
             pageTitle: model.title,
-            pageNumber: model.get("pageIndex"),
-            currentScore: model.get("currentScore")
+            pageNumber: model.pageNumber,
+            currentScore: model.currentScore
         }));
 
         this.renderQuestions();
@@ -2940,13 +3082,14 @@ var PageView = Backbone.View.extend({
     renderQuestions: function(){
         var model = this.model;
         var $el = $(this.el);
-        var questionsPlaceHolder = $("#questions_"+this.pageIndex, $el);
+        var questionsPlaceHolder = $("#questions_"+model.pageNumber, $el);
         var questions = model.getQuestions();
         var questionView = null;
         _.each(questions, function(question){
             questionView = new QuestionView(question);
             questionsPlaceHolder.append(questionView.el);
         });
+
         return questionsPlaceHolder;
     },
 
@@ -2969,7 +3112,7 @@ var PageView = Backbone.View.extend({
     resetQuiz: function(){
         var $el = $(this.el);
         //get the current questions container
-        var $questionContainer = $("#questions_"+this.pageIndex , $el);
+        var $questionContainer = $("#questions_"+this.model.pageNumber , $el);
 
         //reset all the wrong answers marking
         $(".wrong-answer", $questionContainer).removeClass("wrong-answer");
@@ -2977,8 +3120,14 @@ var PageView = Backbone.View.extend({
         //reset all the correct answers marking
         $(".correct-answer", $questionContainer).removeClass("correct-answer");
 
+        $("input[type='radio']", $questionContainer).checkboxradio();
+
+        $("input[type='radio']", $questionContainer).prop("disabled", false).checkboxradio("refresh");
+
         //reset all the radio buttons uncheck and enable again
-        $("input[type='radio']", $questionContainer).prop("checked", false).prop("disabled", false).checkboxradio("refresh");
+        $("input[type='radio']", $questionContainer).prop("checked", false).checkboxradio("refresh");
+
+        this.model.resetModel();
     },
 
     /**
@@ -2987,7 +3136,7 @@ var PageView = Backbone.View.extend({
      */
     updateScore: function(){
         var $el = $(this.el);
-        var $pageScore = $("#pageScore_"+this.pageIndex , $el);
+        var $pageScore = $("#pageScore_"+this.model.pageNumber , $el);
         $pageScore.html(this.model.currentScore);
     }
 });/* ---------- end of file --------------- *//* global Backbone, $, AppTmplts, PanelModel */
@@ -3054,6 +3203,7 @@ var QuestionView = Backbone.View.extend({
 	initialize: function(question) {
 		this.model = question;
 		this.render();
+		this.checkIfAlreayAnswered();
 	},
 
 	/**
@@ -3064,10 +3214,9 @@ var QuestionView = Backbone.View.extend({
 	render: function(){
 		var $el = $(this.el);
 		var model = this.model;
-		
 		$el.append(this.template({
-			title: model.get("title"),
-			questionId: model.get("questionId")
+			title: model.title,
+			questionId: model.questionId
 		}));
 
 		this.renderChoices();
@@ -3083,14 +3232,12 @@ var QuestionView = Backbone.View.extend({
 	renderChoices: function(){
 		var $el = $(this.el);
 		var model = this.model;
-		var choices = model.get("answers");
-		var questionId = model.get("questionId");
+		var choices = model.answers;
+		var questionId = model.questionId;
 		var choicesElement = $('#answers_'+questionId, $el);
-
 		_.each(choices, function(choice){
 			choicesElement.append(new AnswerView(choice, questionId).el);
 		});
-
 	},
 
 	/**
@@ -3105,7 +3252,7 @@ var QuestionView = Backbone.View.extend({
 		var siblingLabel = $(event.target).siblings("label");
 		var questionId = $(event.target).attr("name");
 		var model = this.model;
-		var correctAnswerId = model.get("correctanswerId");
+		var correctAnswerId = model.correctanswerId;
 
 		//if selected answer is correct answer
 		if(event.target.id === correctAnswerId) {
@@ -3115,7 +3262,7 @@ var QuestionView = Backbone.View.extend({
 		//else if answer is not correct answer
 		else {
 			siblingLabel.addClass("wrong-answer");
-			this.markUsersAnswer(false);
+			this.markUsersAnswer(false, event.target.id);
 		}
 		this.disableRadios(questionId);
 	},
@@ -3124,10 +3271,31 @@ var QuestionView = Backbone.View.extend({
 	 * markUsersAnswer will mark the users response
 	 * true if answered correctly false if not
 	 * @param  {boolean} userResponse user response
+	 * @param {string} selectedAnswer user selected answer
 	 * @returns {undefined}
 	 */
-	markUsersAnswer: function(userResponse){
-		this.model.markUserResponse(userResponse);
+	markUsersAnswer: function(userResponse, selectedAnswer){
+		this.model.markUserResponse(userResponse, selectedAnswer);
+	},
+
+	/**
+	 * checkIfAlreayAnswered if question is been already
+	 * answered display it so when page reloaded
+	 * @returns {undefined}
+	 */
+	checkIfAlreayAnswered: function(){
+		var $el = $(this.el);
+		var model = this.model;
+		var questionId = model.questionId;
+		var $question = $("input[name='"+questionId+"'", $el);
+		var $answer = $("input[id='"+model.selectedAnswer+"'", $el);
+		var answeredClass = (model.answeredCorrectly) ? "correct-answer" :"wrong-answer";
+		if(model.selectedAnswer){
+			$question.checkboxradio();
+			$question.prop("disabled", true).checkboxradio("refresh");
+			$answer.prop("checked", true).checkboxradio("refresh");
+			$answer.siblings("label").addClass(answeredClass);
+		}
 	},
 
 	/**

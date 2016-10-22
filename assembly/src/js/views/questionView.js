@@ -16,6 +16,7 @@ var QuestionView = Backbone.View.extend({
 	initialize: function(question) {
 		this.model = question;
 		this.render();
+		this.checkIfAlreayAnswered();
 	},
 
 	/**
@@ -26,10 +27,9 @@ var QuestionView = Backbone.View.extend({
 	render: function(){
 		var $el = $(this.el);
 		var model = this.model;
-		
 		$el.append(this.template({
-			title: model.get("title"),
-			questionId: model.get("questionId")
+			title: model.title,
+			questionId: model.questionId
 		}));
 
 		this.renderChoices();
@@ -45,14 +45,12 @@ var QuestionView = Backbone.View.extend({
 	renderChoices: function(){
 		var $el = $(this.el);
 		var model = this.model;
-		var choices = model.get("answers");
-		var questionId = model.get("questionId");
+		var choices = model.answers;
+		var questionId = model.questionId;
 		var choicesElement = $('#answers_'+questionId, $el);
-
 		_.each(choices, function(choice){
 			choicesElement.append(new AnswerView(choice, questionId).el);
 		});
-
 	},
 
 	/**
@@ -67,7 +65,7 @@ var QuestionView = Backbone.View.extend({
 		var siblingLabel = $(event.target).siblings("label");
 		var questionId = $(event.target).attr("name");
 		var model = this.model;
-		var correctAnswerId = model.get("correctanswerId");
+		var correctAnswerId = model.correctanswerId;
 
 		//if selected answer is correct answer
 		if(event.target.id === correctAnswerId) {
@@ -77,7 +75,7 @@ var QuestionView = Backbone.View.extend({
 		//else if answer is not correct answer
 		else {
 			siblingLabel.addClass("wrong-answer");
-			this.markUsersAnswer(false);
+			this.markUsersAnswer(false, event.target.id);
 		}
 		this.disableRadios(questionId);
 	},
@@ -86,10 +84,31 @@ var QuestionView = Backbone.View.extend({
 	 * markUsersAnswer will mark the users response
 	 * true if answered correctly false if not
 	 * @param  {boolean} userResponse user response
+	 * @param {string} selectedAnswer user selected answer
 	 * @returns {undefined}
 	 */
-	markUsersAnswer: function(userResponse){
-		this.model.markUserResponse(userResponse);
+	markUsersAnswer: function(userResponse, selectedAnswer){
+		this.model.markUserResponse(userResponse, selectedAnswer);
+	},
+
+	/**
+	 * checkIfAlreayAnswered if question is been already
+	 * answered display it so when page reloaded
+	 * @returns {undefined}
+	 */
+	checkIfAlreayAnswered: function(){
+		var $el = $(this.el);
+		var model = this.model;
+		var questionId = model.questionId;
+		var $question = $("input[name='"+questionId+"'", $el);
+		var $answer = $("input[id='"+model.selectedAnswer+"'", $el);
+		var answeredClass = (model.answeredCorrectly) ? "correct-answer" :"wrong-answer";
+		if(model.selectedAnswer){
+			$question.checkboxradio();
+			$question.prop("disabled", true).checkboxradio("refresh");
+			$answer.prop("checked", true).checkboxradio("refresh");
+			$answer.siblings("label").addClass(answeredClass);
+		}
 	},
 
 	/**

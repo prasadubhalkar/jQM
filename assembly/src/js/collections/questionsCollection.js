@@ -10,10 +10,5 @@ var QuestionsCollection = Backbone.Collection.extend({
 	 */
 	getQuestions: function(){
 		return this.models;
-		// var questions = [];
-		// _.each(this.models, function(question){
-		// 	questions.push(question.attributes);
-		// });
-		// return questions;
 	}
 });

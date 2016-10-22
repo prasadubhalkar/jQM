@@ -1,10 +1,6 @@
 /* global Backbone*/
 /* exported AnswerModel */
 var AnswerModel = Backbone.Model.extend({
-	defaults: {
-		label:  "",
-		answerId: ""
-	},
 	/**
 	 * initialize will initialize the Answer model
 	 * with default setting
@@ -14,5 +10,6 @@ var AnswerModel = Backbone.Model.extend({
 	initialize: function(answer){
 		this.label = answer.label;
 		this.answerId = answer.answerId;
+		this.isSelected = answer.isSelected;
 	}
 });

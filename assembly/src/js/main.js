@@ -1,4 +1,4 @@
-/* global Backbone, $, HomeView, PageView */
+/* global Backbone, $, HomeView, PageView, PagesCollection, PageModel, pages */
 
 /**
  * Define backbone router as we override the original jQM routing
@@ -21,6 +21,7 @@ var AppRouter = Backbone.Router.extend({
             window.history.back();
             return false;
         });
+        pagesCollection.initCollection();
         this.firstPage = true;
     },
 
@@ -38,7 +39,16 @@ var AppRouter = Backbone.Router.extend({
      * @returns {undefined}
      */
     page: function (pageIndex) {
-        this.changePage(new PageView(pageIndex), pageIndex);
+        var pages = pagesCollection.getCollection();
+        var pageNumber = "page"+pageIndex;
+        var pageModel = pages.getPage(pageNumber);
+        var pageView = new PageView();
+        if(!pageModel){
+            pageModel = pagesCollection.createPage(pageNumber);
+            pagesCollection.addPage(pageModel);
+        }
+        pageView.setModel(pageModel);
+        this.changePage(pageView, pageIndex);
     },
 
     /**
@@ -76,6 +86,77 @@ var AppRouter = Backbone.Router.extend({
         });
     }
 });
+
+/**
+ * pagesCollection is an interface to communicate with
+ * pagesCollection
+ * @returns {object} accesiable public interface object
+ */
+var pagesCollection = (function(){
+    var pagesCollection = null;
+    /**
+     * createPagesCollection will initiate
+     * the pages collection
+     * @returns {object} pagesCollection collection of pages
+     */
+    function createPagesCollection(){
+        pagesCollection = new PagesCollection();
+        return pagesCollection;
+    }
+
+    /**
+     * fetchExistingPage will return particular
+     * page based on page index
+     * @param  {string} pageIndex unique identifier for page
+     * @returns {object} page model object found in collection
+     */
+    function fetchExistingPage(pageIndex){
+        return pagesCollection.getPage(pageIndex);
+    }
+
+    /**
+     * getPagesCollection will return the
+     * pages collection
+     * @returns {object} pagesCollection a collection of pages
+     */
+    function getPagesCollection(){
+        return pagesCollection;
+    }
+
+    /**
+     * createSinglePage will create a single page
+     * @param  {string} pageIndex page index for page
+     * @returns {undefined}
+     */
+    function createSinglePage(pageIndex){
+        var pageContents = pages[pageIndex];
+        var pageModel = new PageModel(page);
+        var page = {
+            index: pageIndex,
+            contents: pageContents
+        };
+        pageModel.setUpPageData(page);
+        return pageModel;
+    }
+
+    /**
+     * addPageToCollection will push the page model
+     * to the pages collection
+     * @param {object} pageModel page model
+     * @returns {undefined}
+     */
+    function addPageToCollection(pageModel){
+        pagesCollection.add(pageModel);
+    }
+
+    return {
+        initCollection: createPagesCollection,
+        getPage: fetchExistingPage,
+        getCollection: getPagesCollection,
+        addPage: addPageToCollection,
+        createPage: createSinglePage
+    }
+})();
 
 /**
  * When document is ready create a router instance and start

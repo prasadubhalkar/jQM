@@ -1,28 +1,27 @@
-/* global Backbone, pages, QuestionModel, _, QuestionsCollection*/
+/* global Backbone, QuestionModel, _, QuestionsCollection*/
 /* exported PageModel */
 var PageModel = Backbone.Model.extend({
-	defaults: {
-		questionsCollection: null,
-		title: "",
-		pageNumber: null,
-		currentScore: 0
-	},
 	/**
 	 * initialize will initialize the Page model
 	 * with default setting
-	 * @param  {number} data initial model data passed in to model
 	 * @returns {undefined}
 	 */
-	initialize: function(data){
-		var pageName = "page" + data.pageIndex;
-		var pageContents = pages[pageName];
+	initialize: function(){
+	},
 
+	/**
+	 * setUpPageData will setup the page data
+	 * from the page contents
+	 * @param {object} data page contents
+	 * @returns {undefined}
+	 */
+	setUpPageData: function(data){
 		//set the question collection instance
 		this.questionsCollection = new QuestionsCollection();
-		this.title = pageContents.title;
+		this.title = data.contents.title;
 		this.currentScore = 0;
-		this.pageNumber = data.pageIndex;
-		this.setQuestions(pageContents.questions);
+		this.pageNumber = data.index;
+		this.setQuestions(data.contents.questions);	
 	},
 
 	/**
@@ -44,7 +43,8 @@ var PageModel = Backbone.Model.extend({
 		var self = this;
 		_.each(questions, function(question){
 			question.pageNumber = this.pageNumber;
-			questionModel = new QuestionModel(question);
+			questionModel = new QuestionModel();
+			questionModel.setUpQuestionData(question);
 			questionModel.parent = self;
 			self.questionsCollection.add(questionModel);
 		});
@@ -69,5 +69,18 @@ var PageModel = Backbone.Model.extend({
 	 */
 	getQuestions: function(){
 		return this.questionsCollection.getQuestions();
+	},
+
+	/**
+	 * resetModel reset the model data for page
+	 * @returns {undefined}
+	 */
+	resetModel: function(){
+		var questions = this.getQuestions();
+		_.each(questions, function(question){
+			question.resetQuestion();
+        });
+        this.currentScore = 0;
+		this.trigger("scoreUpdated");
 	}
 });
