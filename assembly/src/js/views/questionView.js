@@ -106,7 +106,6 @@ var QuestionView = Backbone.View.extend({
 		if(model.selectedAnswer){
 			$question.checkboxradio();
 			$question.prop("disabled", true).checkboxradio("refresh");
-			$answer.prop("checked", true).checkboxradio("refresh");
 			$answer.siblings("label").addClass(answeredClass);
 		}
 	},
