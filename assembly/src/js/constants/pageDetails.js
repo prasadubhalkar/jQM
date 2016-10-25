@@ -1804,7 +1804,7 @@ var pages = {
 		]
 	},
 	page7: {
-        title: "Code Organization",
+        title: "Organization",
         questions: [
             {
                 title: "Which of this is not a good practice for code organization",
@@ -2081,7 +2081,7 @@ var pages = {
         ]
     },
 	page8: {
-        title: "Code Organization",
+        title: "jQuery UI",
         questions: [
             {
                 title: "jQuery UI's widgets are built on top of _______________",

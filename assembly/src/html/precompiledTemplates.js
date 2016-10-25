@@ -16,8 +16,8 @@ this["AppTmplts"]["src/html/partials/home.hbs"] = Handlebars.template({"1":funct
 
   return "		<h3>"
     + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
-    + "</h3>\r\n    	<p>"
-    + alias2(alias1((depth0 != null ? depth0.details : depth0), depth0))
+    + "</h3>\r\n    	<p>Current Score: "
+    + alias2(alias1((depth0 != null ? depth0.score : depth0), depth0))
     + "</p>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {};
@@ -70,9 +70,9 @@ this["AppTmplts"]["src/html/partials/panel.hbs"] = Handlebars.template({"1":func
 this["AppTmplts"]["src/html/partials/question.hbs"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "<!--<div data-role=\"collapsible\" data-collapsed=\"true\" data-inset=\"true\" data-theme=\"b\" data-content-theme=\"a\">-->\r\n	<h3>"
+  return "<h3>"
     + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
-    + "</h3>\r\n	<div id=\"answers_"
+    + "</h3>\r\n<div id=\"answers_"
     + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
-    + "\">\r\n	</div>\r\n<!--</div>-->";
+    + "\">\r\n</div>";
 },"useData":true});

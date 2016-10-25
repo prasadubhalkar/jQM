@@ -1,5 +1,5 @@
-/* global Backbone, $, HomeView, PageView, PagesCollection, PageModel, pages */
-
+/* global Backbone, $, HomeView, PageView, PagesCollection, PageModel, pages, _ */
+/* exported AppEvents */
 /**
  * Define backbone router as we override the original jQM routing
  * @returns {undefined}
@@ -44,7 +44,7 @@ var AppRouter = Backbone.Router.extend({
         var pageModel = pages.getPage(pageNumber);
         var pageView = new PageView();
         if(!pageModel){
-            pageModel = pagesCollection.createPage(pageNumber);
+            pageModel = pagesCollection.createPage(pageNumber, pageIndex);
             pagesCollection.addPage(pageModel);
         }
         pageView.setModel(pageModel);
@@ -126,14 +126,16 @@ var pagesCollection = (function(){
     /**
      * createSinglePage will create a single page
      * @param  {string} pageIndex page index for page
+     * @param {number} number page index
      * @returns {undefined}
      */
-    function createSinglePage(pageIndex){
+    function createSinglePage(pageIndex, number){
         var pageContents = pages[pageIndex];
         var pageModel = new PageModel(page);
         var page = {
             index: pageIndex,
-            contents: pageContents
+            contents: pageContents,
+            number: number
         };
         pageModel.setUpPageData(page);
         return pageModel;
@@ -157,6 +159,8 @@ var pagesCollection = (function(){
         createPage: createSinglePage
     }
 })();
+
+var AppEvents = _.extend({}, Backbone.Events);
 
 /**
  * When document is ready create a router instance and start

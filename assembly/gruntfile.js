@@ -50,7 +50,7 @@ module.exports = function(grunt) {
     concat: {
       js: {
         options: {
-          separator: '/* ---------- end of file --------------- */'
+          separator: ';'
         },
         files: {
           '../app/www/js/app.js': [
@@ -62,7 +62,10 @@ module.exports = function(grunt) {
             'src/lib/handlebars.min.js',
             'src/html/precompiledTemplates.js',
             'src/js/*.js',
-            'src/js/**/*.js'
+            'src/js/constants/*.js',
+            'src/js/models/*.js',
+            'src/js/collections/*.js',
+            'src/js/views/*.js'
           ]
         }
       },
