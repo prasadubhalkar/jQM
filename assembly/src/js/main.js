@@ -40,11 +40,11 @@ var AppRouter = Backbone.Router.extend({
      */
     page: function (pageIndex) {
         var pages = pagesCollection.getCollection();
-        var pageNumber = "page"+pageIndex;
-        var pageModel = pages.getPage(pageNumber);
+        var pageName = "page"+pageIndex;
+        var pageModel = pages.getPage(pageName);
         var pageView = new PageView();
         if(!pageModel){
-            pageModel = pagesCollection.createPage(pageNumber, pageIndex);
+            pageModel = pagesCollection.createPage(pageName, pageIndex);
             pagesCollection.addPage(pageModel);
         }
         pageView.setModel(pageModel);
@@ -125,17 +125,17 @@ var pagesCollection = (function(){
 
     /**
      * createSinglePage will create a single page
-     * @param  {string} pageIndex page index for page
-     * @param {number} number page index
+     * @param  {string} pageName page name for page
+     * @param {number} index page index
      * @returns {undefined}
      */
-    function createSinglePage(pageIndex, number){
-        var pageContents = pages[pageIndex];
+    function createSinglePage(pageName, index){
+        var pageContents = pages[pageName];
         var pageModel = new PageModel(page);
         var page = {
-            index: pageIndex,
             contents: pageContents,
-            number: number
+            pageName: pageName,
+            pageIndex: index
         };
         pageModel.setUpPageData(page);
         return pageModel;

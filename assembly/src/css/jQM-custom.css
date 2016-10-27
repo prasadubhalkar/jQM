@@ -16,3 +16,12 @@ div h3 a{
 .wrong-answer {
 	background-color: red !important;
 }
+
+.question-info {
+    cursor: pointer;
+    color: green;
+    padding-left: 16px;
+    background-image: url("images/icons-png/info-black.png");
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+}

@@ -18,10 +18,10 @@ var PageModel = Backbone.Model.extend({
 	setUpPageData: function(data){
 		//set the question collection instance
 		this.questionsCollection = new QuestionsCollection();
-		this.title = data.contents.title;
 		this.currentScore = 0;
-		this.pageNumber = data.index;
-		this.number = data.number;
+		this.pageIndex = data.pageName;
+		this.index = data.pageIndex;
+		this.title = data.contents.title;
 		this.setQuestions(data.contents.questions);	
 	},
 
@@ -43,7 +43,7 @@ var PageModel = Backbone.Model.extend({
 		var questionModel = null;
 		var self = this;
 		_.each(questions, function(question){
-			question.pageNumber = self.pageNumber;
+			question.pageIndex = self.pageIndex;
 			questionModel = new QuestionModel();
 			questionModel.setUpQuestionData(question);
 			questionModel.parent = self;
@@ -59,8 +59,8 @@ var PageModel = Backbone.Model.extend({
 	questionAnswered: function(correctAnswer){
 		if(correctAnswer) {
 			this.currentScore += 1;
-			this.trigger("scoreUpdated", this.pageNumber);
-			AppEvents.trigger("someEvent", [this.number, this.currentScore]);
+			this.trigger("scoreUpdated", this.pageIndex);
+			AppEvents.trigger("someEvent", [this.index, this.currentScore]);
 		}
 	},
 

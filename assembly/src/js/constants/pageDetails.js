@@ -283,19 +283,19 @@ var pages = {
 				answers: [
 					{
 						label: "$('#myElement')",
-						answerId: "t1q6a1"
+						answerId: "t1q7a1"
 					},
 					{
 						label: "$('.myElement')",
-						answerId: "t1q6a2"
+						answerId: "t1q7a2"
 					},
 					{
 						label: "$('$myElement')",
-						answerId: "t1q6a3"
+						answerId: "t1q7a3"
 					},
 					{
 						label: "$('_myElement')",
-						answerId: "t1q6a4"
+						answerId: "t1q7a4"
 					},
 				]
 			},
@@ -2184,11 +2184,11 @@ var pages = {
                     },
                     {
                         label: "disable",
-                        answerId: "t8q4a2"
+                        answerId: "t8q4a3"
                     },
                     {
                         label: "destroy",
-                        answerId: "t8q4a2"
+                        answerId: "t8q4a4"
                     }
                 ]
             },

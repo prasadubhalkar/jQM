@@ -35,11 +35,11 @@ this["AppTmplts"]["src/html/partials/page.hbs"] = Handlebars.template({"compiler
   return "<div data-role=\"header\" data-theme=\"b\" data-position=\"fixed\">\r\n    <a href=\"#myPanel\" data-icon=\"bars\" data-iconpos=\"notext\"> Menu </a>\r\n    <h1>"
     + alias4(((helper = (helper = helpers.pageTitle || (depth0 != null ? depth0.pageTitle : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageTitle","hash":{},"data":data}) : helper)))
     + " (<span id=\"pageScore_"
-    + alias4(((helper = (helper = helpers.pageNumber || (depth0 != null ? depth0.pageNumber : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageNumber","hash":{},"data":data}) : helper)))
+    + alias4(((helper = (helper = helpers.pageIndex || (depth0 != null ? depth0.pageIndex : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageIndex","hash":{},"data":data}) : helper)))
     + "\"> "
     + alias4(((helper = (helper = helpers.currentScore || (depth0 != null ? depth0.currentScore : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currentScore","hash":{},"data":data}) : helper)))
     + " </span>)</h1>\r\n    <a id=\"resetQuiz\" data-icon=\"refresh\" data-iconpos=\"notext\"> Reset </a>\r\n</div>\r\n\r\n<div data-role=\"content\">\r\n    <div id=\"questions_"
-    + alias4(((helper = (helper = helpers.pageNumber || (depth0 != null ? depth0.pageNumber : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageNumber","hash":{},"data":data}) : helper)))
+    + alias4(((helper = (helper = helpers.pageIndex || (depth0 != null ? depth0.pageIndex : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageIndex","hash":{},"data":data}) : helper)))
     + "\">\r\n    </div>\r\n</div>";
 },"useData":true});
 
@@ -70,9 +70,15 @@ this["AppTmplts"]["src/html/partials/panel.hbs"] = Handlebars.template({"1":func
 this["AppTmplts"]["src/html/partials/question.hbs"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "<h3>"
+  return "<div class=\"ui-bar ui-bar-b\">\r\n	<h3> "
     + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
-    + "</h3>\r\n<div id=\"answers_"
+    + " </h3>\r\n	<span id=\"info_"
     + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
-    + "\">\r\n</div>";
+    + "\"\r\n		href=\"#popupInfo_"
+    + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
+    + "\"\r\n		class=\"question-info\"\r\n		data-role=\"button\"\r\n		data-rel=\"dialog\">\r\n	</span>\r\n	<div data-role=\"dialog\"\r\n		id=\"popupInfo_"
+    + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
+    + "\"\r\n		data-theme=\"a\"\r\n		style=\"max-width:350px;\">\r\n	  	<p>Hello</p>\r\n	</div>\r\n</div>\r\n<div id=\"answers_"
+    + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
+    + "\">\r\n</div>\r\n<br/>";
 },"useData":true});

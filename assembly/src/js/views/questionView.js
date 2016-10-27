@@ -29,8 +29,11 @@ var QuestionView = Backbone.View.extend({
 		var model = this.model;
 		$el.append(this.template({
 			title: model.title,
-			questionId: model.questionId
+			questionId: model.questionId,
+			description: model.description
 		}));
+		$("#info_"+model.questionId, $el).hide();
+		$el.attr("id", model.questionId);
 
 		this.renderChoices();
 
@@ -64,6 +67,8 @@ var QuestionView = Backbone.View.extend({
 		//get the label element for selected answer
 		var siblingLabel = $(event.target).siblings("label");
 		var questionId = $(event.target).attr("name");
+		var questionContainer = $("#"+questionId);
+		var questionInfo = $("#info_"+questionId, questionContainer);
 		var model = this.model;
 		var correctAnswerId = model.correctanswerId;
 
@@ -77,6 +82,7 @@ var QuestionView = Backbone.View.extend({
 			siblingLabel.addClass("wrong-answer");
 			this.markUsersAnswer(false, event.target.id);
 		}
+		questionInfo.show();
 		this.disableRadios(questionId);
 	},
 

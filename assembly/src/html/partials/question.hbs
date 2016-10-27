@@ -1,3 +1,18 @@
-<h3>{{this.title}}</h3>
+<div class="ui-bar ui-bar-b">
+	<h3> {{this.title}} </h3>
+	<span id="info_{{this.questionId}}"
+		href="#popupInfo_{{this.questionId}}"
+		class="question-info"
+		data-role="button"
+		data-rel="dialog">
+	</span>
+	<div data-role="dialog"
+		id="popupInfo_{{this.questionId}}"
+		data-theme="a"
+		style="max-width:350px;">
+	  	<p>Hello</p>
+	</div>
+</div>
 <div id="answers_{{this.questionId}}">
 </div>
+<br/>

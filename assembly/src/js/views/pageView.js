@@ -35,7 +35,7 @@ var PageView = Backbone.View.extend({
         var model = this.model;
         $(this.el).html(this.template({
             pageTitle: model.title,
-            pageNumber: model.pageNumber,
+            pageIndex: model.pageIndex,
             currentScore: model.currentScore
         }));
 
@@ -52,7 +52,7 @@ var PageView = Backbone.View.extend({
     renderQuestions: function(){
         var model = this.model;
         var $el = $(this.el);
-        var questionsPlaceHolder = $("#questions_"+model.pageNumber, $el);
+        var questionsPlaceHolder = $("#questions_"+model.pageIndex, $el);
         var questions = model.getQuestions();
         var questionView = null;
         _.each(questions, function(question){
@@ -82,7 +82,7 @@ var PageView = Backbone.View.extend({
     resetQuiz: function(){
         var $el = $(this.el);
         //get the current questions container
-        var $questionContainer = $("#questions_"+this.model.pageNumber , $el);
+        var $questionContainer = $("#questions_"+this.model.pageIndex , $el);
 
         //reset all the wrong answers marking
         $(".wrong-answer", $questionContainer).removeClass("wrong-answer");
@@ -106,7 +106,7 @@ var PageView = Backbone.View.extend({
      */
     updateScore: function(){
         var $el = $(this.el);
-        var $pageScore = $("#pageScore_"+this.model.pageNumber , $el);
+        var $pageScore = $("#pageScore_"+this.model.pageIndex , $el);
         $pageScore.html(this.model.currentScore);
     }
 });
