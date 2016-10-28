@@ -94,11 +94,11 @@ this["AppTmplts"]["src/html/partials/page.hbs"] = Handlebars.template({"compiler
   return "<div data-role=\"header\" data-theme=\"b\" data-position=\"fixed\">\r\n    <a href=\"#myPanel\" data-icon=\"bars\" data-iconpos=\"notext\"> Menu </a>\r\n    <h1>"
     + alias4(((helper = (helper = helpers.pageTitle || (depth0 != null ? depth0.pageTitle : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageTitle","hash":{},"data":data}) : helper)))
     + " (<span id=\"pageScore_"
-    + alias4(((helper = (helper = helpers.pageNumber || (depth0 != null ? depth0.pageNumber : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageNumber","hash":{},"data":data}) : helper)))
+    + alias4(((helper = (helper = helpers.pageIndex || (depth0 != null ? depth0.pageIndex : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageIndex","hash":{},"data":data}) : helper)))
     + "\"> "
     + alias4(((helper = (helper = helpers.currentScore || (depth0 != null ? depth0.currentScore : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currentScore","hash":{},"data":data}) : helper)))
     + " </span>)</h1>\r\n    <a id=\"resetQuiz\" data-icon=\"refresh\" data-iconpos=\"notext\"> Reset </a>\r\n</div>\r\n\r\n<div data-role=\"content\">\r\n    <div id=\"questions_"
-    + alias4(((helper = (helper = helpers.pageNumber || (depth0 != null ? depth0.pageNumber : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageNumber","hash":{},"data":data}) : helper)))
+    + alias4(((helper = (helper = helpers.pageIndex || (depth0 != null ? depth0.pageIndex : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pageIndex","hash":{},"data":data}) : helper)))
     + "\">\r\n    </div>\r\n</div>";
 },"useData":true});
 
@@ -127,13 +127,19 @@ this["AppTmplts"]["src/html/partials/panel.hbs"] = Handlebars.template({"1":func
 },"useData":true});
 
 this["AppTmplts"]["src/html/partials/question.hbs"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression;
+    var helper, alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "<h3>"
+  return "<div class=\"ui-bar ui-bar-b\">\r\n	<h3> "
     + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
-    + "</h3>\r\n<div id=\"answers_"
+    + " </h3>\r\n	<span id=\"info_"
     + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
-    + "\">\r\n</div>";
+    + "\" class=\"question-info\"/>\r\n</div>\r\n<div id=\"answers_"
+    + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
+    + "\">\r\n</div>\r\n<div id=\"desc_"
+    + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
+    + "\" class=\"description\">"
+    + alias2(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"description","hash":{},"data":data}) : helper)))
+    + "</div>\r\n<br/>";
 },"useData":true});;/* global Backbone, $, HomeView, PageView, PagesCollection, PageModel, pages, _ */
 /* exported AppEvents */
 /**
@@ -176,11 +182,11 @@ var AppRouter = Backbone.Router.extend({
      */
     page: function (pageIndex) {
         var pages = pagesCollection.getCollection();
-        var pageNumber = "page"+pageIndex;
-        var pageModel = pages.getPage(pageNumber);
+        var pageName = "page"+pageIndex;
+        var pageModel = pages.getPage(pageName);
         var pageView = new PageView();
         if(!pageModel){
-            pageModel = pagesCollection.createPage(pageNumber, pageIndex);
+            pageModel = pagesCollection.createPage(pageName, pageIndex);
             pagesCollection.addPage(pageModel);
         }
         pageView.setModel(pageModel);
@@ -261,17 +267,17 @@ var pagesCollection = (function(){
 
     /**
      * createSinglePage will create a single page
-     * @param  {string} pageIndex page index for page
-     * @param {number} number page index
+     * @param  {string} pageName page name for page
+     * @param {number} index page index
      * @returns {undefined}
      */
-    function createSinglePage(pageIndex, number){
-        var pageContents = pages[pageIndex];
+    function createSinglePage(pageName, index){
+        var pageContents = pages[pageName];
         var pageModel = new PageModel(page);
         var page = {
-            index: pageIndex,
             contents: pageContents,
-            number: number
+            pageName: pageName,
+            pageIndex: index
         };
         pageModel.setUpPageData(page);
         return pageModel;
@@ -592,19 +598,19 @@ var pages = {
 				answers: [
 					{
 						label: "$('#myElement')",
-						answerId: "t1q6a1"
+						answerId: "t1q7a1"
 					},
 					{
 						label: "$('.myElement')",
-						answerId: "t1q6a2"
+						answerId: "t1q7a2"
 					},
 					{
 						label: "$('$myElement')",
-						answerId: "t1q6a3"
+						answerId: "t1q7a3"
 					},
 					{
 						label: "$('_myElement')",
-						answerId: "t1q6a4"
+						answerId: "t1q7a4"
 					},
 				]
 			},
@@ -2493,11 +2499,11 @@ var pages = {
                     },
                     {
                         label: "disable",
-                        answerId: "t8q4a2"
+                        answerId: "t8q4a3"
                     },
                     {
                         label: "destroy",
-                        answerId: "t8q4a2"
+                        answerId: "t8q4a4"
                     }
                 ]
             },
@@ -2725,10 +2731,10 @@ var PageModel = Backbone.Model.extend({
 	setUpPageData: function(data){
 		//set the question collection instance
 		this.questionsCollection = new QuestionsCollection();
-		this.title = data.contents.title;
 		this.currentScore = 0;
-		this.pageNumber = data.index;
-		this.number = data.number;
+		this.pageIndex = data.pageName;
+		this.index = data.pageIndex;
+		this.title = data.contents.title;
 		this.setQuestions(data.contents.questions);	
 	},
 
@@ -2750,7 +2756,7 @@ var PageModel = Backbone.Model.extend({
 		var questionModel = null;
 		var self = this;
 		_.each(questions, function(question){
-			question.pageNumber = self.pageNumber;
+			question.pageIndex = self.pageIndex;
 			questionModel = new QuestionModel();
 			questionModel.setUpQuestionData(question);
 			questionModel.parent = self;
@@ -2766,8 +2772,8 @@ var PageModel = Backbone.Model.extend({
 	questionAnswered: function(correctAnswer){
 		if(correctAnswer) {
 			this.currentScore += 1;
-			this.trigger("scoreUpdated", this.pageNumber);
-			AppEvents.trigger("someEvent", [this.number, this.currentScore]);
+			this.trigger("scoreUpdated", this.pageIndex);
+			AppEvents.trigger("someEvent", [this.index, this.currentScore]);
 		}
 	},
 
@@ -2901,7 +2907,7 @@ var PagesCollection = Backbone.Collection.extend({
 	getPage: function(pageIndex){
 		var foundPage = null;
 		_.each(this.models, function(model){
-			if(model.pageNumber === pageIndex){
+			if(model.pageIndex === pageIndex){
 				foundPage = model;
 			}
 		});
@@ -3028,7 +3034,7 @@ var PageView = Backbone.View.extend({
         var model = this.model;
         $(this.el).html(this.template({
             pageTitle: model.title,
-            pageNumber: model.pageNumber,
+            pageIndex: model.pageIndex,
             currentScore: model.currentScore
         }));
 
@@ -3045,7 +3051,7 @@ var PageView = Backbone.View.extend({
     renderQuestions: function(){
         var model = this.model;
         var $el = $(this.el);
-        var questionsPlaceHolder = $("#questions_"+model.pageNumber, $el);
+        var questionsPlaceHolder = $("#questions_"+model.pageIndex, $el);
         var questions = model.getQuestions();
         var questionView = null;
         _.each(questions, function(question){
@@ -3075,7 +3081,7 @@ var PageView = Backbone.View.extend({
     resetQuiz: function(){
         var $el = $(this.el);
         //get the current questions container
-        var $questionContainer = $("#questions_"+this.model.pageNumber , $el);
+        var $questionContainer = $("#questions_"+this.model.pageIndex , $el);
 
         //reset all the wrong answers marking
         $(".wrong-answer", $questionContainer).removeClass("wrong-answer");
@@ -3090,6 +3096,10 @@ var PageView = Backbone.View.extend({
         //reset all the radio buttons uncheck and enable again
         $("input[type='radio']", $questionContainer).prop("checked", false).checkboxradio("refresh");
 
+        $(".description", $questionContainer).hide();
+
+        $(".question-info", $questionContainer).hide();
+
         this.model.resetModel();
     },
 
@@ -3099,7 +3109,7 @@ var PageView = Backbone.View.extend({
      */
     updateScore: function(){
         var $el = $(this.el);
-        var $pageScore = $("#pageScore_"+this.model.pageNumber , $el);
+        var $pageScore = $("#pageScore_"+this.model.pageIndex , $el);
         $pageScore.html(this.model.currentScore);
     }
 });;/* global Backbone, $, AppTmplts, PanelModel */
@@ -3155,7 +3165,8 @@ var QuestionView = Backbone.View.extend({
 	template:AppTmplts["src/html/partials/question.hbs"],
 	//bind the view level events
 	events: {
-		"change input[type='radio']": "answerSelected"
+		"change input[type='radio']": "answerSelected",
+		"click span.question-info": "showQuestionInfo"
 	},
 
 	/**
@@ -3179,8 +3190,14 @@ var QuestionView = Backbone.View.extend({
 		var model = this.model;
 		$el.append(this.template({
 			title: model.title,
-			questionId: model.questionId
+			questionId: model.questionId,
+			description: model.description
 		}));
+
+		$("#info_"+model.questionId, $el).hide();
+		$("#desc_"+model.questionId, $el).hide();
+		
+		$el.attr("id", model.questionId);
 
 		this.renderChoices();
 
@@ -3204,6 +3221,18 @@ var QuestionView = Backbone.View.extend({
 	},
 
 	/**
+	 * showQuestionInfo will show the question
+	 * related information
+	 * @returns {undefined}
+	 */
+	showQuestionInfo: function(){
+		var $el = $(this.el);
+		var model = this.model;
+		$("#desc_"+model.questionId, $el).toggle("slow");
+		$('#answers_'+model.questionId, $el).toggle("slow");
+	},
+
+	/**
 	 * answerSelected this is an event handling function
 	 * that will be called whenever and choice for answer
 	 * for a question is selected
@@ -3214,6 +3243,8 @@ var QuestionView = Backbone.View.extend({
 		//get the label element for selected answer
 		var siblingLabel = $(event.target).siblings("label");
 		var questionId = $(event.target).attr("name");
+		var questionContainer = $("#"+questionId);
+		var questionInfo = $("#info_"+questionId, questionContainer);
 		var model = this.model;
 		var correctAnswerId = model.correctanswerId;
 
@@ -3227,6 +3258,7 @@ var QuestionView = Backbone.View.extend({
 			siblingLabel.addClass("wrong-answer");
 			this.markUsersAnswer(false, event.target.id);
 		}
+		questionInfo.show();
 		this.disableRadios(questionId);
 	},
 
@@ -3257,6 +3289,7 @@ var QuestionView = Backbone.View.extend({
 			$question.checkboxradio();
 			$question.prop("disabled", true).checkboxradio("refresh");
 			$answer.siblings("label").addClass(answeredClass);
+			$("#info_"+questionId, $el).show();
 		}
 	},
 

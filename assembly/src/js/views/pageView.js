@@ -97,6 +97,10 @@ var PageView = Backbone.View.extend({
         //reset all the radio buttons uncheck and enable again
         $("input[type='radio']", $questionContainer).prop("checked", false).checkboxradio("refresh");
 
+        $(".description", $questionContainer).hide();
+
+        $(".question-info", $questionContainer).hide();
+
         this.model.resetModel();
     },
 

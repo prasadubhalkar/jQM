@@ -5,7 +5,8 @@ var QuestionView = Backbone.View.extend({
 	template:AppTmplts["src/html/partials/question.hbs"],
 	//bind the view level events
 	events: {
-		"change input[type='radio']": "answerSelected"
+		"change input[type='radio']": "answerSelected",
+		"click span.question-info": "showQuestionInfo"
 	},
 
 	/**
@@ -32,7 +33,10 @@ var QuestionView = Backbone.View.extend({
 			questionId: model.questionId,
 			description: model.description
 		}));
+
 		$("#info_"+model.questionId, $el).hide();
+		$("#desc_"+model.questionId, $el).hide();
+		
 		$el.attr("id", model.questionId);
 
 		this.renderChoices();
@@ -54,6 +58,18 @@ var QuestionView = Backbone.View.extend({
 		_.each(choices, function(choice){
 			choicesElement.append(new AnswerView(choice, questionId).el);
 		});
+	},
+
+	/**
+	 * showQuestionInfo will show the question
+	 * related information
+	 * @returns {undefined}
+	 */
+	showQuestionInfo: function(){
+		var $el = $(this.el);
+		var model = this.model;
+		$("#desc_"+model.questionId, $el).toggle("slow");
+		$('#answers_'+model.questionId, $el).toggle("slow");
 	},
 
 	/**
@@ -113,6 +129,7 @@ var QuestionView = Backbone.View.extend({
 			$question.checkboxradio();
 			$question.prop("disabled", true).checkboxradio("refresh");
 			$answer.siblings("label").addClass(answeredClass);
+			$("#info_"+questionId, $el).show();
 		}
 	},
 

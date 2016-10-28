@@ -127,19 +127,19 @@ this["AppTmplts"]["src/html/partials/panel.hbs"] = Handlebars.template({"1":func
 },"useData":true});
 
 this["AppTmplts"]["src/html/partials/question.hbs"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression;
+    var helper, alias1=container.lambda, alias2=container.escapeExpression;
 
   return "<div class=\"ui-bar ui-bar-b\">\r\n	<h3> "
     + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
     + " </h3>\r\n	<span id=\"info_"
     + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
-    + "\"\r\n		href=\"#popupInfo_"
+    + "\" class=\"question-info\"/>\r\n</div>\r\n<div id=\"answers_"
     + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
-    + "\"\r\n		class=\"question-info\"\r\n		data-role=\"button\"\r\n		data-rel=\"dialog\">\r\n	</span>\r\n	<div data-role=\"dialog\"\r\n		id=\"popupInfo_"
+    + "\">\r\n</div>\r\n<div id=\"desc_"
     + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
-    + "\"\r\n		data-theme=\"a\"\r\n		style=\"max-width:350px;\">\r\n	  	<p>Hello</p>\r\n	</div>\r\n</div>\r\n<div id=\"answers_"
-    + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
-    + "\">\r\n</div>\r\n<br/>";
+    + "\" class=\"description\">"
+    + alias2(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"description","hash":{},"data":data}) : helper)))
+    + "</div>\r\n<br/>";
 },"useData":true});;/* global Backbone, $, HomeView, PageView, PagesCollection, PageModel, pages, _ */
 /* exported AppEvents */
 /**
@@ -2907,7 +2907,7 @@ var PagesCollection = Backbone.Collection.extend({
 	getPage: function(pageIndex){
 		var foundPage = null;
 		_.each(this.models, function(model){
-			if(model.pageNumber === pageIndex){
+			if(model.pageIndex === pageIndex){
 				foundPage = model;
 			}
 		});
@@ -3096,6 +3096,10 @@ var PageView = Backbone.View.extend({
         //reset all the radio buttons uncheck and enable again
         $("input[type='radio']", $questionContainer).prop("checked", false).checkboxradio("refresh");
 
+        $(".description", $questionContainer).hide();
+
+        $(".question-info", $questionContainer).hide();
+
         this.model.resetModel();
     },
 
@@ -3161,7 +3165,8 @@ var QuestionView = Backbone.View.extend({
 	template:AppTmplts["src/html/partials/question.hbs"],
 	//bind the view level events
 	events: {
-		"change input[type='radio']": "answerSelected"
+		"change input[type='radio']": "answerSelected",
+		"click span.question-info": "showQuestionInfo"
 	},
 
 	/**
@@ -3188,7 +3193,10 @@ var QuestionView = Backbone.View.extend({
 			questionId: model.questionId,
 			description: model.description
 		}));
+
 		$("#info_"+model.questionId, $el).hide();
+		$("#desc_"+model.questionId, $el).hide();
+		
 		$el.attr("id", model.questionId);
 
 		this.renderChoices();
@@ -3210,6 +3218,18 @@ var QuestionView = Backbone.View.extend({
 		_.each(choices, function(choice){
 			choicesElement.append(new AnswerView(choice, questionId).el);
 		});
+	},
+
+	/**
+	 * showQuestionInfo will show the question
+	 * related information
+	 * @returns {undefined}
+	 */
+	showQuestionInfo: function(){
+		var $el = $(this.el);
+		var model = this.model;
+		$("#desc_"+model.questionId, $el).toggle("slow");
+		$('#answers_'+model.questionId, $el).toggle("slow");
 	},
 
 	/**
@@ -3269,6 +3289,7 @@ var QuestionView = Backbone.View.extend({
 			$question.checkboxradio();
 			$question.prop("disabled", true).checkboxradio("refresh");
 			$answer.siblings("label").addClass(answeredClass);
+			$("#info_"+questionId, $el).show();
 		}
 	},
 

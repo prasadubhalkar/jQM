@@ -12,7 +12,7 @@ var PagesCollection = Backbone.Collection.extend({
 	getPage: function(pageIndex){
 		var foundPage = null;
 		_.each(this.models, function(model){
-			if(model.pageNumber === pageIndex){
+			if(model.pageIndex === pageIndex){
 				foundPage = model;
 			}
 		});
