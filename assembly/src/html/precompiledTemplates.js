@@ -67,8 +67,12 @@ this["AppTmplts"]["src/html/partials/panel.hbs"] = Handlebars.template({"1":func
     + "</ul>\r\n";
 },"useData":true});
 
-this["AppTmplts"]["src/html/partials/question.hbs"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=container.lambda, alias2=container.escapeExpression;
+this["AppTmplts"]["src/html/partials/question.hbs"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    return "		<pre>"
+    + container.escapeExpression(container.lambda(depth0, depth0))
+    + "</pre>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
   return "<div class=\"ui-bar ui-bar-b\">\r\n	<h3> "
     + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
@@ -78,7 +82,7 @@ this["AppTmplts"]["src/html/partials/question.hbs"] = Handlebars.template({"comp
     + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
     + "\">\r\n</div>\r\n<div id=\"desc_"
     + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
-    + "\" class=\"description\">"
-    + alias2(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"description","hash":{},"data":data}) : helper)))
+    + "\" class=\"description\">\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.description : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</div>\r\n<br/>";
 },"useData":true});

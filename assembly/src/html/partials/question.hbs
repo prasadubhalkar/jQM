@@ -4,5 +4,9 @@
 </div>
 <div id="answers_{{this.questionId}}">
 </div>
-<div id="desc_{{this.questionId}}" class="description">{{description}}</div>
+<div id="desc_{{this.questionId}}" class="description">
+	{{#each description}}
+		<pre>{{this}}</pre>
+	{{/each}}
+</div>
 <br/>

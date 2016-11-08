@@ -163,11 +163,27 @@ var pagesCollection = (function(){
 var AppEvents = _.extend({}, Backbone.Events);
 
 /**
+ * onBackKeyDown will handle the back button
+ * action for mobile phones
+ * @returns {undefined}
+ */
+function onBackKeyDown() {
+    var currentFragment = Backbone.history.getFragment();
+    if(currentFragment === ""){
+        navigator.app.exitApp();
+    }
+    else {
+        Backbone.history.navigate("", true);
+    }
+}
+
+/**
  * When document is ready create a router instance and start
  * the backbone application
  * @returns {undefined}
  */
 $(document).ready(function () {
     new AppRouter();
+    document.addEventListener("backbutton", onBackKeyDown, false);
     Backbone.history.start();
 });

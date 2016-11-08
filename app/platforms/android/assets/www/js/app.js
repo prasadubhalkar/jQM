@@ -126,8 +126,12 @@ this["AppTmplts"]["src/html/partials/panel.hbs"] = Handlebars.template({"1":func
     + "</ul>\r\n";
 },"useData":true});
 
-this["AppTmplts"]["src/html/partials/question.hbs"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=container.lambda, alias2=container.escapeExpression;
+this["AppTmplts"]["src/html/partials/question.hbs"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    return "		<pre>"
+    + container.escapeExpression(container.lambda(depth0, depth0))
+    + "</pre>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
   return "<div class=\"ui-bar ui-bar-b\">\r\n	<h3> "
     + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
@@ -137,8 +141,8 @@ this["AppTmplts"]["src/html/partials/question.hbs"] = Handlebars.template({"comp
     + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
     + "\">\r\n</div>\r\n<div id=\"desc_"
     + alias2(alias1((depth0 != null ? depth0.questionId : depth0), depth0))
-    + "\" class=\"description\">"
-    + alias2(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"description","hash":{},"data":data}) : helper)))
+    + "\" class=\"description\">\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.description : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</div>\r\n<br/>";
 },"useData":true});;/* global Backbone, $, HomeView, PageView, PagesCollection, PageModel, pages, _ */
 /* exported AppEvents */
@@ -172,6 +176,7 @@ var AppRouter = Backbone.Router.extend({
      * @returns {undefined}
      */
     home:function () {
+        alert(window.localStorage.getItem("key"));
         this.changePage(new HomeView());
     },
 
@@ -305,12 +310,29 @@ var pagesCollection = (function(){
 var AppEvents = _.extend({}, Backbone.Events);
 
 /**
+ * onBackKeyDown will handle the back button
+ * action for mobile phones
+ * @returns {undefined}
+ */
+function onBackKeyDown() {
+    var currentFragment = Backbone.history.getFragment();
+    if(currentFragment === ""){
+        window.localStorage.setItem("key", "minhbinh")
+        navigator.app.exitApp();
+    }
+    else {
+        Backbone.history.navigate("", true);
+    }
+}
+
+/**
  * When document is ready create a router instance and start
  * the backbone application
  * @returns {undefined}
  */
 $(document).ready(function () {
     new AppRouter();
+    document.addEventListener("backbutton", onBackKeyDown, false);
     Backbone.history.start();
 });
 ;/* exported indexItems, pages, homeIntro */
@@ -3240,36 +3262,58 @@ var QuestionView = Backbone.View.extend({
 	 * @returns {undefined}
 	 */
 	answerSelected: function(event){
-		//get the label element for selected answer
-		var siblingLabel = $(event.target).siblings("label");
-		var questionId = $(event.target).attr("name");
-		var questionContainer = $("#"+questionId);
-		var questionInfo = $("#info_"+questionId, questionContainer);
-		var model = this.model;
-		var correctAnswerId = model.correctanswerId;
-
-		//if selected answer is correct answer
-		if(event.target.id === correctAnswerId) {
-			siblingLabel.addClass("correct-answer");
-			this.markUsersAnswer(true);
-		}
-		//else if answer is not correct answer
-		else {
-			siblingLabel.addClass("wrong-answer");
-			this.markUsersAnswer(false, event.target.id);
-		}
-		questionInfo.show();
-		this.disableRadios(questionId);
+		this.updateSelectedAnswer(event.target.id);
+		this.updateQuestionDescription();
+		this.disableRadios();
 	},
 
 	/**
-	 * markUsersAnswer will mark the users response
+	 * updateSelectedAnswer will update the answer
+	 * display for selected user choice and update model
+	 * @param  {object} answerId selected Answer id
+	 * @returns {undefined}
+	 */
+	updateSelectedAnswer: function(answerId){
+		var $el = $(this.el);
+		var $answer = $("input[id='"+answerId+"'", $el);
+		if(answerId === this.model.correctanswerId) {
+			$answer.siblings("label").addClass("correct-answer");
+			this.updateAnswerInModel(true);
+		}
+		else {
+			$answer.siblings("label").addClass("wrong-answer");
+			this.updateAnswerInModel(false, answerId);
+		}
+	},
+
+	/**
+	 * updateQuestionDescription will enable the description
+	 * for the answer been selected for a question
+	 * @returns {undefined}
+	 */
+	updateQuestionDescription: function(){
+		var questionContainer = $("#"+this.model.questionId);
+		$("#info_"+this.model.questionId, questionContainer).show();
+	},
+
+	/**
+	 * disableRadios will disable radio buttons for
+	 * the question once an answer is selected
+	 * @returns {undefined}
+	 */
+	disableRadios: function(){
+		var $el = $(this.el);
+		$("input[name='"+this.model.questionId+"'", $el).prop("disabled", true).checkboxradio("refresh");
+	},
+
+	/**
+	 * updateAnswerInModel will mark the users response
 	 * true if answered correctly false if not
 	 * @param  {boolean} userResponse user response
 	 * @param {string} selectedAnswer user selected answer
 	 * @returns {undefined}
 	 */
-	markUsersAnswer: function(userResponse, selectedAnswer){
+	updateAnswerInModel: function(userResponse, selectedAnswer){
 		this.model.markUserResponse(userResponse, selectedAnswer);
 	},
 
@@ -3291,16 +3335,5 @@ var QuestionView = Backbone.View.extend({
 			$answer.siblings("label").addClass(answeredClass);
 			$("#info_"+questionId, $el).show();
 		}
-	},
-
-	/**
-	 * disableRadios will disable radio buttons for
-	 * the question once an answer is selected
-	 * @param  {string} questionId the question identifier
-	 * @returns {undefined}
-	 */
-	disableRadios: function(questionId){
-		var $el = $(this.el);
-		$("input[name='"+questionId+"'", $el).prop("disabled", true).checkboxradio("refresh");
 	}
 });

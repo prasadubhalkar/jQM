@@ -80,36 +80,58 @@ var QuestionView = Backbone.View.extend({
 	 * @returns {undefined}
 	 */
 	answerSelected: function(event){
-		//get the label element for selected answer
-		var siblingLabel = $(event.target).siblings("label");
-		var questionId = $(event.target).attr("name");
-		var questionContainer = $("#"+questionId);
-		var questionInfo = $("#info_"+questionId, questionContainer);
-		var model = this.model;
-		var correctAnswerId = model.correctanswerId;
-
-		//if selected answer is correct answer
-		if(event.target.id === correctAnswerId) {
-			siblingLabel.addClass("correct-answer");
-			this.markUsersAnswer(true);
-		}
-		//else if answer is not correct answer
-		else {
-			siblingLabel.addClass("wrong-answer");
-			this.markUsersAnswer(false, event.target.id);
-		}
-		questionInfo.show();
-		this.disableRadios(questionId);
+		this.updateSelectedAnswer(event.target.id);
+		this.updateQuestionDescription();
+		this.disableRadios();
 	},
 
 	/**
-	 * markUsersAnswer will mark the users response
+	 * updateSelectedAnswer will update the answer
+	 * display for selected user choice and update model
+	 * @param  {object} answerId selected Answer id
+	 * @returns {undefined}
+	 */
+	updateSelectedAnswer: function(answerId){
+		var $el = $(this.el);
+		var $answer = $("input[id='"+answerId+"'", $el);
+		if(answerId === this.model.correctanswerId) {
+			$answer.siblings("label").addClass("correct-answer");
+			this.updateAnswerInModel(true);
+		}
+		else {
+			$answer.siblings("label").addClass("wrong-answer");
+			this.updateAnswerInModel(false, answerId);
+		}
+	},
+
+	/**
+	 * updateQuestionDescription will enable the description
+	 * for the answer been selected for a question
+	 * @returns {undefined}
+	 */
+	updateQuestionDescription: function(){
+		var questionContainer = $("#"+this.model.questionId);
+		$("#info_"+this.model.questionId, questionContainer).show();
+	},
+
+	/**
+	 * disableRadios will disable radio buttons for
+	 * the question once an answer is selected
+	 * @returns {undefined}
+	 */
+	disableRadios: function(){
+		var $el = $(this.el);
+		$("input[name='"+this.model.questionId+"'", $el).prop("disabled", true).checkboxradio("refresh");
+	},
+
+	/**
+	 * updateAnswerInModel will mark the users response
 	 * true if answered correctly false if not
 	 * @param  {boolean} userResponse user response
 	 * @param {string} selectedAnswer user selected answer
 	 * @returns {undefined}
 	 */
-	markUsersAnswer: function(userResponse, selectedAnswer){
+	updateAnswerInModel: function(userResponse, selectedAnswer){
 		this.model.markUserResponse(userResponse, selectedAnswer);
 	},
 
@@ -131,16 +153,5 @@ var QuestionView = Backbone.View.extend({
 			$answer.siblings("label").addClass(answeredClass);
 			$("#info_"+questionId, $el).show();
 		}
-	},
-
-	/**
-	 * disableRadios will disable radio buttons for
-	 * the question once an answer is selected
-	 * @param  {string} questionId the question identifier
-	 * @returns {undefined}
-	 */
-	disableRadios: function(questionId){
-		var $el = $(this.el);
-		$("input[name='"+questionId+"'", $el).prop("disabled", true).checkboxradio("refresh");
 	}
 });
