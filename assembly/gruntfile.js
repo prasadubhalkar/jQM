@@ -57,6 +57,7 @@ module.exports = function(grunt) {
             'src/lib/jquery.js',
             'src/config/jqm-config.js', //concat this file before the jQM mobile is loaded
             'src/lib/jquery.mobile-1.4.5.min.js',
+            'src/lib/jquery.mobile.simpledialog2.min.js',
             'src/lib/underscore-min.js',
             'src/lib/backbone-min.js',
             'src/lib/handlebars.min.js',

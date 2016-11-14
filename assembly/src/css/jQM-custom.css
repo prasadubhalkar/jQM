@@ -25,3 +25,7 @@ div h3 a{
     background-repeat: no-repeat;
     background-size: 14px 14px;
 }
+
+.description pre{
+    white-space: pre-wrap;
+}

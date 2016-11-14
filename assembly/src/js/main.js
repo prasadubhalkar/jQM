@@ -17,10 +17,6 @@ var AppRouter = Backbone.Router.extend({
      */
     initialize:function () {
         // Handle back button throughout the application
-        $(".back").live("click", function() {
-            window.history.back();
-            return false;
-        });
         pagesCollection.initCollection();
         this.firstPage = true;
     },
@@ -162,6 +158,28 @@ var pagesCollection = (function(){
 
 var AppEvents = _.extend({}, Backbone.Events);
 
+function openDialog(){
+    if($(".ui-simpledialog-container").length === 0) {
+        $('<div>').simpledialog2({
+            mode: 'button',
+            headerText: 'Confirm Exit',
+            headerClose: false,
+            buttonPrompt: 'Are you sure you want to exit session?',
+            buttons : {
+                "Yes": {
+                    click: function () { 
+                        navigator.app.exitApp();
+                    }
+                },
+                "No": {
+                    click: function () {},
+                    icon: "delete",
+                    theme: "c"
+                }
+            }
+        });
+    }
+}
 /**
  * onBackKeyDown will handle the back button
  * action for mobile phones
@@ -170,7 +188,7 @@ var AppEvents = _.extend({}, Backbone.Events);
 function onBackKeyDown() {
     var currentFragment = Backbone.history.getFragment();
     if(currentFragment === ""){
-        navigator.app.exitApp();
+        openDialog();
     }
     else {
         Backbone.history.navigate("", true);
